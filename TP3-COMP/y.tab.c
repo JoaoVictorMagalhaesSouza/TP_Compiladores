@@ -512,7 +512,7 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    15,    15,    16,    18,    18,    19
+       0,    15,    15,    16,    18,    18,    20
 };
 #endif
 
@@ -522,7 +522,8 @@ static const yytype_int8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "TIPOS", "NOME_VARIAVEL", "EOL",
-  "PONTO_VIRGULA", "VIRGULA", "$accept", "PROGRAMA", "NOMES", "DECLARACAO", YY_NULLPTR
+  "PONTO_VIRGULA", "VIRGULA", "$accept", "PROGRAMA", "NOMES",
+  "DECLARACAO_SEM_ATRB", YY_NULLPTR
 };
 #endif
 
@@ -1300,15 +1301,15 @@ yyreduce:
   switch (yyn)
     {
   case 6:
-#line 19 "melodia.y"
-                                    {	
-	printf("Declaracao de variavel sem atribuicao OK.\n");
+#line 20 "melodia.y"
+                                             {	
+	printf("Declaracao de variavel(variaveis) sem atribuicao OK.\n");
 	}
-#line 1308 "y.tab.c"
+#line 1309 "y.tab.c"
     break;
 
 
-#line 1312 "y.tab.c"
+#line 1313 "y.tab.c"
 
       default: break;
     }
@@ -1540,7 +1541,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 22 "melodia.y"
+#line 23 "melodia.y"
 	
 
 
