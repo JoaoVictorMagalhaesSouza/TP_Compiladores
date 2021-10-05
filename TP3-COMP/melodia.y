@@ -4,34 +4,34 @@
 void yyerror(char *c);
 int yylex(void);
 char *s;
+extern int linha;
 
 %}
 
-%token TIPOS NOME_VARIAVEL EOL
-%token LITERAL_PONTO_E_VIRGULA LITERAL_VIRGULA LITERAL_RECEBE
-%token CONSTANTE
-%start PROGRAMA
+%token TIPOS ID IF ELSE WHILE FOR CONTINUE BREAK VOID RETURN ICONSTANTE FCONSTANTE STRING LPAREN RPAREN LCOLCH RCOLCH LCHAV RCHAV LITERAL_PONTO_E_VIRGULA LITERAL_PONTO LITERAL_VIRGULA LITERAL_RECEBE
+%token ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP EOL
+
+%start programa
 %%
 
-PROGRAMA: PROGRAMA DECLARACAO EOL;
+programa: programa declaracao EOL;
 	|
 
-NOMES: NOME_VARIAVEL|NOMES LITERAL_VIRGULA NOME_VARIAVEL; 
+constante: ICONSTANTE|FCONSTANTE|STRING;
+nomes: ID|nomes LITERAL_VIRGULA ID; 
 
-DECLARACAO : DECLARACAO_SEM_ATRB|DECLARACAO_COM_ATRB; 
-
-DECLARACAO_SEM_ATRB:TIPOS NOMES LITERAL_PONTO_E_VIRGULA{  //do a,b,c; | re c,d; Mudar aqui depois 
+declaracao : declaracao_sem_atrb|declaracao_com_atrb; 
+declaracao_sem_atrb:TIPOS nomes LITERAL_PONTO_E_VIRGULA{  //do a,b,c; | re c,d; Mudar aqui depois 
 	printf("Declaracao de variavel(variaveis) sem atribuicao.\n");
 	};
-	
-DECLARACAO_COM_ATRB: TIPOS NOME_VARIAVEL LITERAL_RECEBE CONSTANTE{	// do a = 2
+declaracao_com_atrb: TIPOS ID LITERAL_RECEBE constante{	// do a = 2
 	printf("Declaracao de variavel(variaveis) com atribuicao.\n");
 };
 %%	
 
 
 void yyerror(char *c){
-	printf("Erro : %s\n",c);
+	printf("Erro %s na linha: %d\n",c,linha);
 }
 
 int main(){

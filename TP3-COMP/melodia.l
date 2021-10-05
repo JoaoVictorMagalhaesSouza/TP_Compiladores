@@ -5,10 +5,9 @@ void yyerror(char *c);
 #include "string.h" 
 #include "stdio.h"
 #include "stdlib.h"
+int linha = 1; 
 
 %}
-
-
 
 
 
@@ -20,27 +19,59 @@ SOL "sol"
 LA "la"			
 SI "si"			
 
-NOME_VARIAVEL [a-zA-Z_][a-zA-Z0-9_]*
-TIPOS {DO}|{RE}|{MI}|{FA}|{SOL}|{LA}|{SI}
+ID	 		[a-zA-Z_][a-zA-Z0-9_]*
+TIPOS 			{DO}|{RE}|{MI}|{FA}|{SOL}|{LA}|{SI}
+allsymbols     	[ -~]
+DIGIT 			[0-9]
 
-CONSTANTE [0-9][0-9]*
+ICONSTANTE 		["0"|[0-9]{DIGIT}*
+FCONSTANTE 		"0"|{DIGIT}*"."{DIGIT}+
+STRING 		\"{allsymbols}*\"
 
-LITERAL_PONTO_E_VIRGULA ";"
-LITERAL_VIRGULA ","
-LITERAL_RECEBE "="
+
+
 %%
-{LITERAL_VIRGULA} {return LITERAL_VIRGULA; }
-{LITERAL_PONTO_E_VIRGULA} { return LITERAL_PONTO_E_VIRGULA;}
-{LITERAL_RECEBE} {return LITERAL_RECEBE;}
-{CONSTANTE} {return CONSTANTE;}
-{TIPOS} { 
-	return TIPOS;}
-{NOME_VARIAVEL} {
-	return NOME_VARIAVEL;
-}
 
-\n {return EOL;}
+{TIPOS} 				{ return TIPOS;}
+{ID}		 			{ return ID; }			
 
+"ensaio"				{ return IF; }
+"improviso"				{ return ELSE; }
+"bis"					{ return WHILE; }
+"refrao"				{ return FOR; }
+"continue"				{ return CONTINUE; }
+"finale"				{ return BREAK; }
+"void"					{ return VOID; }
+"eco"					{ return RETURN; }
+
+{ICONSTANTE}				{ return ICONSTANTE; }
+{FCONSTANTE}				{ return FCONSTANTE; }
+{STRING}				{ return STRING; }
+
+
+"("					{ return LPAREN; }
+")"					{ return RPAREN; }
+"]"					{ return LCOLCH; }
+"["					{ return RCOLCH; }
+"{"					{ return LCHAV; }
+"}"					{ return RCHAV; }
+";"					{ return LITERAL_PONTO_E_VIRGULA; }
+"."					{ return LITERAL_PONTO; }
+","					{ return LITERAL_VIRGULA; }
+"="					{ return LITERAL_RECEBE; }
+
+"+"|"-"				{ return ADDOP; }
+"=="|"~="				{ return EQOP; }
+"&"					{ return ANDOP; }
+"|"					{ return OROP; }
+"~"					{ return NOTOP; }
+">"|"<"|">="|"<="			{ return RELOP; }
+"++"|"--"				{ return INCR; }
+"*"					{ return MULOP; }
+"/"					{ return DIVOP; }
+
+
+\n 					{ return EOL; linha +=1;}
 . ;
 
 
