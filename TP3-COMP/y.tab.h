@@ -52,16 +52,20 @@ extern int yydebug;
     TIPOS = 258,
     NOME_VARIAVEL = 259,
     EOL = 260,
-    PONTO_VIRGULA = 261,
-    VIRGULA = 262
+    LITERAL_PONTO_E_VIRGULA = 261,
+    LITERAL_VIRGULA = 262,
+    LITERAL_RECEBE = 263,
+    CONSTANTE = 264
   };
 #endif
 /* Tokens.  */
 #define TIPOS 258
 #define NOME_VARIAVEL 259
 #define EOL 260
-#define PONTO_VIRGULA 261
-#define VIRGULA 262
+#define LITERAL_PONTO_E_VIRGULA 261
+#define LITERAL_VIRGULA 262
+#define LITERAL_RECEBE 263
+#define CONSTANTE 264
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
