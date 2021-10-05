@@ -22,9 +22,11 @@ SI "si"
 
 NOME_VARIAVEL [a-zA-Z_][a-zA-Z0-9_]*
 TIPOS {DO}|{RE}|{MI}|{FA}|{SOL}|{LA}|{SI}
+PONTO_VIRGULA ";"
+VIRGULA ","
 %%
-
-
+{VIRGULA} {return VIRGULA; }
+{PONTO_VIRGULA} { return PONTO_VIRGULA;}
 
 {TIPOS} { 
 	return TIPOS;}

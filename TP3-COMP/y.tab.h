@@ -51,13 +51,17 @@ extern int yydebug;
   {
     TIPOS = 258,
     NOME_VARIAVEL = 259,
-    EOL = 260
+    EOL = 260,
+    PONTO_VIRGULA = 261,
+    VIRGULA = 262
   };
 #endif
 /* Tokens.  */
 #define TIPOS 258
 #define NOME_VARIAVEL 259
 #define EOL 260
+#define PONTO_VIRGULA 261
+#define VIRGULA 262
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
