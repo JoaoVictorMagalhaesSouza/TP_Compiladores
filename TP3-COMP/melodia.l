@@ -32,7 +32,7 @@ STRING 		\"{allsymbols}*\"
 
 %%
 
-{TIPOS} 				{ return TIPOS;}
+{TIPOS} 				{ return TIPO;}
 {ID}		 			{ return ID; }			
 
 "ensaio"				{ return IF; }
@@ -58,7 +58,7 @@ STRING 		\"{allsymbols}*\"
 ";"					{ return LITERAL_PONTO_E_VIRGULA; }
 "."					{ return LITERAL_PONTO; }
 ","					{ return LITERAL_VIRGULA; }
-"="					{ return LITERAL_RECEBE; }
+"="|"-="|"+="				{ return LITERAL_RECEBE; }
 
 "+"|"-"				{ return ADDOP; }
 "=="|"~="				{ return EQOP; }

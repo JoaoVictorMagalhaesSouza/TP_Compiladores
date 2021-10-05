@@ -124,7 +124,7 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    TIPOS = 258,
+    TIPO = 258,
     ID = 259,
     IF = 260,
     ELSE = 261,
@@ -160,7 +160,7 @@ extern int yydebug;
   };
 #endif
 /* Tokens.  */
-#define TIPOS 258
+#define TIPO 258
 #define ID 259
 #define IF 260
 #define ELSE 261
@@ -510,18 +510,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  2
+#define YYFINAL  10
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   10
+#define YYLAST   30
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  36
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  7
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  12
+#define YYNRULES  11
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  18
+#define YYNSTATES  17
 
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   290
@@ -572,8 +572,8 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    17,    17,    18,    20,    20,    20,    21,    21,    23,
-      23,    24,    27
+       0,    18,    18,    20,    20,    22,    24,    24,    26,    26,
+      28,    28
 };
 #endif
 
@@ -582,13 +582,13 @@ static const yytype_int8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "TIPOS", "ID", "IF", "ELSE", "WHILE",
+  "$end", "error", "$undefined", "TIPO", "ID", "IF", "ELSE", "WHILE",
   "FOR", "CONTINUE", "BREAK", "VOID", "RETURN", "ICONSTANTE", "FCONSTANTE",
   "STRING", "LPAREN", "RPAREN", "LCOLCH", "RCOLCH", "LCHAV", "RCHAV",
   "LITERAL_PONTO_E_VIRGULA", "LITERAL_PONTO", "LITERAL_VIRGULA",
   "LITERAL_RECEBE", "ADDOP", "EQOP", "ANDOP", "OROP", "NOTOP", "RELOP",
-  "INCR", "MULOP", "DIVOP", "EOL", "$accept", "programa", "constante",
-  "nomes", "declaracao", "declaracao_sem_atrb", "declaracao_com_atrb", YY_NULLPTR
+  "INCR", "MULOP", "DIVOP", "EOL", "$accept", "program", "declarations",
+  "declaration", "names", "variable", "pointer", YY_NULLPTR
 };
 #endif
 
@@ -604,7 +604,7 @@ static const yytype_int16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF (-34)
+#define YYPACT_NINF (-23)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -618,8 +618,8 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -34,     0,   -34,    -3,   -33,   -34,   -34,   -17,   -15,   -34,
-      -9,   -34,     6,   -34,   -34,   -34,   -34,   -34
+       0,    -4,     4,     0,   -23,   -23,   -23,   -22,   -23,    -3,
+     -23,   -23,    -4,   -23,   -23,   -23,   -23
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -627,20 +627,20 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       3,     0,     1,     0,     0,     9,    10,     7,     0,     2,
-       0,    11,     0,     4,     5,     6,    12,     8
+       0,     0,     0,     2,     4,     8,    11,     0,     6,     0,
+       1,     3,     0,     5,     9,    10,     7
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -34,   -34,   -34,   -34,   -34,   -34,   -34
+     -23,   -23,   -23,     2,   -23,    -6,   -23
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     1,    16,     8,     4,     5,     6
+      -1,     2,     3,     4,     7,     8,     9
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -648,36 +648,40 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       2,     7,     9,     3,    13,    14,    15,    11,    10,    12,
-      17
+       5,    14,    12,     1,    10,    11,    16,     0,     0,     0,
+       0,     0,     0,    13,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     6,
+      15
 };
 
 static const yytype_int8 yycheck[] =
 {
-       0,     4,    35,     3,    13,    14,    15,    22,    25,    24,
-       4
+       4,     4,    24,     3,     0,     3,    12,    -1,    -1,    -1,
+      -1,    -1,    -1,    35,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    33,
+      33
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    37,     0,     3,    40,    41,    42,     4,    39,    35,
-      25,    22,    24,    13,    14,    15,    38,     4
+       0,     3,    37,    38,    39,     4,    33,    40,    41,    42,
+       0,    39,    24,    35,     4,    33,    41
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    36,    37,    37,    38,    38,    38,    39,    39,    40,
-      40,    41,    42
+       0,    36,    37,    38,    38,    39,    40,    40,    41,    41,
+      42,    42
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     3,     0,     1,     1,     1,     1,     3,     1,
-       1,     3,     4
+       0,     2,     1,     2,     1,     3,     1,     3,     1,     2,
+       2,     1
 };
 
 
@@ -1372,24 +1376,14 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 11:
-#line 24 "melodia.y"
-                                                       {  //do a,b,c; | re c,d; Mudar aqui depois 
-	printf("Declaracao de variavel(variaveis) sem atribuicao.\n");
-	}
-#line 1381 "y.tab.c"
-    break;
-
-  case 12:
-#line 27 "melodia.y"
-                                                      {	// do a = 2
-	printf("Declaracao de variavel(variaveis) com atribuicao.\n");
-}
-#line 1389 "y.tab.c"
+  case 5:
+#line 22 "melodia.y"
+                            {printf("Houve uma declaracao\n");}
+#line 1383 "y.tab.c"
     break;
 
 
-#line 1393 "y.tab.c"
+#line 1387 "y.tab.c"
 
       default: break;
     }
@@ -1621,7 +1615,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 30 "melodia.y"
+#line 48 "melodia.y"
 	
 
 

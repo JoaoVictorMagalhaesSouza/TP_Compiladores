@@ -49,7 +49,7 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    TIPOS = 258,
+    TIPO = 258,
     ID = 259,
     IF = 260,
     ELSE = 261,
@@ -85,7 +85,7 @@ extern int yydebug;
   };
 #endif
 /* Tokens.  */
-#define TIPOS 258
+#define TIPO 258
 #define ID 259
 #define IF 260
 #define ELSE 261
