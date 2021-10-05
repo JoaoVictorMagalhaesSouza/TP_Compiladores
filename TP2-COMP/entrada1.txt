@@ -1,0 +1,39 @@
+do a
+re b
+mi c
+fa d
+la e = True
+do a = 2+2
+la h = 2>2
+la k = ~True|False
+do play funcao1(){}
+re play funcao2(){}
+sol play funcao3(){}
+mi play funcao4(){}
+2
++2
+-2
+2.3
+-2.3
+0
+"Essa eh uma string"
+True
+False
+["Joao","Victor",False,False,False,2,2.3,"Futebol",]
+medley nossoModeloClasse{}
+medley classe1{} = nossoModeloClasse
+refrao(i=0 ; i<10 ; i++){}
+refrao(re j=1 ; j>500 ; i--){}
+bis(e==True){}
+bis(a>b){}
+ensaio(a>b){}
+ensaio(b==False){}
+improviso{}
+finale
+eco 0
+do(v1)
+re(v2)
+k[2]
+k[10]
+nota()
+show()

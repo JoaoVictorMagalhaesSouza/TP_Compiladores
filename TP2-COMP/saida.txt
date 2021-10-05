@@ -1,0 +1,39 @@
+Foi encontrado uma operacao de DECLARACAO DE VARIAVEL. do a 
+Foi encontrado uma operacao de DECLARACAO DE VARIAVEL. re b 
+Foi encontrado uma operacao de DECLARACAO DE VARIAVEL. mi c 
+Foi encontrado uma operacao de DECLARACAO DE VARIAVEL. fa d 
+Foi encontrado uma operacao de DECLARACAO DE VARIAVEL. la e = True 
+Foi encontrado uma operacao de DECLARACAO DE VARIAVEL. do a = 2+2 
+Foi encontrado uma operacao de DECLARACAO DE VARIAVEL. la h = 2>2 
+Foi encontrado uma operacao de DECLARACAO DE VARIAVEL. la k = ~True|False 
+Foi econtrado a definicao de uma FUNCAO. do play funcao1(){} 
+Foi econtrado a definicao de uma FUNCAO. re play funcao2(){} 
+Foi econtrado a definicao de uma FUNCAO. sol play funcao3(){} 
+Foi econtrado a definicao de uma FUNCAO. mi play funcao4(){} 
+Foi encontrada uma variavel do tipo DO: 2 
+Foi encontrada uma variavel do tipo RE: +2 
+Foi encontrada uma variavel do tipo RE: -2 
+Foi encontrada uma variavel do tipo MI: 2.3 
+Foi encontrada uma variavel do tipo MI: -2.3 
+Foi encontrada uma variavel do tipo DO: 0 
+Foi encontrada uma variavel do tipo SI: "Essa eh uma string" 
+Foi encontrada uma variavel do tipo LA: True 
+Foi encontrada uma variavel do tipo LA: False 
+Foi encontado um TAD_ACORDE. ["Joao","Victor",False,False,False,2,2.3,"Futebol",] 
+Foi encontrado uma operacao de DECLARACAO DE VARIAVEL. medley nossoModeloClasse{} 
+Foi encontrado uma operacao de DECLARACAO DE VARIAVEL. medley classe1{} = nossoModeloClasse 
+Foi encontrado um LACO REFRAO. refrao(i=0 ; i<10 ; i++){} 
+Foi encontrado um LACO REFRAO. refrao(re j=1 ; j>500 ; i--){} 
+Foi encontrado um LACO BIS. bis(e==True){} 
+Foi encontrado um LACO BIS. bis(a>b){} 
+Foi encontrado a condicional ENSAIO. ensaio(a>b){} 
+Foi encontrado a condicional ENSAIO. ensaio(b==False){} 
+Foi encontrado a condicional IMPROVISO. improviso{} 
+Foi encontrada uma operacao de PARADA DE EXECUCAO. finale 
+Foi encontrada uma operacao de RETORNO DE VALOR. eco 0 
+Foi encontrada uma EXPRESSAO DE CASTING EXPLICITO. do(v1) 
+Foi encontrada uma EXPRESSAO DE CASTING EXPLICITO. re(v2) 
+Foi encontrado uma operacao de REFERENCIAMENTO. k[2] 
+Foi encontrado uma operacao de REFERENCIAMENTO. k[10] 
+Foi encontrado uma FUNCAO DE ENTRADA DE DADOS. nota() 
+Foi encontrado uma FUNCAO DE SAIDA DE DADOS. show() 
