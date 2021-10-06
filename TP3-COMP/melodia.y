@@ -9,8 +9,8 @@ extern int linha;
 %}
 
 %token TIPO ID IF ELSE WHILE FOR CONTINUE BREAK VOID RETURN ICONSTANTE FCONSTANTE STRING LPAREN RPAREN LCOLCH RCOLCH LCHAV RCHAV LITERAL_PONTO_E_VIRGULA LITERAL_PONTO LITERAL_VIRGULA LITERAL_RECEBE
-%token ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP EOL
-%token ARRAY
+%token ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP EOL ACORDE
+
 %start program
 %%
 
@@ -26,7 +26,7 @@ variable: ID | pointer ID | ID array ;
 
 pointer: pointer MULOP | MULOP ;
 
-array: array LCOLCH ICONSTANTE RCOLCH | LCOLCH ICONSTANTE RCOLCH ;
+array: array LCOLCH ICONSTANTE RCOLCH | LCOLCH ICONSTANTE RCOLCH {printf("arriei\n");};
 
 /* DECLARAÇÕES */
 declarations: declarations declaration | declaration ;
@@ -36,7 +36,7 @@ declaration: TIPO declaration_names EOL //| TIPO names LITERAL_RECEBE expression
 
 declaration_names: declaration_variable | declaration_names LITERAL_VIRGULA declaration_variable ;
 
-declaration_variable: ID | pointer ID | ARRAY ID array ;
+declaration_variable: ACORDE ID array | ID | pointer ID ;
 
 /* STATEMENTS */
 

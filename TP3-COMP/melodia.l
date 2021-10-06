@@ -24,16 +24,14 @@ TIPOS 			{DO}|{RE}|{MI}|{FA}|{SOL}|{LA}|{SI}
 allsymbols     		[ -~]
 DIGIT 			[0-9]
 
-ICONSTANTE 		["0"|[0-9]{DIGIT}*
+ICONSTANTE 		"0"|[0-9]{DIGIT}*
 FCONSTANTE 		"0"|{DIGIT}*"."{DIGIT}+
 STRING 			\"{allsymbols}*\"
 
-ARRAY			"acorde"
 
 %%
 
-{TIPOS} 				{ return TIPO;}
-{ID}		 			{ return ID; }			
+{TIPOS} 				{ printf("tipei\n");return TIPO;}		
 
 "ensaio"				{ return IF; }
 "improviso"				{ return ELSE; }
@@ -43,17 +41,18 @@ ARRAY			"acorde"
 "finale"				{ return BREAK; }
 "void"					{ return VOID; }
 "eco"					{ return RETURN; }
-{ARRAY}					{ return ARRAY; }
+"acorde"				{ printf("acordei\n"); return ACORDE; }
 
 {ICONSTANTE}				{ return ICONSTANTE; }
 {FCONSTANTE}				{ return FCONSTANTE; }
 {STRING}				{ return STRING; }
 
+{ID}		 			{ return ID; }	
 
 "("					{ return LPAREN; }
 ")"					{ return RPAREN; }
-"]"					{ return LCOLCH; }
-"["					{ return RCOLCH; }
+"["					{ return LCOLCH; }
+"]"					{ return RCOLCH; }
 "{"					{ return LCHAV; }
 "}"					{ return RCHAV; }
 ";"					{ return LITERAL_PONTO_E_VIRGULA; }

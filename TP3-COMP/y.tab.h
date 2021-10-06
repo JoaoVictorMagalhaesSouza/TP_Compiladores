@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.5.1.  */
+/* A Bison parser, made by GNU Bison 3.7.5.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -31,8 +31,9 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-/* Undocumented macros, especially those whose name start with YY_,
-   are private implementation details.  Do not rely on them.  */
+/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
+   especially those whose name start with YY_ or yy_.  They are
+   private implementation details that can be changed or removed.  */
 
 #ifndef YY_YY_Y_TAB_H_INCLUDED
 # define YY_YY_Y_TAB_H_INCLUDED
@@ -44,47 +45,57 @@
 extern int yydebug;
 #endif
 
-/* Token type.  */
+/* Token kinds.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
   enum yytokentype
   {
-    TIPO = 258,
-    ID = 259,
-    IF = 260,
-    ELSE = 261,
-    WHILE = 262,
-    FOR = 263,
-    CONTINUE = 264,
-    BREAK = 265,
-    VOID = 266,
-    RETURN = 267,
-    ICONSTANTE = 268,
-    FCONSTANTE = 269,
-    STRING = 270,
-    LPAREN = 271,
-    RPAREN = 272,
-    LCOLCH = 273,
-    RCOLCH = 274,
-    LCHAV = 275,
-    RCHAV = 276,
-    LITERAL_PONTO_E_VIRGULA = 277,
-    LITERAL_PONTO = 278,
-    LITERAL_VIRGULA = 279,
-    LITERAL_RECEBE = 280,
-    ADDOP = 281,
-    EQOP = 282,
-    ANDOP = 283,
-    OROP = 284,
-    NOTOP = 285,
-    RELOP = 286,
-    INCR = 287,
-    MULOP = 288,
-    DIVOP = 289,
-    EOL = 290
+    YYEMPTY = -2,
+    YYEOF = 0,                     /* "end of file"  */
+    YYerror = 256,                 /* error  */
+    YYUNDEF = 257,                 /* "invalid token"  */
+    TIPO = 258,                    /* TIPO  */
+    ID = 259,                      /* ID  */
+    IF = 260,                      /* IF  */
+    ELSE = 261,                    /* ELSE  */
+    WHILE = 262,                   /* WHILE  */
+    FOR = 263,                     /* FOR  */
+    CONTINUE = 264,                /* CONTINUE  */
+    BREAK = 265,                   /* BREAK  */
+    VOID = 266,                    /* VOID  */
+    RETURN = 267,                  /* RETURN  */
+    ICONSTANTE = 268,              /* ICONSTANTE  */
+    FCONSTANTE = 269,              /* FCONSTANTE  */
+    STRING = 270,                  /* STRING  */
+    LPAREN = 271,                  /* LPAREN  */
+    RPAREN = 272,                  /* RPAREN  */
+    LCOLCH = 273,                  /* LCOLCH  */
+    RCOLCH = 274,                  /* RCOLCH  */
+    LCHAV = 275,                   /* LCHAV  */
+    RCHAV = 276,                   /* RCHAV  */
+    LITERAL_PONTO_E_VIRGULA = 277, /* LITERAL_PONTO_E_VIRGULA  */
+    LITERAL_PONTO = 278,           /* LITERAL_PONTO  */
+    LITERAL_VIRGULA = 279,         /* LITERAL_VIRGULA  */
+    LITERAL_RECEBE = 280,          /* LITERAL_RECEBE  */
+    ADDOP = 281,                   /* ADDOP  */
+    EQOP = 282,                    /* EQOP  */
+    ANDOP = 283,                   /* ANDOP  */
+    OROP = 284,                    /* OROP  */
+    NOTOP = 285,                   /* NOTOP  */
+    RELOP = 286,                   /* RELOP  */
+    INCR = 287,                    /* INCR  */
+    MULOP = 288,                   /* MULOP  */
+    DIVOP = 289,                   /* DIVOP  */
+    EOL = 290,                     /* EOL  */
+    ACORDE = 291                   /* ACORDE  */
   };
+  typedef enum yytokentype yytoken_kind_t;
 #endif
-/* Tokens.  */
+/* Token kinds.  */
+#define YYEMPTY -2
+#define YYEOF 0
+#define YYerror 256
+#define YYUNDEF 257
 #define TIPO 258
 #define ID 259
 #define IF 260
@@ -118,6 +129,7 @@ extern int yydebug;
 #define MULOP 288
 #define DIVOP 289
 #define EOL 290
+#define ACORDE 291
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
