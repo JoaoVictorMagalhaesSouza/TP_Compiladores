@@ -1,0 +1,4 @@
+bison melodia.y
+flex melodia.l
+gcc -omelodia lex.yy.c y.tab.c -ll
+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

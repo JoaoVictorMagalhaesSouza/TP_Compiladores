@@ -21,14 +21,14 @@ SI "si"
 
 ID	 		[a-zA-Z_][a-zA-Z0-9_]*
 TIPOS 			{DO}|{RE}|{MI}|{FA}|{SOL}|{LA}|{SI}
-allsymbols     	[ -~]
+allsymbols     		[ -~]
 DIGIT 			[0-9]
 
 ICONSTANTE 		["0"|[0-9]{DIGIT}*
 FCONSTANTE 		"0"|{DIGIT}*"."{DIGIT}+
-STRING 		\"{allsymbols}*\"
+STRING 			\"{allsymbols}*\"
 
-
+ARRAY			"acorde"
 
 %%
 
@@ -43,6 +43,7 @@ STRING 		\"{allsymbols}*\"
 "finale"				{ return BREAK; }
 "void"					{ return VOID; }
 "eco"					{ return RETURN; }
+{ARRAY}					{ return ARRAY; }
 
 {ICONSTANTE}				{ return ICONSTANTE; }
 {FCONSTANTE}				{ return FCONSTANTE; }
@@ -60,7 +61,7 @@ STRING 		\"{allsymbols}*\"
 ","					{ return LITERAL_VIRGULA; }
 "="|"-="|"+="				{ return LITERAL_RECEBE; }
 
-"+"|"-"				{ return ADDOP; }
+"+"|"-"					{ return ADDOP; }
 "=="|"~="				{ return EQOP; }
 "&"					{ return ANDOP; }
 "|"					{ return OROP; }
