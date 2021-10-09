@@ -31,7 +31,7 @@ STRING 			\"{allsymbols}*\"
 
 %%
 
-{TIPOS} 				{ printf("tipei\n");return TIPO;}		
+{TIPOS} 				{return TIPO;}		
 
 "ensaio"				{ return IF; }
 "improviso"				{ return ELSE; }
@@ -41,13 +41,16 @@ STRING 			\"{allsymbols}*\"
 "finale"				{ return BREAK; }
 "void"					{ return VOID; }
 "eco"					{ return RETURN; }
-"acorde"				{ printf("acordei\n"); return ACORDE; }
+"acorde"				{ return ACORDE; }
 
-{ICONSTANTE}				{ return ICONSTANTE; }
-{FCONSTANTE}				{ return FCONSTANTE; }
-{STRING}				{ return STRING; }
+{ID}		 			{return ID; }	
 
-{ID}		 			{ return ID; }	
+{ICONSTANTE}				{return ICONSTANTE; }
+{FCONSTANTE}				{return FCONSTANTE; }
+
+{STRING}				{return STRING; }
+
+
 
 "("					{ return LPAREN; }
 ")"					{ return RPAREN; }
@@ -58,9 +61,9 @@ STRING 			\"{allsymbols}*\"
 ";"					{ return LITERAL_PONTO_E_VIRGULA; }
 "."					{ return LITERAL_PONTO; }
 ","					{ return LITERAL_VIRGULA; }
-"="|"-="|"+="				{ return LITERAL_RECEBE; }
+"="|"-="|"+="				{return LITERAL_RECEBE; }
 
-"+"|"-"					{ return ADDOP; }
+"+"|"-"				{return ADDOP; }
 "=="|"~="				{ return EQOP; }
 "&"					{ return ANDOP; }
 "|"					{ return OROP; }
@@ -68,10 +71,12 @@ STRING 			\"{allsymbols}*\"
 ">"|"<"|">="|"<="			{ return RELOP; }
 "++"|"--"				{ return INCR; }
 "*"					{ return MULOP; }
-"/"					{ return DIVOP; }
+"**"					{ return POWOP; }
+"%"					{ return RESTOP; }
+"/"|"//"				{ return DIVOP; } 
 
 
-\n 					{ return EOL; linha +=1;}
+\n 					{linha +=1;return EOL; }
 . ;
 
 

@@ -9,39 +9,98 @@ extern int linha;
 %}
 
 %token TIPO ID IF ELSE WHILE FOR CONTINUE BREAK VOID RETURN ICONSTANTE FCONSTANTE STRING LPAREN RPAREN LCOLCH RCOLCH LCHAV RCHAV LITERAL_PONTO_E_VIRGULA LITERAL_PONTO LITERAL_VIRGULA LITERAL_RECEBE
-%token ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP EOL ACORDE
+%token ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP EOL ACORDE POWOP RESTOP
+
+
+
+%left ID ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP ACORDE POWOP RESTOP
+%right LITERAL_RECEBE ICONSTANTE FCONSTANTE
+
+
+
+
 
 %start program
 %%
 
+
 program: commands | program commands ;
 
-//commands: declarations | statements ;
+commands: declarations | statements ;
 
-commands: declarations;
+//commands: declarations;
 
 names: variable | names LITERAL_VIRGULA variable ;
 
-variable: ID | pointer ID | ID array ;
+variable: ID | pointer ID | ID array  {printf("VARIAVEL identificada\n");};
 
 pointer: pointer MULOP | MULOP ;
 
 array: array LCOLCH ICONSTANTE RCOLCH | LCOLCH ICONSTANTE RCOLCH {printf("arriei\n");};
 
 /* DECLARAÇÕES */
+
 declarations: declarations declaration | declaration ;
 
-declaration: TIPO declaration_names EOL //| TIPO names LITERAL_RECEBE expression 
+declaration: TIPO names LITERAL_RECEBE expression EOL|TIPO declaration_names EOL
 {printf("Houve uma declaracao\n");} ;
-
+//do a = 2
 declaration_names: declaration_variable | declaration_names LITERAL_VIRGULA declaration_variable ;
 
-declaration_variable: ACORDE ID array | ID | pointer ID ;
+declaration_variable: ID|ACORDE ID array|pointer ID ;
+
+/* EXPRESSIONS */
+expression:
+	variable|
+    sign constant|
+    expression POWOP expression|    
+    expression MULOP expression|
+    expression DIVOP expression|
+    expression ADDOP expression|
+    expression INCR|
+    INCR expression|
+    expression OROP expression|
+    expression ANDOP expression|    
+    expression RESTOP expression|
+    NOTOP expression|
+    expression EQOP expression|
+    expression RELOP expression| 
+    LPAREN expression RPAREN
+    
+    {printf("EXPRESSION reconhecida.\n");}
+    
+;
+sign: ADDOP| {printf("SIGN reconhecida.\n");}; 
+constant: ICONSTANTE|FCONSTANTE{printf("CONSTANT reconhecida.\n");};
 
 /* STATEMENTS */
 
+statements: statements statement | statement;
 
+statement:
+    if_statement | for_statement | while_statement | assigment |
+    CONTINUE LITERAL_PONTO_E_VIRGULA | BREAK LITERAL_PONTO_E_VIRGULA | RETURN LITERAL_PONTO_E_VIRGULA
+    {printf("STATEMENT reconhecido\n");}
+;
 
+if_statement: IF LPAREN expression RPAREN tail else_if_part else_part {printf("Bloco IF\n");};
+
+else_if_part: 
+    else_if_part ELSE IF LPAREN expression RPAREN tail  |
+    ELSE IF LPAREN expression RPAREN tail  |
+    /* empty */
+; 
+else_part: ELSE tail | /* empty */ ; 
+
+for_statement: FOR LPAREN expression LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA expression RPAREN tail ;
+
+while_statement: WHILE LPAREN expression RPAREN tail ;
+
+tail: statement | LCHAV statements RCHAV{printf("TAIL reconhecido\n");};
+
+assigment: variable LITERAL_RECEBE expression EOL ; 
+
+// ensaio (2>3) a = 3
 %%	
 
 

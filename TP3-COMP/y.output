@@ -1,0 +1,2111 @@
+Não terminais inúteis na gramática
+
+    names
+
+
+Terminais sem uso na gramática
+
+    VOID
+    STRING
+    LITERAL_PONTO
+
+
+Regras inúteis na gramática
+
+   59 names: variable
+   60      | names LITERAL_VIRGULA variable
+
+
+Estado 14 conflitos: 1 de deslocamento/redução
+Estado 16 conflitos: 8 de deslocamento/redução
+Estado 63 conflitos: 10 de deslocamento/redução
+Estado 64 conflitos: 10 de deslocamento/redução
+Estado 86 conflitos: 1 de deslocamento/redução
+Estado 87 conflitos: 10 de deslocamento/redução
+Estado 88 conflitos: 10 de deslocamento/redução
+Estado 89 conflitos: 10 de deslocamento/redução
+Estado 90 conflitos: 10 de deslocamento/redução
+Estado 91 conflitos: 10 de deslocamento/redução
+Estado 92 conflitos: 10 de deslocamento/redução
+Estado 93 conflitos: 10 de deslocamento/redução
+Estado 94 conflitos: 10 de deslocamento/redução
+Estado 95 conflitos: 10 de deslocamento/redução
+Estado 100 conflitos: 1 de deslocamento/redução
+Estado 118 conflitos: 1 de deslocamento/redução, 12 de redução/redução
+
+
+Gramática
+
+    0 $accept: program $end
+
+    1 program: commands
+    2        | program commands
+
+    3 commands: declarations
+    4         | statements
+
+    5 variable: ID
+    6         | pointer ID
+    7         | ID array
+
+    8 pointer: pointer MULOP
+    9        | MULOP
+
+   10 array: array LCOLCH ICONSTANTE RCOLCH
+   11      | LCOLCH ICONSTANTE RCOLCH
+
+   12 declarations: declarations declaration
+   13             | declaration
+
+   14 declaration: TIPO declaration_names EOL
+
+   15 declaration_names: declaration_variable
+   16                  | declaration_names LITERAL_VIRGULA declaration_variable
+
+   17 declaration_variable: ID
+   18                     | ACORDE ID array
+   19                     | pointer ID
+
+   20 expression: variable
+   21           | sign constant
+   22           | expression POWOP expression
+   23           | expression MULOP expression
+   24           | expression DIVOP expression
+   25           | expression ADDOP expression
+   26           | expression INCR
+   27           | INCR expression
+   28           | expression OROP expression
+   29           | expression ANDOP expression
+   30           | expression RESTOP expression
+   31           | NOTOP expression
+   32           | expression EQOP expression
+   33           | expression RELOP expression
+   34           | LPAREN expression RPAREN
+
+   35 sign: ADDOP
+   36     | %empty
+
+   37 constant: ICONSTANTE
+   38         | FCONSTANTE
+
+   39 statements: statements statement
+   40           | statement
+
+   41 statement: if_statement
+   42          | for_statement
+   43          | while_statement
+   44          | assigment
+   45          | CONTINUE EOL
+   46          | BREAK EOL
+   47          | RETURN EOL
+
+   48 if_statement: IF LPAREN expression RPAREN tail else_if_part else_part
+
+   49 else_if_part: else_if_part ELSE IF LPAREN expression RPAREN tail
+   50             | ELSE IF LPAREN expression RPAREN tail
+   51             | %empty
+
+   52 else_part: ELSE tail
+   53          | %empty
+
+   54 for_statement: FOR LPAREN expression LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA expression RPAREN tail
+
+   55 while_statement: WHILE LPAREN expression RPAREN tail
+
+   56 tail: statement
+   57     | LCHAV statements RCHAV
+
+   58 assigment: variable LITERAL_RECEBE expression EOL
+
+
+Terminais, com as regras onde eles aparecem
+
+    $end (0) 0
+    error (256)
+    TIPO (258) 14
+    ID (259) 5 6 7 17 18 19
+    IF (260) 48 49 50
+    ELSE (261) 49 50 52
+    WHILE (262) 55
+    FOR (263) 54
+    CONTINUE (264) 45
+    BREAK (265) 46
+    VOID (266)
+    RETURN (267) 47
+    ICONSTANTE (268) 10 11 37
+    FCONSTANTE (269) 38
+    STRING (270)
+    LPAREN (271) 34 48 49 50 54 55
+    RPAREN (272) 34 48 49 50 54 55
+    LCOLCH (273) 10 11
+    RCOLCH (274) 10 11
+    LCHAV (275) 57
+    RCHAV (276) 57
+    LITERAL_PONTO_E_VIRGULA (277) 54
+    LITERAL_PONTO (278)
+    LITERAL_VIRGULA (279) 16
+    LITERAL_RECEBE (280) 58
+    ADDOP (281) 25 35
+    EQOP (282) 32
+    ANDOP (283) 29
+    OROP (284) 28
+    NOTOP (285) 31
+    RELOP (286) 33
+    INCR (287) 26 27
+    MULOP (288) 8 9 23
+    DIVOP (289) 24
+    EOL (290) 14 45 46 47 58
+    ACORDE (291) 18
+    POWOP (292) 22
+    RESTOP (293) 30
+
+
+Não terminais com as regras onde eles aparecem
+
+    $accept (39)
+        à esquerda: 0
+    program (40)
+        à esquerda: 1 2
+        à direita: 0 2
+    commands (41)
+        à esquerda: 3 4
+        à direita: 1 2
+    variable (42)
+        à esquerda: 5 6 7
+        à direita: 20 58
+    pointer (43)
+        à esquerda: 8 9
+        à direita: 6 8 19
+    array (44)
+        à esquerda: 10 11
+        à direita: 7 10 18
+    declarations (45)
+        à esquerda: 12 13
+        à direita: 3 12
+    declaration (46)
+        à esquerda: 14
+        à direita: 12 13
+    declaration_names (47)
+        à esquerda: 15 16
+        à direita: 14 16
+    declaration_variable (48)
+        à esquerda: 17 18 19
+        à direita: 15 16
+    expression (49)
+        à esquerda: 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34
+        à direita: 22 23 24 25 26 27 28 29 30 31 32 33 34 48 49 50 54 55 58
+    sign (50)
+        à esquerda: 35 36
+        à direita: 21
+    constant (51)
+        à esquerda: 37 38
+        à direita: 21
+    statements (52)
+        à esquerda: 39 40
+        à direita: 4 39 57
+    statement (53)
+        à esquerda: 41 42 43 44 45 46 47
+        à direita: 39 40 56
+    if_statement (54)
+        à esquerda: 48
+        à direita: 41
+    else_if_part (55)
+        à esquerda: 49 50 51
+        à direita: 48 49
+    else_part (56)
+        à esquerda: 52 53
+        à direita: 48
+    for_statement (57)
+        à esquerda: 54
+        à direita: 42
+    while_statement (58)
+        à esquerda: 55
+        à direita: 43
+    tail (59)
+        à esquerda: 56 57
+        à direita: 48 49 50 52 54 55
+    assigment (60)
+        à esquerda: 58
+        à direita: 44
+
+
+Estado 0
+
+    0 $accept: . program $end
+
+    TIPO      deslocar, e ir ao estado 1
+    ID        deslocar, e ir ao estado 2
+    IF        deslocar, e ir ao estado 3
+    WHILE     deslocar, e ir ao estado 4
+    FOR       deslocar, e ir ao estado 5
+    CONTINUE  deslocar, e ir ao estado 6
+    BREAK     deslocar, e ir ao estado 7
+    RETURN    deslocar, e ir ao estado 8
+    MULOP     deslocar, e ir ao estado 9
+
+    program          ir ao estado 10
+    commands         ir ao estado 11
+    variable         ir ao estado 12
+    pointer          ir ao estado 13
+    declarations     ir ao estado 14
+    declaration      ir ao estado 15
+    statements       ir ao estado 16
+    statement        ir ao estado 17
+    if_statement     ir ao estado 18
+    for_statement    ir ao estado 19
+    while_statement  ir ao estado 20
+    assigment        ir ao estado 21
+
+
+Estado 1
+
+   14 declaration: TIPO . declaration_names EOL
+
+    ID      deslocar, e ir ao estado 22
+    MULOP   deslocar, e ir ao estado 9
+    ACORDE  deslocar, e ir ao estado 23
+
+    pointer               ir ao estado 24
+    declaration_names     ir ao estado 25
+    declaration_variable  ir ao estado 26
+
+
+Estado 2
+
+    5 variable: ID .
+    7         | ID . array
+
+    LCOLCH  deslocar, e ir ao estado 27
+
+    $padrão  reduzir usando a regra 5 (variable)
+
+    array  ir ao estado 28
+
+
+Estado 3
+
+   48 if_statement: IF . LPAREN expression RPAREN tail else_if_part else_part
+
+    LPAREN  deslocar, e ir ao estado 29
+
+
+Estado 4
+
+   55 while_statement: WHILE . LPAREN expression RPAREN tail
+
+    LPAREN  deslocar, e ir ao estado 30
+
+
+Estado 5
+
+   54 for_statement: FOR . LPAREN expression LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA expression RPAREN tail
+
+    LPAREN  deslocar, e ir ao estado 31
+
+
+Estado 6
+
+   45 statement: CONTINUE . EOL
+
+    EOL  deslocar, e ir ao estado 32
+
+
+Estado 7
+
+   46 statement: BREAK . EOL
+
+    EOL  deslocar, e ir ao estado 33
+
+
+Estado 8
+
+   47 statement: RETURN . EOL
+
+    EOL  deslocar, e ir ao estado 34
+
+
+Estado 9
+
+    9 pointer: MULOP .
+
+    $padrão  reduzir usando a regra 9 (pointer)
+
+
+Estado 10
+
+    0 $accept: program . $end
+    2 program: program . commands
+
+    $end      deslocar, e ir ao estado 35
+    TIPO      deslocar, e ir ao estado 1
+    ID        deslocar, e ir ao estado 2
+    IF        deslocar, e ir ao estado 3
+    WHILE     deslocar, e ir ao estado 4
+    FOR       deslocar, e ir ao estado 5
+    CONTINUE  deslocar, e ir ao estado 6
+    BREAK     deslocar, e ir ao estado 7
+    RETURN    deslocar, e ir ao estado 8
+    MULOP     deslocar, e ir ao estado 9
+
+    commands         ir ao estado 36
+    variable         ir ao estado 12
+    pointer          ir ao estado 13
+    declarations     ir ao estado 14
+    declaration      ir ao estado 15
+    statements       ir ao estado 16
+    statement        ir ao estado 17
+    if_statement     ir ao estado 18
+    for_statement    ir ao estado 19
+    while_statement  ir ao estado 20
+    assigment        ir ao estado 21
+
+
+Estado 11
+
+    1 program: commands .
+
+    $padrão  reduzir usando a regra 1 (program)
+
+
+Estado 12
+
+   58 assigment: variable . LITERAL_RECEBE expression EOL
+
+    LITERAL_RECEBE  deslocar, e ir ao estado 37
+
+
+Estado 13
+
+    6 variable: pointer . ID
+    8 pointer: pointer . MULOP
+
+    ID     deslocar, e ir ao estado 38
+    MULOP  deslocar, e ir ao estado 39
+
+
+Estado 14
+
+    3 commands: declarations .
+   12 declarations: declarations . declaration
+
+    TIPO  deslocar, e ir ao estado 1
+
+    TIPO      [reduzir usando a regra 3 (commands)]
+    $padrão  reduzir usando a regra 3 (commands)
+
+    declaration  ir ao estado 40
+
+
+Estado 15
+
+   13 declarations: declaration .
+
+    $padrão  reduzir usando a regra 13 (declarations)
+
+
+Estado 16
+
+    4 commands: statements .
+   39 statements: statements . statement
+
+    ID        deslocar, e ir ao estado 2
+    IF        deslocar, e ir ao estado 3
+    WHILE     deslocar, e ir ao estado 4
+    FOR       deslocar, e ir ao estado 5
+    CONTINUE  deslocar, e ir ao estado 6
+    BREAK     deslocar, e ir ao estado 7
+    RETURN    deslocar, e ir ao estado 8
+    MULOP     deslocar, e ir ao estado 9
+
+    ID        [reduzir usando a regra 4 (commands)]
+    IF        [reduzir usando a regra 4 (commands)]
+    WHILE     [reduzir usando a regra 4 (commands)]
+    FOR       [reduzir usando a regra 4 (commands)]
+    CONTINUE  [reduzir usando a regra 4 (commands)]
+    BREAK     [reduzir usando a regra 4 (commands)]
+    RETURN    [reduzir usando a regra 4 (commands)]
+    MULOP     [reduzir usando a regra 4 (commands)]
+    $padrão  reduzir usando a regra 4 (commands)
+
+    variable         ir ao estado 12
+    pointer          ir ao estado 13
+    statement        ir ao estado 41
+    if_statement     ir ao estado 18
+    for_statement    ir ao estado 19
+    while_statement  ir ao estado 20
+    assigment        ir ao estado 21
+
+
+Estado 17
+
+   40 statements: statement .
+
+    $padrão  reduzir usando a regra 40 (statements)
+
+
+Estado 18
+
+   41 statement: if_statement .
+
+    $padrão  reduzir usando a regra 41 (statement)
+
+
+Estado 19
+
+   42 statement: for_statement .
+
+    $padrão  reduzir usando a regra 42 (statement)
+
+
+Estado 20
+
+   43 statement: while_statement .
+
+    $padrão  reduzir usando a regra 43 (statement)
+
+
+Estado 21
+
+   44 statement: assigment .
+
+    $padrão  reduzir usando a regra 44 (statement)
+
+
+Estado 22
+
+   17 declaration_variable: ID .
+
+    $padrão  reduzir usando a regra 17 (declaration_variable)
+
+
+Estado 23
+
+   18 declaration_variable: ACORDE . ID array
+
+    ID  deslocar, e ir ao estado 42
+
+
+Estado 24
+
+    8 pointer: pointer . MULOP
+   19 declaration_variable: pointer . ID
+
+    ID     deslocar, e ir ao estado 43
+    MULOP  deslocar, e ir ao estado 39
+
+
+Estado 25
+
+   14 declaration: TIPO declaration_names . EOL
+   16 declaration_names: declaration_names . LITERAL_VIRGULA declaration_variable
+
+    LITERAL_VIRGULA  deslocar, e ir ao estado 44
+    EOL              deslocar, e ir ao estado 45
+
+
+Estado 26
+
+   15 declaration_names: declaration_variable .
+
+    $padrão  reduzir usando a regra 15 (declaration_names)
+
+
+Estado 27
+
+   11 array: LCOLCH . ICONSTANTE RCOLCH
+
+    ICONSTANTE  deslocar, e ir ao estado 46
+
+
+Estado 28
+
+    7 variable: ID array .
+   10 array: array . LCOLCH ICONSTANTE RCOLCH
+
+    LCOLCH  deslocar, e ir ao estado 47
+
+    $padrão  reduzir usando a regra 7 (variable)
+
+
+Estado 29
+
+   48 if_statement: IF LPAREN . expression RPAREN tail else_if_part else_part
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 53
+    sign        ir ao estado 54
+
+
+Estado 30
+
+   55 while_statement: WHILE LPAREN . expression RPAREN tail
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 55
+    sign        ir ao estado 54
+
+
+Estado 31
+
+   54 for_statement: FOR LPAREN . expression LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA expression RPAREN tail
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 56
+    sign        ir ao estado 54
+
+
+Estado 32
+
+   45 statement: CONTINUE EOL .
+
+    $padrão  reduzir usando a regra 45 (statement)
+
+
+Estado 33
+
+   46 statement: BREAK EOL .
+
+    $padrão  reduzir usando a regra 46 (statement)
+
+
+Estado 34
+
+   47 statement: RETURN EOL .
+
+    $padrão  reduzir usando a regra 47 (statement)
+
+
+Estado 35
+
+    0 $accept: program $end .
+
+    $padrão  aceitar
+
+
+Estado 36
+
+    2 program: program commands .
+
+    $padrão  reduzir usando a regra 2 (program)
+
+
+Estado 37
+
+   58 assigment: variable LITERAL_RECEBE . expression EOL
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 57
+    sign        ir ao estado 54
+
+
+Estado 38
+
+    6 variable: pointer ID .
+
+    $padrão  reduzir usando a regra 6 (variable)
+
+
+Estado 39
+
+    8 pointer: pointer MULOP .
+
+    $padrão  reduzir usando a regra 8 (pointer)
+
+
+Estado 40
+
+   12 declarations: declarations declaration .
+
+    $padrão  reduzir usando a regra 12 (declarations)
+
+
+Estado 41
+
+   39 statements: statements statement .
+
+    $padrão  reduzir usando a regra 39 (statements)
+
+
+Estado 42
+
+   18 declaration_variable: ACORDE ID . array
+
+    LCOLCH  deslocar, e ir ao estado 27
+
+    array  ir ao estado 58
+
+
+Estado 43
+
+   19 declaration_variable: pointer ID .
+
+    $padrão  reduzir usando a regra 19 (declaration_variable)
+
+
+Estado 44
+
+   16 declaration_names: declaration_names LITERAL_VIRGULA . declaration_variable
+
+    ID      deslocar, e ir ao estado 22
+    MULOP   deslocar, e ir ao estado 9
+    ACORDE  deslocar, e ir ao estado 23
+
+    pointer               ir ao estado 24
+    declaration_variable  ir ao estado 59
+
+
+Estado 45
+
+   14 declaration: TIPO declaration_names EOL .
+
+    $padrão  reduzir usando a regra 14 (declaration)
+
+
+Estado 46
+
+   11 array: LCOLCH ICONSTANTE . RCOLCH
+
+    RCOLCH  deslocar, e ir ao estado 60
+
+
+Estado 47
+
+   10 array: array LCOLCH . ICONSTANTE RCOLCH
+
+    ICONSTANTE  deslocar, e ir ao estado 61
+
+
+Estado 48
+
+   34 expression: LPAREN . expression RPAREN
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 62
+    sign        ir ao estado 54
+
+
+Estado 49
+
+   35 sign: ADDOP .
+
+    $padrão  reduzir usando a regra 35 (sign)
+
+
+Estado 50
+
+   31 expression: NOTOP . expression
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 63
+    sign        ir ao estado 54
+
+
+Estado 51
+
+   27 expression: INCR . expression
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 64
+    sign        ir ao estado 54
+
+
+Estado 52
+
+   20 expression: variable .
+
+    $padrão  reduzir usando a regra 20 (expression)
+
+
+Estado 53
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+   48 if_statement: IF LPAREN expression . RPAREN tail else_if_part else_part
+
+    RPAREN  deslocar, e ir ao estado 65
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+
+Estado 54
+
+   21 expression: sign . constant
+
+    ICONSTANTE  deslocar, e ir ao estado 76
+    FCONSTANTE  deslocar, e ir ao estado 77
+
+    constant  ir ao estado 78
+
+
+Estado 55
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+   55 while_statement: WHILE LPAREN expression . RPAREN tail
+
+    RPAREN  deslocar, e ir ao estado 79
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+
+Estado 56
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+   54 for_statement: FOR LPAREN expression . LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA expression RPAREN tail
+
+    LITERAL_PONTO_E_VIRGULA  deslocar, e ir ao estado 80
+    ADDOP                    deslocar, e ir ao estado 66
+    EQOP                     deslocar, e ir ao estado 67
+    ANDOP                    deslocar, e ir ao estado 68
+    OROP                     deslocar, e ir ao estado 69
+    RELOP                    deslocar, e ir ao estado 70
+    INCR                     deslocar, e ir ao estado 71
+    MULOP                    deslocar, e ir ao estado 72
+    DIVOP                    deslocar, e ir ao estado 73
+    POWOP                    deslocar, e ir ao estado 74
+    RESTOP                   deslocar, e ir ao estado 75
+
+
+Estado 57
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+   58 assigment: variable LITERAL_RECEBE expression . EOL
+
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    EOL     deslocar, e ir ao estado 81
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+
+Estado 58
+
+   10 array: array . LCOLCH ICONSTANTE RCOLCH
+   18 declaration_variable: ACORDE ID array .
+
+    LCOLCH  deslocar, e ir ao estado 47
+
+    $padrão  reduzir usando a regra 18 (declaration_variable)
+
+
+Estado 59
+
+   16 declaration_names: declaration_names LITERAL_VIRGULA declaration_variable .
+
+    $padrão  reduzir usando a regra 16 (declaration_names)
+
+
+Estado 60
+
+   11 array: LCOLCH ICONSTANTE RCOLCH .
+
+    $padrão  reduzir usando a regra 11 (array)
+
+
+Estado 61
+
+   10 array: array LCOLCH ICONSTANTE . RCOLCH
+
+    RCOLCH  deslocar, e ir ao estado 82
+
+
+Estado 62
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+   34           | LPAREN expression . RPAREN
+
+    RPAREN  deslocar, e ir ao estado 83
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+
+Estado 63
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   31           | NOTOP expression .
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+    ADDOP     [reduzir usando a regra 31 (expression)]
+    EQOP      [reduzir usando a regra 31 (expression)]
+    ANDOP     [reduzir usando a regra 31 (expression)]
+    OROP      [reduzir usando a regra 31 (expression)]
+    RELOP     [reduzir usando a regra 31 (expression)]
+    INCR      [reduzir usando a regra 31 (expression)]
+    MULOP     [reduzir usando a regra 31 (expression)]
+    DIVOP     [reduzir usando a regra 31 (expression)]
+    POWOP     [reduzir usando a regra 31 (expression)]
+    RESTOP    [reduzir usando a regra 31 (expression)]
+    $padrão  reduzir usando a regra 31 (expression)
+
+
+Estado 64
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   27           | INCR expression .
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+    ADDOP     [reduzir usando a regra 27 (expression)]
+    EQOP      [reduzir usando a regra 27 (expression)]
+    ANDOP     [reduzir usando a regra 27 (expression)]
+    OROP      [reduzir usando a regra 27 (expression)]
+    RELOP     [reduzir usando a regra 27 (expression)]
+    INCR      [reduzir usando a regra 27 (expression)]
+    MULOP     [reduzir usando a regra 27 (expression)]
+    DIVOP     [reduzir usando a regra 27 (expression)]
+    POWOP     [reduzir usando a regra 27 (expression)]
+    RESTOP    [reduzir usando a regra 27 (expression)]
+    $padrão  reduzir usando a regra 27 (expression)
+
+
+Estado 65
+
+   48 if_statement: IF LPAREN expression RPAREN . tail else_if_part else_part
+
+    ID        deslocar, e ir ao estado 2
+    IF        deslocar, e ir ao estado 3
+    WHILE     deslocar, e ir ao estado 4
+    FOR       deslocar, e ir ao estado 5
+    CONTINUE  deslocar, e ir ao estado 6
+    BREAK     deslocar, e ir ao estado 7
+    RETURN    deslocar, e ir ao estado 8
+    LCHAV     deslocar, e ir ao estado 84
+    MULOP     deslocar, e ir ao estado 9
+
+    variable         ir ao estado 12
+    pointer          ir ao estado 13
+    statement        ir ao estado 85
+    if_statement     ir ao estado 18
+    for_statement    ir ao estado 19
+    while_statement  ir ao estado 20
+    tail             ir ao estado 86
+    assigment        ir ao estado 21
+
+
+Estado 66
+
+   25 expression: expression ADDOP . expression
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 87
+    sign        ir ao estado 54
+
+
+Estado 67
+
+   32 expression: expression EQOP . expression
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 88
+    sign        ir ao estado 54
+
+
+Estado 68
+
+   29 expression: expression ANDOP . expression
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 89
+    sign        ir ao estado 54
+
+
+Estado 69
+
+   28 expression: expression OROP . expression
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 90
+    sign        ir ao estado 54
+
+
+Estado 70
+
+   33 expression: expression RELOP . expression
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 91
+    sign        ir ao estado 54
+
+
+Estado 71
+
+   26 expression: expression INCR .
+
+    $padrão  reduzir usando a regra 26 (expression)
+
+
+Estado 72
+
+   23 expression: expression MULOP . expression
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 92
+    sign        ir ao estado 54
+
+
+Estado 73
+
+   24 expression: expression DIVOP . expression
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 93
+    sign        ir ao estado 54
+
+
+Estado 74
+
+   22 expression: expression POWOP . expression
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 94
+    sign        ir ao estado 54
+
+
+Estado 75
+
+   30 expression: expression RESTOP . expression
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 95
+    sign        ir ao estado 54
+
+
+Estado 76
+
+   37 constant: ICONSTANTE .
+
+    $padrão  reduzir usando a regra 37 (constant)
+
+
+Estado 77
+
+   38 constant: FCONSTANTE .
+
+    $padrão  reduzir usando a regra 38 (constant)
+
+
+Estado 78
+
+   21 expression: sign constant .
+
+    $padrão  reduzir usando a regra 21 (expression)
+
+
+Estado 79
+
+   55 while_statement: WHILE LPAREN expression RPAREN . tail
+
+    ID        deslocar, e ir ao estado 2
+    IF        deslocar, e ir ao estado 3
+    WHILE     deslocar, e ir ao estado 4
+    FOR       deslocar, e ir ao estado 5
+    CONTINUE  deslocar, e ir ao estado 6
+    BREAK     deslocar, e ir ao estado 7
+    RETURN    deslocar, e ir ao estado 8
+    LCHAV     deslocar, e ir ao estado 84
+    MULOP     deslocar, e ir ao estado 9
+
+    variable         ir ao estado 12
+    pointer          ir ao estado 13
+    statement        ir ao estado 85
+    if_statement     ir ao estado 18
+    for_statement    ir ao estado 19
+    while_statement  ir ao estado 20
+    tail             ir ao estado 96
+    assigment        ir ao estado 21
+
+
+Estado 80
+
+   54 for_statement: FOR LPAREN expression LITERAL_PONTO_E_VIRGULA . expression LITERAL_PONTO_E_VIRGULA expression RPAREN tail
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 97
+    sign        ir ao estado 54
+
+
+Estado 81
+
+   58 assigment: variable LITERAL_RECEBE expression EOL .
+
+    $padrão  reduzir usando a regra 58 (assigment)
+
+
+Estado 82
+
+   10 array: array LCOLCH ICONSTANTE RCOLCH .
+
+    $padrão  reduzir usando a regra 10 (array)
+
+
+Estado 83
+
+   34 expression: LPAREN expression RPAREN .
+
+    $padrão  reduzir usando a regra 34 (expression)
+
+
+Estado 84
+
+   57 tail: LCHAV . statements RCHAV
+
+    ID        deslocar, e ir ao estado 2
+    IF        deslocar, e ir ao estado 3
+    WHILE     deslocar, e ir ao estado 4
+    FOR       deslocar, e ir ao estado 5
+    CONTINUE  deslocar, e ir ao estado 6
+    BREAK     deslocar, e ir ao estado 7
+    RETURN    deslocar, e ir ao estado 8
+    MULOP     deslocar, e ir ao estado 9
+
+    variable         ir ao estado 12
+    pointer          ir ao estado 13
+    statements       ir ao estado 98
+    statement        ir ao estado 17
+    if_statement     ir ao estado 18
+    for_statement    ir ao estado 19
+    while_statement  ir ao estado 20
+    assigment        ir ao estado 21
+
+
+Estado 85
+
+   56 tail: statement .
+
+    $padrão  reduzir usando a regra 56 (tail)
+
+
+Estado 86
+
+   48 if_statement: IF LPAREN expression RPAREN tail . else_if_part else_part
+
+    ELSE  deslocar, e ir ao estado 99
+
+    ELSE      [reduzir usando a regra 51 (else_if_part)]
+    $padrão  reduzir usando a regra 51 (else_if_part)
+
+    else_if_part  ir ao estado 100
+
+
+Estado 87
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   25           | expression ADDOP expression .
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+    ADDOP     [reduzir usando a regra 25 (expression)]
+    EQOP      [reduzir usando a regra 25 (expression)]
+    ANDOP     [reduzir usando a regra 25 (expression)]
+    OROP      [reduzir usando a regra 25 (expression)]
+    RELOP     [reduzir usando a regra 25 (expression)]
+    INCR      [reduzir usando a regra 25 (expression)]
+    MULOP     [reduzir usando a regra 25 (expression)]
+    DIVOP     [reduzir usando a regra 25 (expression)]
+    POWOP     [reduzir usando a regra 25 (expression)]
+    RESTOP    [reduzir usando a regra 25 (expression)]
+    $padrão  reduzir usando a regra 25 (expression)
+
+
+Estado 88
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   32           | expression EQOP expression .
+   33           | expression . RELOP expression
+
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+    ADDOP     [reduzir usando a regra 32 (expression)]
+    EQOP      [reduzir usando a regra 32 (expression)]
+    ANDOP     [reduzir usando a regra 32 (expression)]
+    OROP      [reduzir usando a regra 32 (expression)]
+    RELOP     [reduzir usando a regra 32 (expression)]
+    INCR      [reduzir usando a regra 32 (expression)]
+    MULOP     [reduzir usando a regra 32 (expression)]
+    DIVOP     [reduzir usando a regra 32 (expression)]
+    POWOP     [reduzir usando a regra 32 (expression)]
+    RESTOP    [reduzir usando a regra 32 (expression)]
+    $padrão  reduzir usando a regra 32 (expression)
+
+
+Estado 89
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   29           | expression ANDOP expression .
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+    ADDOP     [reduzir usando a regra 29 (expression)]
+    EQOP      [reduzir usando a regra 29 (expression)]
+    ANDOP     [reduzir usando a regra 29 (expression)]
+    OROP      [reduzir usando a regra 29 (expression)]
+    RELOP     [reduzir usando a regra 29 (expression)]
+    INCR      [reduzir usando a regra 29 (expression)]
+    MULOP     [reduzir usando a regra 29 (expression)]
+    DIVOP     [reduzir usando a regra 29 (expression)]
+    POWOP     [reduzir usando a regra 29 (expression)]
+    RESTOP    [reduzir usando a regra 29 (expression)]
+    $padrão  reduzir usando a regra 29 (expression)
+
+
+Estado 90
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   28           | expression OROP expression .
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+    ADDOP     [reduzir usando a regra 28 (expression)]
+    EQOP      [reduzir usando a regra 28 (expression)]
+    ANDOP     [reduzir usando a regra 28 (expression)]
+    OROP      [reduzir usando a regra 28 (expression)]
+    RELOP     [reduzir usando a regra 28 (expression)]
+    INCR      [reduzir usando a regra 28 (expression)]
+    MULOP     [reduzir usando a regra 28 (expression)]
+    DIVOP     [reduzir usando a regra 28 (expression)]
+    POWOP     [reduzir usando a regra 28 (expression)]
+    RESTOP    [reduzir usando a regra 28 (expression)]
+    $padrão  reduzir usando a regra 28 (expression)
+
+
+Estado 91
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+   33           | expression RELOP expression .
+
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+    ADDOP     [reduzir usando a regra 33 (expression)]
+    EQOP      [reduzir usando a regra 33 (expression)]
+    ANDOP     [reduzir usando a regra 33 (expression)]
+    OROP      [reduzir usando a regra 33 (expression)]
+    RELOP     [reduzir usando a regra 33 (expression)]
+    INCR      [reduzir usando a regra 33 (expression)]
+    MULOP     [reduzir usando a regra 33 (expression)]
+    DIVOP     [reduzir usando a regra 33 (expression)]
+    POWOP     [reduzir usando a regra 33 (expression)]
+    RESTOP    [reduzir usando a regra 33 (expression)]
+    $padrão  reduzir usando a regra 33 (expression)
+
+
+Estado 92
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   23           | expression MULOP expression .
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+    ADDOP     [reduzir usando a regra 23 (expression)]
+    EQOP      [reduzir usando a regra 23 (expression)]
+    ANDOP     [reduzir usando a regra 23 (expression)]
+    OROP      [reduzir usando a regra 23 (expression)]
+    RELOP     [reduzir usando a regra 23 (expression)]
+    INCR      [reduzir usando a regra 23 (expression)]
+    MULOP     [reduzir usando a regra 23 (expression)]
+    DIVOP     [reduzir usando a regra 23 (expression)]
+    POWOP     [reduzir usando a regra 23 (expression)]
+    RESTOP    [reduzir usando a regra 23 (expression)]
+    $padrão  reduzir usando a regra 23 (expression)
+
+
+Estado 93
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   24           | expression DIVOP expression .
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+    ADDOP     [reduzir usando a regra 24 (expression)]
+    EQOP      [reduzir usando a regra 24 (expression)]
+    ANDOP     [reduzir usando a regra 24 (expression)]
+    OROP      [reduzir usando a regra 24 (expression)]
+    RELOP     [reduzir usando a regra 24 (expression)]
+    INCR      [reduzir usando a regra 24 (expression)]
+    MULOP     [reduzir usando a regra 24 (expression)]
+    DIVOP     [reduzir usando a regra 24 (expression)]
+    POWOP     [reduzir usando a regra 24 (expression)]
+    RESTOP    [reduzir usando a regra 24 (expression)]
+    $padrão  reduzir usando a regra 24 (expression)
+
+
+Estado 94
+
+   22 expression: expression . POWOP expression
+   22           | expression POWOP expression .
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+    ADDOP     [reduzir usando a regra 22 (expression)]
+    EQOP      [reduzir usando a regra 22 (expression)]
+    ANDOP     [reduzir usando a regra 22 (expression)]
+    OROP      [reduzir usando a regra 22 (expression)]
+    RELOP     [reduzir usando a regra 22 (expression)]
+    INCR      [reduzir usando a regra 22 (expression)]
+    MULOP     [reduzir usando a regra 22 (expression)]
+    DIVOP     [reduzir usando a regra 22 (expression)]
+    POWOP     [reduzir usando a regra 22 (expression)]
+    RESTOP    [reduzir usando a regra 22 (expression)]
+    $padrão  reduzir usando a regra 22 (expression)
+
+
+Estado 95
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   30           | expression RESTOP expression .
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+    ADDOP     [reduzir usando a regra 30 (expression)]
+    EQOP      [reduzir usando a regra 30 (expression)]
+    ANDOP     [reduzir usando a regra 30 (expression)]
+    OROP      [reduzir usando a regra 30 (expression)]
+    RELOP     [reduzir usando a regra 30 (expression)]
+    INCR      [reduzir usando a regra 30 (expression)]
+    MULOP     [reduzir usando a regra 30 (expression)]
+    DIVOP     [reduzir usando a regra 30 (expression)]
+    POWOP     [reduzir usando a regra 30 (expression)]
+    RESTOP    [reduzir usando a regra 30 (expression)]
+    $padrão  reduzir usando a regra 30 (expression)
+
+
+Estado 96
+
+   55 while_statement: WHILE LPAREN expression RPAREN tail .
+
+    $padrão  reduzir usando a regra 55 (while_statement)
+
+
+Estado 97
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+   54 for_statement: FOR LPAREN expression LITERAL_PONTO_E_VIRGULA expression . LITERAL_PONTO_E_VIRGULA expression RPAREN tail
+
+    LITERAL_PONTO_E_VIRGULA  deslocar, e ir ao estado 101
+    ADDOP                    deslocar, e ir ao estado 66
+    EQOP                     deslocar, e ir ao estado 67
+    ANDOP                    deslocar, e ir ao estado 68
+    OROP                     deslocar, e ir ao estado 69
+    RELOP                    deslocar, e ir ao estado 70
+    INCR                     deslocar, e ir ao estado 71
+    MULOP                    deslocar, e ir ao estado 72
+    DIVOP                    deslocar, e ir ao estado 73
+    POWOP                    deslocar, e ir ao estado 74
+    RESTOP                   deslocar, e ir ao estado 75
+
+
+Estado 98
+
+   39 statements: statements . statement
+   57 tail: LCHAV statements . RCHAV
+
+    ID        deslocar, e ir ao estado 2
+    IF        deslocar, e ir ao estado 3
+    WHILE     deslocar, e ir ao estado 4
+    FOR       deslocar, e ir ao estado 5
+    CONTINUE  deslocar, e ir ao estado 6
+    BREAK     deslocar, e ir ao estado 7
+    RETURN    deslocar, e ir ao estado 8
+    RCHAV     deslocar, e ir ao estado 102
+    MULOP     deslocar, e ir ao estado 9
+
+    variable         ir ao estado 12
+    pointer          ir ao estado 13
+    statement        ir ao estado 41
+    if_statement     ir ao estado 18
+    for_statement    ir ao estado 19
+    while_statement  ir ao estado 20
+    assigment        ir ao estado 21
+
+
+Estado 99
+
+   50 else_if_part: ELSE . IF LPAREN expression RPAREN tail
+
+    IF  deslocar, e ir ao estado 103
+
+
+Estado 100
+
+   48 if_statement: IF LPAREN expression RPAREN tail else_if_part . else_part
+   49 else_if_part: else_if_part . ELSE IF LPAREN expression RPAREN tail
+
+    ELSE  deslocar, e ir ao estado 104
+
+    ELSE      [reduzir usando a regra 53 (else_part)]
+    $padrão  reduzir usando a regra 53 (else_part)
+
+    else_part  ir ao estado 105
+
+
+Estado 101
+
+   54 for_statement: FOR LPAREN expression LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA . expression RPAREN tail
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 106
+    sign        ir ao estado 54
+
+
+Estado 102
+
+   57 tail: LCHAV statements RCHAV .
+
+    $padrão  reduzir usando a regra 57 (tail)
+
+
+Estado 103
+
+   50 else_if_part: ELSE IF . LPAREN expression RPAREN tail
+
+    LPAREN  deslocar, e ir ao estado 107
+
+
+Estado 104
+
+   49 else_if_part: else_if_part ELSE . IF LPAREN expression RPAREN tail
+   52 else_part: ELSE . tail
+
+    ID        deslocar, e ir ao estado 2
+    IF        deslocar, e ir ao estado 108
+    WHILE     deslocar, e ir ao estado 4
+    FOR       deslocar, e ir ao estado 5
+    CONTINUE  deslocar, e ir ao estado 6
+    BREAK     deslocar, e ir ao estado 7
+    RETURN    deslocar, e ir ao estado 8
+    LCHAV     deslocar, e ir ao estado 84
+    MULOP     deslocar, e ir ao estado 9
+
+    variable         ir ao estado 12
+    pointer          ir ao estado 13
+    statement        ir ao estado 85
+    if_statement     ir ao estado 18
+    for_statement    ir ao estado 19
+    while_statement  ir ao estado 20
+    tail             ir ao estado 109
+    assigment        ir ao estado 21
+
+
+Estado 105
+
+   48 if_statement: IF LPAREN expression RPAREN tail else_if_part else_part .
+
+    $padrão  reduzir usando a regra 48 (if_statement)
+
+
+Estado 106
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+   54 for_statement: FOR LPAREN expression LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA expression . RPAREN tail
+
+    RPAREN  deslocar, e ir ao estado 110
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+
+Estado 107
+
+   50 else_if_part: ELSE IF LPAREN . expression RPAREN tail
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 111
+    sign        ir ao estado 54
+
+
+Estado 108
+
+   48 if_statement: IF . LPAREN expression RPAREN tail else_if_part else_part
+   49 else_if_part: else_if_part ELSE IF . LPAREN expression RPAREN tail
+
+    LPAREN  deslocar, e ir ao estado 112
+
+
+Estado 109
+
+   52 else_part: ELSE tail .
+
+    $padrão  reduzir usando a regra 52 (else_part)
+
+
+Estado 110
+
+   54 for_statement: FOR LPAREN expression LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA expression RPAREN . tail
+
+    ID        deslocar, e ir ao estado 2
+    IF        deslocar, e ir ao estado 3
+    WHILE     deslocar, e ir ao estado 4
+    FOR       deslocar, e ir ao estado 5
+    CONTINUE  deslocar, e ir ao estado 6
+    BREAK     deslocar, e ir ao estado 7
+    RETURN    deslocar, e ir ao estado 8
+    LCHAV     deslocar, e ir ao estado 84
+    MULOP     deslocar, e ir ao estado 9
+
+    variable         ir ao estado 12
+    pointer          ir ao estado 13
+    statement        ir ao estado 85
+    if_statement     ir ao estado 18
+    for_statement    ir ao estado 19
+    while_statement  ir ao estado 20
+    tail             ir ao estado 113
+    assigment        ir ao estado 21
+
+
+Estado 111
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+   50 else_if_part: ELSE IF LPAREN expression . RPAREN tail
+
+    RPAREN  deslocar, e ir ao estado 114
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+
+Estado 112
+
+   48 if_statement: IF LPAREN . expression RPAREN tail else_if_part else_part
+   49 else_if_part: else_if_part ELSE IF LPAREN . expression RPAREN tail
+
+    ID      deslocar, e ir ao estado 2
+    LPAREN  deslocar, e ir ao estado 48
+    ADDOP   deslocar, e ir ao estado 49
+    NOTOP   deslocar, e ir ao estado 50
+    INCR    deslocar, e ir ao estado 51
+    MULOP   deslocar, e ir ao estado 9
+
+    $padrão  reduzir usando a regra 36 (sign)
+
+    variable    ir ao estado 52
+    pointer     ir ao estado 13
+    expression  ir ao estado 115
+    sign        ir ao estado 54
+
+
+Estado 113
+
+   54 for_statement: FOR LPAREN expression LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA expression RPAREN tail .
+
+    $padrão  reduzir usando a regra 54 (for_statement)
+
+
+Estado 114
+
+   50 else_if_part: ELSE IF LPAREN expression RPAREN . tail
+
+    ID        deslocar, e ir ao estado 2
+    IF        deslocar, e ir ao estado 3
+    WHILE     deslocar, e ir ao estado 4
+    FOR       deslocar, e ir ao estado 5
+    CONTINUE  deslocar, e ir ao estado 6
+    BREAK     deslocar, e ir ao estado 7
+    RETURN    deslocar, e ir ao estado 8
+    LCHAV     deslocar, e ir ao estado 84
+    MULOP     deslocar, e ir ao estado 9
+
+    variable         ir ao estado 12
+    pointer          ir ao estado 13
+    statement        ir ao estado 85
+    if_statement     ir ao estado 18
+    for_statement    ir ao estado 19
+    while_statement  ir ao estado 20
+    tail             ir ao estado 116
+    assigment        ir ao estado 21
+
+
+Estado 115
+
+   22 expression: expression . POWOP expression
+   23           | expression . MULOP expression
+   24           | expression . DIVOP expression
+   25           | expression . ADDOP expression
+   26           | expression . INCR
+   28           | expression . OROP expression
+   29           | expression . ANDOP expression
+   30           | expression . RESTOP expression
+   32           | expression . EQOP expression
+   33           | expression . RELOP expression
+   48 if_statement: IF LPAREN expression . RPAREN tail else_if_part else_part
+   49 else_if_part: else_if_part ELSE IF LPAREN expression . RPAREN tail
+
+    RPAREN  deslocar, e ir ao estado 117
+    ADDOP   deslocar, e ir ao estado 66
+    EQOP    deslocar, e ir ao estado 67
+    ANDOP   deslocar, e ir ao estado 68
+    OROP    deslocar, e ir ao estado 69
+    RELOP   deslocar, e ir ao estado 70
+    INCR    deslocar, e ir ao estado 71
+    MULOP   deslocar, e ir ao estado 72
+    DIVOP   deslocar, e ir ao estado 73
+    POWOP   deslocar, e ir ao estado 74
+    RESTOP  deslocar, e ir ao estado 75
+
+
+Estado 116
+
+   50 else_if_part: ELSE IF LPAREN expression RPAREN tail .
+
+    $padrão  reduzir usando a regra 50 (else_if_part)
+
+
+Estado 117
+
+   48 if_statement: IF LPAREN expression RPAREN . tail else_if_part else_part
+   49 else_if_part: else_if_part ELSE IF LPAREN expression RPAREN . tail
+
+    ID        deslocar, e ir ao estado 2
+    IF        deslocar, e ir ao estado 3
+    WHILE     deslocar, e ir ao estado 4
+    FOR       deslocar, e ir ao estado 5
+    CONTINUE  deslocar, e ir ao estado 6
+    BREAK     deslocar, e ir ao estado 7
+    RETURN    deslocar, e ir ao estado 8
+    LCHAV     deslocar, e ir ao estado 84
+    MULOP     deslocar, e ir ao estado 9
+
+    variable         ir ao estado 12
+    pointer          ir ao estado 13
+    statement        ir ao estado 85
+    if_statement     ir ao estado 18
+    for_statement    ir ao estado 19
+    while_statement  ir ao estado 20
+    tail             ir ao estado 118
+    assigment        ir ao estado 21
+
+
+Estado 118
+
+   48 if_statement: IF LPAREN expression RPAREN tail . else_if_part else_part
+   49 else_if_part: else_if_part ELSE IF LPAREN expression RPAREN tail .
+
+    ELSE  deslocar, e ir ao estado 99
+
+    $end      reduzir usando a regra 49 (else_if_part)
+    $end      [reduzir usando a regra 51 (else_if_part)]
+    TIPO      reduzir usando a regra 49 (else_if_part)
+    TIPO      [reduzir usando a regra 51 (else_if_part)]
+    ID        reduzir usando a regra 49 (else_if_part)
+    ID        [reduzir usando a regra 51 (else_if_part)]
+    IF        reduzir usando a regra 49 (else_if_part)
+    IF        [reduzir usando a regra 51 (else_if_part)]
+    ELSE      [reduzir usando a regra 49 (else_if_part)]
+    ELSE      [reduzir usando a regra 51 (else_if_part)]
+    WHILE     reduzir usando a regra 49 (else_if_part)
+    WHILE     [reduzir usando a regra 51 (else_if_part)]
+    FOR       reduzir usando a regra 49 (else_if_part)
+    FOR       [reduzir usando a regra 51 (else_if_part)]
+    CONTINUE  reduzir usando a regra 49 (else_if_part)
+    CONTINUE  [reduzir usando a regra 51 (else_if_part)]
+    BREAK     reduzir usando a regra 49 (else_if_part)
+    BREAK     [reduzir usando a regra 51 (else_if_part)]
+    RETURN    reduzir usando a regra 49 (else_if_part)
+    RETURN    [reduzir usando a regra 51 (else_if_part)]
+    RCHAV     reduzir usando a regra 49 (else_if_part)
+    RCHAV     [reduzir usando a regra 51 (else_if_part)]
+    MULOP     reduzir usando a regra 49 (else_if_part)
+    MULOP     [reduzir usando a regra 51 (else_if_part)]
+    $padrão  reduzir usando a regra 49 (else_if_part)
+
+    else_if_part  ir ao estado 100
