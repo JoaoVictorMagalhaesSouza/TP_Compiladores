@@ -30,6 +30,7 @@ STRING 			\"{allsymbols}*\"
 
 
 %%
+#.*
 
 {TIPOS} 				{return TIPO;}		
 
@@ -77,9 +78,7 @@ STRING 			\"{allsymbols}*\"
 
 
 \n 					{ linha +=1;}
-. ;
-
-
+.
 
 
 

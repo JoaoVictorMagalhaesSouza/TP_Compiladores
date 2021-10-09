@@ -36,7 +36,7 @@ variable: ID | pointer ID | ID array  {printf("VARIAVEL identificada\n");};
 
 pointer: pointer MULOP | MULOP ;
 
-array: array LCOLCH ICONSTANTE RCOLCH | LCOLCH ICONSTANTE RCOLCH {printf("arriei\n");};
+array: array LCOLCH ICONSTANTE RCOLCH | LCOLCH ICONSTANTE RCOLCH ;//{printf("arriei\n");};
 
 /* DECLARAÇÕES */
 
@@ -107,7 +107,7 @@ assigment: variable LITERAL_RECEBE expression LITERAL_PONTO_E_VIRGULA{printf("AS
 
 
 void yyerror(char *c){
-	printf("Erro %s na linha: %d\n",c,linha-1);
+	printf("Erro %s na linha: %d\n",c,linha);
 }
 
 int main(){

@@ -1,20 +1,9 @@
-Não terminais inúteis na gramática
-
-    names
-
-
 Terminais sem uso na gramática
 
     VOID
     STRING
     LITERAL_PONTO
     EOL
-
-
-Regras inúteis na gramática
-
-   59 names: variable
-   60      | names LITERAL_VIRGULA variable
 
 
 Estado 15 conflitos: 1 de deslocamento/redução

@@ -1494,44 +1494,38 @@ yyreduce:
 #line 1495 "y.tab.c"
     break;
 
-  case 12:
-#line 39 "melodia.y"
-                                                                 {printf("arriei\n");}
-#line 1501 "y.tab.c"
-    break;
-
   case 15:
 #line 46 "melodia.y"
 {printf("Houve uma declaracao\n");}
-#line 1507 "y.tab.c"
+#line 1501 "y.tab.c"
     break;
 
   case 35:
 #line 71 "melodia.y"
     {printf("EXPRESSION reconhecida.\n");}
-#line 1513 "y.tab.c"
+#line 1507 "y.tab.c"
     break;
 
   case 49:
 #line 88 "melodia.y"
-                                                                      {printf("Bloco IF\n");}
-#line 1519 "y.tab.c"
+                                                                      {printf("BLOCO IF\n");}
+#line 1513 "y.tab.c"
     break;
 
   case 58:
 #line 101 "melodia.y"
                                         {printf("TAIL reconhecido\n");}
-#line 1525 "y.tab.c"
+#line 1519 "y.tab.c"
     break;
 
   case 59:
 #line 103 "melodia.y"
                                                                      {printf("ASSIGNMENT reconhecido\n");}
-#line 1531 "y.tab.c"
+#line 1525 "y.tab.c"
     break;
 
 
-#line 1535 "y.tab.c"
+#line 1529 "y.tab.c"
 
       default: break;
     }
@@ -1768,7 +1762,7 @@ yyreturn:
 
 
 void yyerror(char *c){
-	printf("Erro %s na linha: %d\n",c,linha-1);
+	printf("Erro %s na linha: %d\n",c,linha);
 }
 
 int main(){
