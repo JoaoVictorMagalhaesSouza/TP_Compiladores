@@ -72,19 +72,20 @@ extern int yydebug;
     LITERAL_PONTO = 278,
     LITERAL_VIRGULA = 279,
     LITERAL_RECEBE = 280,
-    ADDOP = 281,
-    EQOP = 282,
-    ANDOP = 283,
-    OROP = 284,
-    NOTOP = 285,
-    RELOP = 286,
-    INCR = 287,
-    MULOP = 288,
-    DIVOP = 289,
-    EOL = 290,
-    ACORDE = 291,
-    POWOP = 292,
-    RESTOP = 293
+    PLAY = 281,
+    ADDOP = 282,
+    EQOP = 283,
+    ANDOP = 284,
+    OROP = 285,
+    NOTOP = 286,
+    RELOP = 287,
+    INCR = 288,
+    MULOP = 289,
+    DIVOP = 290,
+    EOL = 291,
+    ACORDE = 292,
+    POWOP = 293,
+    RESTOP = 294
   };
 #endif
 /* Tokens.  */
@@ -111,19 +112,20 @@ extern int yydebug;
 #define LITERAL_PONTO 278
 #define LITERAL_VIRGULA 279
 #define LITERAL_RECEBE 280
-#define ADDOP 281
-#define EQOP 282
-#define ANDOP 283
-#define OROP 284
-#define NOTOP 285
-#define RELOP 286
-#define INCR 287
-#define MULOP 288
-#define DIVOP 289
-#define EOL 290
-#define ACORDE 291
-#define POWOP 292
-#define RESTOP 293
+#define PLAY 281
+#define ADDOP 282
+#define EQOP 283
+#define ANDOP 284
+#define OROP 285
+#define NOTOP 286
+#define RELOP 287
+#define INCR 288
+#define MULOP 289
+#define DIVOP 290
+#define EOL 291
+#define ACORDE 292
+#define POWOP 293
+#define RESTOP 294
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

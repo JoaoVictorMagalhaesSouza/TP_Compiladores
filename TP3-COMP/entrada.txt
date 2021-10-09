@@ -28,6 +28,24 @@ ensaio (a>3){
  	improviso a = 20;
  }
 improviso { a = 0; }
+do a;
+refrao (a; a<2; a++) {b = b+1;} #For
+bis (c<500){
+ c = c+1;
+}
+do play func1 (do v1, do v2, re v3){
+	a = 1;
+	
 
+}
 
+a = func1();
+a = 2 + func1(v1,v2,v3) + 3;
+ensaio (a>0) a=b; 
+
+func47();
+
+a = funcv1(v1);
+
+a = do(a);
 

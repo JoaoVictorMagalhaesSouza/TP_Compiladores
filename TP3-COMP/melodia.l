@@ -43,6 +43,7 @@ STRING 			\"{allsymbols}*\"
 "void"					{ return VOID; }
 "eco"					{ return RETURN; }
 "acorde"				{ return ACORDE; }
+"play"					{ return PLAY; }
 
 {ID}		 			{printf("%s\n",yytext);return ID; }	
 
@@ -53,8 +54,8 @@ STRING 			\"{allsymbols}*\"
 
 
 
-"("					{ return LPAREN; }
-")"					{ return RPAREN; }
+"("					{ printf("%s\n",yytext);return LPAREN; }
+")"					{ printf("%s\n",yytext);return RPAREN; }
 "["					{ return LCOLCH; }
 "]"					{ return RCOLCH; }
 "{"					{ printf("%s\n",yytext);return LCHAV; }

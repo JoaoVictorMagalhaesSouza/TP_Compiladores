@@ -8,7 +8,7 @@ extern int linha;
 
 %}
 
-%token TIPO ID IF ELSE WHILE FOR CONTINUE BREAK VOID RETURN ICONSTANTE FCONSTANTE STRING LPAREN RPAREN LCOLCH RCOLCH LCHAV RCHAV LITERAL_PONTO_E_VIRGULA LITERAL_PONTO LITERAL_VIRGULA LITERAL_RECEBE
+%token TIPO ID IF ELSE WHILE FOR CONTINUE BREAK VOID RETURN ICONSTANTE FCONSTANTE STRING LPAREN RPAREN LCOLCH RCOLCH LCHAV RCHAV LITERAL_PONTO_E_VIRGULA LITERAL_PONTO LITERAL_VIRGULA LITERAL_RECEBE PLAY
 %token ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP EOL ACORDE POWOP RESTOP
 
 
@@ -40,15 +40,21 @@ array: array LCOLCH ICONSTANTE RCOLCH | LCOLCH ICONSTANTE RCOLCH ;//{printf("arr
 
 /* DECLARAÇÕES */
 
-declarations:  declaration declarations| declaration;
+declarations:  declaration declarations| declaration ;
 
-declaration: TIPO declaration_names LITERAL_PONTO_E_VIRGULA
+declaration: TIPO declaration_names LITERAL_PONTO_E_VIRGULA |function_def
 {printf("Houve uma declaracao\n");};
 
 
 declaration_names: declaration_variable|declaration_names LITERAL_VIRGULA declaration_variable;
 
 declaration_variable: ID|ACORDE ID array|pointer ID ;
+
+declaration_args: TIPO ID ;
+
+argument_list: declaration_args LITERAL_VIRGULA argument_list | declaration_args |;
+
+expression_list: expression LITERAL_VIRGULA expression_list | expression | ;
 
 /* EXPRESSIONS */
 expression:
@@ -58,7 +64,7 @@ expression:
     expression MULOP expression|
     expression DIVOP expression|
     expression ADDOP expression|
-    expression INCR|
+    expression INCR| 
     INCR expression|
     expression OROP expression|
     expression ANDOP expression|    
@@ -66,11 +72,15 @@ expression:
     NOTOP expression|
     expression EQOP expression|
     expression RELOP expression| 
-    LPAREN expression RPAREN
+    LPAREN expression RPAREN |
+    function_call|
+    casting
+
     
     {printf("EXPRESSION reconhecida.\n");}
     
 ;
+
 constant: ICONSTANTE|FCONSTANTE ;//{printf("CONSTANT reconhecida.\n");};
 
 sign: ADDOP|;//{printf("SIGN reconhecida.\n");}; 
@@ -82,7 +92,7 @@ statements: statement statements_;
 statements_: statement statements_ | ;
 
 statement:
-    if_statement | for_statement | while_statement | assigment |
+    if_statement | for_statement | while_statement | assigment |  function_call LITERAL_PONTO_E_VIRGULA |
     CONTINUE LITERAL_PONTO_E_VIRGULA | BREAK LITERAL_PONTO_E_VIRGULA | RETURN LITERAL_PONTO_E_VIRGULA | declaration
     //{printf("STATEMENT reconhecido\n");}
 ;
@@ -97,9 +107,15 @@ else_if_part_: ELSE IF LPAREN expression RPAREN tail else_if_part_ | ;
 
 else_part: ELSE tail | /* empty */ ; 
 
-for_statement: FOR LPAREN expression LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA expression RPAREN tail ;
+for_statement: FOR LPAREN expression LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA expression RPAREN tail {printf("BLOCO FOR\n");} ;
 
-while_statement: WHILE LPAREN expression RPAREN tail ;
+while_statement: WHILE LPAREN expression RPAREN tail {printf("BLOCO WHILE\n");};
+// Definicao de funcao:
+
+function_def: TIPO PLAY ID LPAREN argument_list RPAREN tail {printf("DEFINICAO FUNCAO reconhecida\n");};
+function_call: ID LPAREN expression_list RPAREN {printf("CHAMADA FUNCAO reconhecida\n");};
+
+casting: TIPO LPAREN expression_list RPAREN {printf("CASTING reconhecido\n");};
 
 tail: statement | LCHAV statements RCHAV{printf("TAIL reconhecido\n");};
 
