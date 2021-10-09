@@ -13,7 +13,7 @@ extern int linha;
 
 
 
-%left ID ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP ACORDE POWOP RESTOP
+%left ID ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP ACORDE POWOP RESTOP 
 
 
 
@@ -77,21 +77,24 @@ sign: ADDOP|;//{printf("SIGN reconhecida.\n");};
 /* STATEMENTS */
 
 // MUITAS REDUCOES AQUi
-statements: statements statement| statement ;
+//statements: statements statement|statement ;
+statements: statement statements_;
+statements_: statement statements_ | ;
 
 statement:
     if_statement | for_statement | while_statement | assigment |
-    CONTINUE LITERAL_PONTO_E_VIRGULA | BREAK LITERAL_PONTO_E_VIRGULA | RETURN LITERAL_PONTO_E_VIRGULA
+    CONTINUE LITERAL_PONTO_E_VIRGULA | BREAK LITERAL_PONTO_E_VIRGULA | RETURN LITERAL_PONTO_E_VIRGULA | declaration
     //{printf("STATEMENT reconhecido\n");}
 ;
 
-if_statement: IF LPAREN expression RPAREN tail else_if_part else_part {printf("BLOCO IF\n");};
+if_statement: IF LPAREN expression RPAREN tail else_part{printf("BLOCO IF\n");};
 
-else_if_part: 
-    else_if_part ELSE IF LPAREN expression RPAREN tail  |
-    ELSE IF LPAREN expression RPAREN tail  |
-    /* empty */
-; 
+//if_statement: IF LPAREN expression RPAREN tail else_if_part else_part{printf("BLOCO IF\n");};
+// Tivemos problemas nessa parte: nossa suspeita é que esteja relacionado à recursão mais a esquerda.
+else_if_part: ELSE IF LPAREN expression RPAREN tail else_if_part_ | ;
+else_if_part_: ELSE IF LPAREN expression RPAREN tail else_if_part_ | ;
+
+
 else_part: ELSE tail | /* empty */ ; 
 
 for_statement: FOR LPAREN expression LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA expression RPAREN tail ;

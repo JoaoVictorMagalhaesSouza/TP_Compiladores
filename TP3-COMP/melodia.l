@@ -35,7 +35,7 @@ STRING 			\"{allsymbols}*\"
 {TIPOS} 				{return TIPO;}		
 
 "ensaio"				{ return IF; }
-"improviso"				{ return ELSE; }
+"improviso"				{ printf("%s\n",yytext);return ELSE; }
 "bis"					{ return WHILE; }
 "refrao"				{ return FOR; }
 "continue"				{ return CONTINUE; }
@@ -44,9 +44,9 @@ STRING 			\"{allsymbols}*\"
 "eco"					{ return RETURN; }
 "acorde"				{ return ACORDE; }
 
-{ID}		 			{return ID; }	
+{ID}		 			{printf("%s\n",yytext);return ID; }	
 
-{ICONSTANTE}				{return ICONSTANTE; }
+{ICONSTANTE}				{printf("%s\n",yytext);return ICONSTANTE; }
 {FCONSTANTE}				{return FCONSTANTE; }
 
 {STRING}				{return STRING; }
@@ -57,12 +57,12 @@ STRING 			\"{allsymbols}*\"
 ")"					{ return RPAREN; }
 "["					{ return LCOLCH; }
 "]"					{ return RCOLCH; }
-"{"					{ return LCHAV; }
-"}"					{ return RCHAV; }
+"{"					{ printf("%s\n",yytext);return LCHAV; }
+"}"					{ printf("%s\n",yytext);return RCHAV; }
 ";"					{ return LITERAL_PONTO_E_VIRGULA;}
 "."					{ return LITERAL_PONTO; }
 ","					{ return LITERAL_VIRGULA; }
-"="|"-="|"+="				{return LITERAL_RECEBE; }
+"="|"-="|"+="				{printf("%s\n",yytext);return LITERAL_RECEBE; }
 
 "+"|"-"				{return ADDOP; }
 "=="|"~="				{ return EQOP; }

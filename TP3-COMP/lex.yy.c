@@ -813,7 +813,7 @@ YY_RULE_SETUP
 case 4:
 YY_RULE_SETUP
 #line 38 "melodia.l"
-{ return ELSE; }
+{ printf("%s\n",yytext);return ELSE; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
@@ -853,12 +853,12 @@ YY_RULE_SETUP
 case 12:
 YY_RULE_SETUP
 #line 47 "melodia.l"
-{return ID; }	
+{printf("%s\n",yytext);return ID; }	
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 49 "melodia.l"
-{return ICONSTANTE; }
+{printf("%s\n",yytext);return ICONSTANTE; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
@@ -893,12 +893,12 @@ YY_RULE_SETUP
 case 20:
 YY_RULE_SETUP
 #line 60 "melodia.l"
-{ return LCHAV; }
+{ printf("%s\n",yytext);return LCHAV; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 61 "melodia.l"
-{ return RCHAV; }
+{ printf("%s\n",yytext);return RCHAV; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
@@ -918,7 +918,7 @@ YY_RULE_SETUP
 case 25:
 YY_RULE_SETUP
 #line 65 "melodia.l"
-{return LITERAL_RECEBE; }
+{printf("%s\n",yytext);return LITERAL_RECEBE; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
