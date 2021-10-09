@@ -49,3 +49,6 @@ a = funcv1(v1);
 
 a = do(a);
 
+nota();
+show();
+
