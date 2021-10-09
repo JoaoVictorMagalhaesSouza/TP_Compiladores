@@ -14,7 +14,7 @@ extern int linha;
 
 
 %left ID ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP ACORDE POWOP RESTOP
-%right LITERAL_RECEBE ICONSTANTE FCONSTANTE
+
 
 
 
@@ -24,13 +24,13 @@ extern int linha;
 %%
 
 
-program: commands | program commands ;
+program: commands|program commands;
 
 commands: declarations | statements ;
 
 //commands: declarations;
 
-names: variable | names LITERAL_VIRGULA variable ;
+//names: variable | names LITERAL_VIRGULA variable ;
 
 variable: ID | pointer ID | ID array  {printf("VARIAVEL identificada\n");};
 
@@ -40,12 +40,13 @@ array: array LCOLCH ICONSTANTE RCOLCH | LCOLCH ICONSTANTE RCOLCH {printf("arriei
 
 /* DECLARAÇÕES */
 
-declarations: declarations declaration | declaration ;
+declarations:  declaration declarations| declaration;
 
-declaration: TIPO names LITERAL_RECEBE expression EOL|TIPO declaration_names EOL
-{printf("Houve uma declaracao\n");} ;
-//do a = 2
-declaration_names: declaration_variable | declaration_names LITERAL_VIRGULA declaration_variable ;
+declaration: TIPO declaration_names LITERAL_PONTO_E_VIRGULA
+{printf("Houve uma declaracao\n");};
+
+
+declaration_names: declaration_variable|declaration_names LITERAL_VIRGULA declaration_variable;
 
 declaration_variable: ID|ACORDE ID array|pointer ID ;
 
@@ -70,20 +71,21 @@ expression:
     {printf("EXPRESSION reconhecida.\n");}
     
 ;
-sign: ADDOP| {printf("SIGN reconhecida.\n");}; 
-constant: ICONSTANTE|FCONSTANTE{printf("CONSTANT reconhecida.\n");};
+constant: ICONSTANTE|FCONSTANTE ;//{printf("CONSTANT reconhecida.\n");};
 
+sign: ADDOP|;//{printf("SIGN reconhecida.\n");}; 
 /* STATEMENTS */
 
-statements: statements statement | statement;
+// MUITAS REDUCOES AQUi
+statements: statements statement| statement ;
 
 statement:
     if_statement | for_statement | while_statement | assigment |
     CONTINUE LITERAL_PONTO_E_VIRGULA | BREAK LITERAL_PONTO_E_VIRGULA | RETURN LITERAL_PONTO_E_VIRGULA
-    {printf("STATEMENT reconhecido\n");}
+    //{printf("STATEMENT reconhecido\n");}
 ;
 
-if_statement: IF LPAREN expression RPAREN tail else_if_part else_part {printf("Bloco IF\n");};
+if_statement: IF LPAREN expression RPAREN tail else_if_part else_part {printf("BLOCO IF\n");};
 
 else_if_part: 
     else_if_part ELSE IF LPAREN expression RPAREN tail  |
@@ -98,14 +100,14 @@ while_statement: WHILE LPAREN expression RPAREN tail ;
 
 tail: statement | LCHAV statements RCHAV{printf("TAIL reconhecido\n");};
 
-assigment: variable LITERAL_RECEBE expression EOL ; 
+assigment: variable LITERAL_RECEBE expression LITERAL_PONTO_E_VIRGULA{printf("ASSIGNMENT reconhecido\n");}; 
 
 // ensaio (2>3) a = 3
 %%	
 
 
 void yyerror(char *c){
-	printf("Erro %s na linha: %d\n",c,linha);
+	printf("Erro %s na linha: %d\n",c,linha-1);
 }
 
 int main(){

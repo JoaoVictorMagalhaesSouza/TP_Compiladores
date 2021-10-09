@@ -58,7 +58,7 @@ STRING 			\"{allsymbols}*\"
 "]"					{ return RCOLCH; }
 "{"					{ return LCHAV; }
 "}"					{ return RCHAV; }
-";"					{ return LITERAL_PONTO_E_VIRGULA; }
+";"					{ return LITERAL_PONTO_E_VIRGULA;}
 "."					{ return LITERAL_PONTO; }
 ","					{ return LITERAL_VIRGULA; }
 "="|"-="|"+="				{return LITERAL_RECEBE; }
@@ -76,7 +76,7 @@ STRING 			\"{allsymbols}*\"
 "/"|"//"				{ return DIVOP; } 
 
 
-\n 					{linha +=1;return EOL; }
+\n 					{ linha +=1;}
 . ;
 
 

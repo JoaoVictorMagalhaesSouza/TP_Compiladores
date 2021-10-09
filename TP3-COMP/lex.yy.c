@@ -795,7 +795,7 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 34 "melodia.l"
-{ printf("TOKEN TIPO\n");return TIPO;}		
+{return TIPO;}		
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
@@ -845,22 +845,22 @@ YY_RULE_SETUP
 case 11:
 YY_RULE_SETUP
 #line 46 "melodia.l"
-{ printf("TOKEN ID\n");return ID; }	
+{return ID; }	
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 48 "melodia.l"
-{ printf("TOKEN CONSTANTE INTEIRA\n");return ICONSTANTE; }
+{return ICONSTANTE; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 49 "melodia.l"
-{ printf("TOKEN CONSTANTE FLUTUANTE\n");return FCONSTANTE; }
+{return FCONSTANTE; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 51 "melodia.l"
-{ printf("TOKEN STRING\n");return STRING; }
+{return STRING; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
@@ -895,7 +895,7 @@ YY_RULE_SETUP
 case 21:
 YY_RULE_SETUP
 #line 61 "melodia.l"
-{ return LITERAL_PONTO_E_VIRGULA; }
+{ return LITERAL_PONTO_E_VIRGULA;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
@@ -910,12 +910,12 @@ YY_RULE_SETUP
 case 24:
 YY_RULE_SETUP
 #line 64 "melodia.l"
-{ printf("TOKEN =\n");return LITERAL_RECEBE; }
+{return LITERAL_RECEBE; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 66 "melodia.l"
-{ printf("TOKEN +\n");return ADDOP; }
+{return ADDOP; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
@@ -971,7 +971,7 @@ case 36:
 /* rule 36 can match eol */
 YY_RULE_SETUP
 #line 79 "melodia.l"
-{linha +=1; printf("TOKEN EOL\n");return EOL; }
+{ linha +=1;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP

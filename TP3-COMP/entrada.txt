@@ -1,0 +1,10 @@
+do a;
+do b;
+do c;
+do k;
+ensaio (2>3) { a=2; }
+ensaio (2>3){
+a = 2;
+a=a++;
+a+=1;
+}

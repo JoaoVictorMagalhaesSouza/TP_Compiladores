@@ -8,6 +8,7 @@ Terminais sem uso na gramática
     VOID
     STRING
     LITERAL_PONTO
+    EOL
 
 
 Regras inúteis na gramática
@@ -16,20 +17,9 @@ Regras inúteis na gramática
    60      | names LITERAL_VIRGULA variable
 
 
-Estado 14 conflitos: 1 de deslocamento/redução
+Estado 15 conflitos: 1 de deslocamento/redução
 Estado 16 conflitos: 8 de deslocamento/redução
-Estado 63 conflitos: 10 de deslocamento/redução
-Estado 64 conflitos: 10 de deslocamento/redução
 Estado 86 conflitos: 1 de deslocamento/redução
-Estado 87 conflitos: 10 de deslocamento/redução
-Estado 88 conflitos: 10 de deslocamento/redução
-Estado 89 conflitos: 10 de deslocamento/redução
-Estado 90 conflitos: 10 de deslocamento/redução
-Estado 91 conflitos: 10 de deslocamento/redução
-Estado 92 conflitos: 10 de deslocamento/redução
-Estado 93 conflitos: 10 de deslocamento/redução
-Estado 94 conflitos: 10 de deslocamento/redução
-Estado 95 conflitos: 10 de deslocamento/redução
 Estado 100 conflitos: 1 de deslocamento/redução
 Estado 118 conflitos: 1 de deslocamento/redução, 12 de redução/redução
 
@@ -54,10 +44,10 @@ Gramática
    10 array: array LCOLCH ICONSTANTE RCOLCH
    11      | LCOLCH ICONSTANTE RCOLCH
 
-   12 declarations: declarations declaration
+   12 declarations: declaration declarations
    13             | declaration
 
-   14 declaration: TIPO declaration_names EOL
+   14 declaration: TIPO declaration_names LITERAL_PONTO_E_VIRGULA
 
    15 declaration_names: declaration_variable
    16                  | declaration_names LITERAL_VIRGULA declaration_variable
@@ -82,11 +72,11 @@ Gramática
    33           | expression RELOP expression
    34           | LPAREN expression RPAREN
 
-   35 sign: ADDOP
-   36     | %empty
+   35 constant: ICONSTANTE
+   36         | FCONSTANTE
 
-   37 constant: ICONSTANTE
-   38         | FCONSTANTE
+   37 sign: ADDOP
+   38     | %empty
 
    39 statements: statements statement
    40           | statement
@@ -95,9 +85,9 @@ Gramática
    42          | for_statement
    43          | while_statement
    44          | assigment
-   45          | CONTINUE EOL
-   46          | BREAK EOL
-   47          | RETURN EOL
+   45          | CONTINUE LITERAL_PONTO_E_VIRGULA
+   46          | BREAK LITERAL_PONTO_E_VIRGULA
+   47          | RETURN LITERAL_PONTO_E_VIRGULA
 
    48 if_statement: IF LPAREN expression RPAREN tail else_if_part else_part
 
@@ -115,7 +105,7 @@ Gramática
    56 tail: statement
    57     | LCHAV statements RCHAV
 
-   58 assigment: variable LITERAL_RECEBE expression EOL
+   58 assigment: variable LITERAL_RECEBE expression LITERAL_PONTO_E_VIRGULA
 
 
 Terminais, com as regras onde eles aparecem
@@ -132,8 +122,8 @@ Terminais, com as regras onde eles aparecem
     BREAK (265) 46
     VOID (266)
     RETURN (267) 47
-    ICONSTANTE (268) 10 11 37
-    FCONSTANTE (269) 38
+    ICONSTANTE (268) 10 11 35
+    FCONSTANTE (269) 36
     STRING (270)
     LPAREN (271) 34 48 49 50 54 55
     RPAREN (272) 34 48 49 50 54 55
@@ -141,11 +131,11 @@ Terminais, com as regras onde eles aparecem
     RCOLCH (274) 10 11
     LCHAV (275) 57
     RCHAV (276) 57
-    LITERAL_PONTO_E_VIRGULA (277) 54
+    LITERAL_PONTO_E_VIRGULA (277) 14 45 46 47 54 58
     LITERAL_PONTO (278)
     LITERAL_VIRGULA (279) 16
     LITERAL_RECEBE (280) 58
-    ADDOP (281) 25 35
+    ADDOP (281) 25 37
     EQOP (282) 32
     ANDOP (283) 29
     OROP (284) 28
@@ -154,7 +144,7 @@ Terminais, com as regras onde eles aparecem
     INCR (287) 26 27
     MULOP (288) 8 9 23
     DIVOP (289) 24
-    EOL (290) 14 45 46 47 58
+    EOL (290)
     ACORDE (291) 18
     POWOP (292) 22
     RESTOP (293) 30
@@ -194,10 +184,10 @@ Não terminais com as regras onde eles aparecem
     expression (49)
         à esquerda: 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34
         à direita: 22 23 24 25 26 27 28 29 30 31 32 33 34 48 49 50 54 55 58
-    sign (50)
+    constant (50)
         à esquerda: 35 36
         à direita: 21
-    constant (51)
+    sign (51)
         à esquerda: 37 38
         à direita: 21
     statements (52)
@@ -259,7 +249,7 @@ Estado 0
 
 Estado 1
 
-   14 declaration: TIPO . declaration_names EOL
+   14 declaration: TIPO . declaration_names LITERAL_PONTO_E_VIRGULA
 
     ID      deslocar, e ir ao estado 22
     MULOP   deslocar, e ir ao estado 9
@@ -305,23 +295,23 @@ Estado 5
 
 Estado 6
 
-   45 statement: CONTINUE . EOL
+   45 statement: CONTINUE . LITERAL_PONTO_E_VIRGULA
 
-    EOL  deslocar, e ir ao estado 32
+    LITERAL_PONTO_E_VIRGULA  deslocar, e ir ao estado 32
 
 
 Estado 7
 
-   46 statement: BREAK . EOL
+   46 statement: BREAK . LITERAL_PONTO_E_VIRGULA
 
-    EOL  deslocar, e ir ao estado 33
+    LITERAL_PONTO_E_VIRGULA  deslocar, e ir ao estado 33
 
 
 Estado 8
 
-   47 statement: RETURN . EOL
+   47 statement: RETURN . LITERAL_PONTO_E_VIRGULA
 
-    EOL  deslocar, e ir ao estado 34
+    LITERAL_PONTO_E_VIRGULA  deslocar, e ir ao estado 34
 
 
 Estado 9
@@ -369,7 +359,7 @@ Estado 11
 
 Estado 12
 
-   58 assigment: variable . LITERAL_RECEBE expression EOL
+   58 assigment: variable . LITERAL_RECEBE expression LITERAL_PONTO_E_VIRGULA
 
     LITERAL_RECEBE  deslocar, e ir ao estado 37
 
@@ -386,21 +376,22 @@ Estado 13
 Estado 14
 
     3 commands: declarations .
-   12 declarations: declarations . declaration
 
-    TIPO  deslocar, e ir ao estado 1
-
-    TIPO      [reduzir usando a regra 3 (commands)]
     $padrão  reduzir usando a regra 3 (commands)
-
-    declaration  ir ao estado 40
 
 
 Estado 15
 
-   13 declarations: declaration .
+   12 declarations: declaration . declarations
+   13             | declaration .
 
+    TIPO  deslocar, e ir ao estado 1
+
+    TIPO      [reduzir usando a regra 13 (declarations)]
     $padrão  reduzir usando a regra 13 (declarations)
+
+    declarations  ir ao estado 40
+    declaration   ir ao estado 15
 
 
 Estado 16
@@ -496,11 +487,11 @@ Estado 24
 
 Estado 25
 
-   14 declaration: TIPO declaration_names . EOL
+   14 declaration: TIPO declaration_names . LITERAL_PONTO_E_VIRGULA
    16 declaration_names: declaration_names . LITERAL_VIRGULA declaration_variable
 
-    LITERAL_VIRGULA  deslocar, e ir ao estado 44
-    EOL              deslocar, e ir ao estado 45
+    LITERAL_PONTO_E_VIRGULA  deslocar, e ir ao estado 44
+    LITERAL_VIRGULA          deslocar, e ir ao estado 45
 
 
 Estado 26
@@ -538,7 +529,7 @@ Estado 29
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -557,7 +548,7 @@ Estado 30
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -576,7 +567,7 @@ Estado 31
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -586,21 +577,21 @@ Estado 31
 
 Estado 32
 
-   45 statement: CONTINUE EOL .
+   45 statement: CONTINUE LITERAL_PONTO_E_VIRGULA .
 
     $padrão  reduzir usando a regra 45 (statement)
 
 
 Estado 33
 
-   46 statement: BREAK EOL .
+   46 statement: BREAK LITERAL_PONTO_E_VIRGULA .
 
     $padrão  reduzir usando a regra 46 (statement)
 
 
 Estado 34
 
-   47 statement: RETURN EOL .
+   47 statement: RETURN LITERAL_PONTO_E_VIRGULA .
 
     $padrão  reduzir usando a regra 47 (statement)
 
@@ -621,7 +612,7 @@ Estado 36
 
 Estado 37
 
-   58 assigment: variable LITERAL_RECEBE . expression EOL
+   58 assigment: variable LITERAL_RECEBE . expression LITERAL_PONTO_E_VIRGULA
 
     ID      deslocar, e ir ao estado 2
     LPAREN  deslocar, e ir ao estado 48
@@ -630,7 +621,7 @@ Estado 37
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -654,7 +645,7 @@ Estado 39
 
 Estado 40
 
-   12 declarations: declarations declaration .
+   12 declarations: declaration declarations .
 
     $padrão  reduzir usando a regra 12 (declarations)
 
@@ -684,6 +675,13 @@ Estado 43
 
 Estado 44
 
+   14 declaration: TIPO declaration_names LITERAL_PONTO_E_VIRGULA .
+
+    $padrão  reduzir usando a regra 14 (declaration)
+
+
+Estado 45
+
    16 declaration_names: declaration_names LITERAL_VIRGULA . declaration_variable
 
     ID      deslocar, e ir ao estado 22
@@ -692,13 +690,6 @@ Estado 44
 
     pointer               ir ao estado 24
     declaration_variable  ir ao estado 59
-
-
-Estado 45
-
-   14 declaration: TIPO declaration_names EOL .
-
-    $padrão  reduzir usando a regra 14 (declaration)
 
 
 Estado 46
@@ -726,7 +717,7 @@ Estado 48
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -736,9 +727,9 @@ Estado 48
 
 Estado 49
 
-   35 sign: ADDOP .
+   37 sign: ADDOP .
 
-    $padrão  reduzir usando a regra 35 (sign)
+    $padrão  reduzir usando a regra 37 (sign)
 
 
 Estado 50
@@ -752,7 +743,7 @@ Estado 50
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -771,7 +762,7 @@ Estado 51
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -889,19 +880,19 @@ Estado 57
    30           | expression . RESTOP expression
    32           | expression . EQOP expression
    33           | expression . RELOP expression
-   58 assigment: variable LITERAL_RECEBE expression . EOL
+   58 assigment: variable LITERAL_RECEBE expression . LITERAL_PONTO_E_VIRGULA
 
-    ADDOP   deslocar, e ir ao estado 66
-    EQOP    deslocar, e ir ao estado 67
-    ANDOP   deslocar, e ir ao estado 68
-    OROP    deslocar, e ir ao estado 69
-    RELOP   deslocar, e ir ao estado 70
-    INCR    deslocar, e ir ao estado 71
-    MULOP   deslocar, e ir ao estado 72
-    DIVOP   deslocar, e ir ao estado 73
-    EOL     deslocar, e ir ao estado 81
-    POWOP   deslocar, e ir ao estado 74
-    RESTOP  deslocar, e ir ao estado 75
+    LITERAL_PONTO_E_VIRGULA  deslocar, e ir ao estado 81
+    ADDOP                    deslocar, e ir ao estado 66
+    EQOP                     deslocar, e ir ao estado 67
+    ANDOP                    deslocar, e ir ao estado 68
+    OROP                     deslocar, e ir ao estado 69
+    RELOP                    deslocar, e ir ao estado 70
+    INCR                     deslocar, e ir ao estado 71
+    MULOP                    deslocar, e ir ao estado 72
+    DIVOP                    deslocar, e ir ao estado 73
+    POWOP                    deslocar, e ir ao estado 74
+    RESTOP                   deslocar, e ir ao estado 75
 
 
 Estado 58
@@ -976,27 +967,6 @@ Estado 63
    32           | expression . EQOP expression
    33           | expression . RELOP expression
 
-    ADDOP   deslocar, e ir ao estado 66
-    EQOP    deslocar, e ir ao estado 67
-    ANDOP   deslocar, e ir ao estado 68
-    OROP    deslocar, e ir ao estado 69
-    RELOP   deslocar, e ir ao estado 70
-    INCR    deslocar, e ir ao estado 71
-    MULOP   deslocar, e ir ao estado 72
-    DIVOP   deslocar, e ir ao estado 73
-    POWOP   deslocar, e ir ao estado 74
-    RESTOP  deslocar, e ir ao estado 75
-
-    ADDOP     [reduzir usando a regra 31 (expression)]
-    EQOP      [reduzir usando a regra 31 (expression)]
-    ANDOP     [reduzir usando a regra 31 (expression)]
-    OROP      [reduzir usando a regra 31 (expression)]
-    RELOP     [reduzir usando a regra 31 (expression)]
-    INCR      [reduzir usando a regra 31 (expression)]
-    MULOP     [reduzir usando a regra 31 (expression)]
-    DIVOP     [reduzir usando a regra 31 (expression)]
-    POWOP     [reduzir usando a regra 31 (expression)]
-    RESTOP    [reduzir usando a regra 31 (expression)]
     $padrão  reduzir usando a regra 31 (expression)
 
 
@@ -1014,27 +984,6 @@ Estado 64
    32           | expression . EQOP expression
    33           | expression . RELOP expression
 
-    ADDOP   deslocar, e ir ao estado 66
-    EQOP    deslocar, e ir ao estado 67
-    ANDOP   deslocar, e ir ao estado 68
-    OROP    deslocar, e ir ao estado 69
-    RELOP   deslocar, e ir ao estado 70
-    INCR    deslocar, e ir ao estado 71
-    MULOP   deslocar, e ir ao estado 72
-    DIVOP   deslocar, e ir ao estado 73
-    POWOP   deslocar, e ir ao estado 74
-    RESTOP  deslocar, e ir ao estado 75
-
-    ADDOP     [reduzir usando a regra 27 (expression)]
-    EQOP      [reduzir usando a regra 27 (expression)]
-    ANDOP     [reduzir usando a regra 27 (expression)]
-    OROP      [reduzir usando a regra 27 (expression)]
-    RELOP     [reduzir usando a regra 27 (expression)]
-    INCR      [reduzir usando a regra 27 (expression)]
-    MULOP     [reduzir usando a regra 27 (expression)]
-    DIVOP     [reduzir usando a regra 27 (expression)]
-    POWOP     [reduzir usando a regra 27 (expression)]
-    RESTOP    [reduzir usando a regra 27 (expression)]
     $padrão  reduzir usando a regra 27 (expression)
 
 
@@ -1073,7 +1022,7 @@ Estado 66
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -1092,7 +1041,7 @@ Estado 67
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -1111,7 +1060,7 @@ Estado 68
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -1130,7 +1079,7 @@ Estado 69
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -1149,7 +1098,7 @@ Estado 70
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -1175,7 +1124,7 @@ Estado 72
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -1194,7 +1143,7 @@ Estado 73
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -1213,7 +1162,7 @@ Estado 74
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -1232,7 +1181,7 @@ Estado 75
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -1242,16 +1191,16 @@ Estado 75
 
 Estado 76
 
-   37 constant: ICONSTANTE .
+   35 constant: ICONSTANTE .
 
-    $padrão  reduzir usando a regra 37 (constant)
+    $padrão  reduzir usando a regra 35 (constant)
 
 
 Estado 77
 
-   38 constant: FCONSTANTE .
+   36 constant: FCONSTANTE .
 
-    $padrão  reduzir usando a regra 38 (constant)
+    $padrão  reduzir usando a regra 36 (constant)
 
 
 Estado 78
@@ -1296,7 +1245,7 @@ Estado 80
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -1306,7 +1255,7 @@ Estado 80
 
 Estado 81
 
-   58 assigment: variable LITERAL_RECEBE expression EOL .
+   58 assigment: variable LITERAL_RECEBE expression LITERAL_PONTO_E_VIRGULA .
 
     $padrão  reduzir usando a regra 58 (assigment)
 
@@ -1381,27 +1330,6 @@ Estado 87
    32           | expression . EQOP expression
    33           | expression . RELOP expression
 
-    ADDOP   deslocar, e ir ao estado 66
-    EQOP    deslocar, e ir ao estado 67
-    ANDOP   deslocar, e ir ao estado 68
-    OROP    deslocar, e ir ao estado 69
-    RELOP   deslocar, e ir ao estado 70
-    INCR    deslocar, e ir ao estado 71
-    MULOP   deslocar, e ir ao estado 72
-    DIVOP   deslocar, e ir ao estado 73
-    POWOP   deslocar, e ir ao estado 74
-    RESTOP  deslocar, e ir ao estado 75
-
-    ADDOP     [reduzir usando a regra 25 (expression)]
-    EQOP      [reduzir usando a regra 25 (expression)]
-    ANDOP     [reduzir usando a regra 25 (expression)]
-    OROP      [reduzir usando a regra 25 (expression)]
-    RELOP     [reduzir usando a regra 25 (expression)]
-    INCR      [reduzir usando a regra 25 (expression)]
-    MULOP     [reduzir usando a regra 25 (expression)]
-    DIVOP     [reduzir usando a regra 25 (expression)]
-    POWOP     [reduzir usando a regra 25 (expression)]
-    RESTOP    [reduzir usando a regra 25 (expression)]
     $padrão  reduzir usando a regra 25 (expression)
 
 
@@ -1419,27 +1347,6 @@ Estado 88
    32           | expression EQOP expression .
    33           | expression . RELOP expression
 
-    ADDOP   deslocar, e ir ao estado 66
-    EQOP    deslocar, e ir ao estado 67
-    ANDOP   deslocar, e ir ao estado 68
-    OROP    deslocar, e ir ao estado 69
-    RELOP   deslocar, e ir ao estado 70
-    INCR    deslocar, e ir ao estado 71
-    MULOP   deslocar, e ir ao estado 72
-    DIVOP   deslocar, e ir ao estado 73
-    POWOP   deslocar, e ir ao estado 74
-    RESTOP  deslocar, e ir ao estado 75
-
-    ADDOP     [reduzir usando a regra 32 (expression)]
-    EQOP      [reduzir usando a regra 32 (expression)]
-    ANDOP     [reduzir usando a regra 32 (expression)]
-    OROP      [reduzir usando a regra 32 (expression)]
-    RELOP     [reduzir usando a regra 32 (expression)]
-    INCR      [reduzir usando a regra 32 (expression)]
-    MULOP     [reduzir usando a regra 32 (expression)]
-    DIVOP     [reduzir usando a regra 32 (expression)]
-    POWOP     [reduzir usando a regra 32 (expression)]
-    RESTOP    [reduzir usando a regra 32 (expression)]
     $padrão  reduzir usando a regra 32 (expression)
 
 
@@ -1457,27 +1364,6 @@ Estado 89
    32           | expression . EQOP expression
    33           | expression . RELOP expression
 
-    ADDOP   deslocar, e ir ao estado 66
-    EQOP    deslocar, e ir ao estado 67
-    ANDOP   deslocar, e ir ao estado 68
-    OROP    deslocar, e ir ao estado 69
-    RELOP   deslocar, e ir ao estado 70
-    INCR    deslocar, e ir ao estado 71
-    MULOP   deslocar, e ir ao estado 72
-    DIVOP   deslocar, e ir ao estado 73
-    POWOP   deslocar, e ir ao estado 74
-    RESTOP  deslocar, e ir ao estado 75
-
-    ADDOP     [reduzir usando a regra 29 (expression)]
-    EQOP      [reduzir usando a regra 29 (expression)]
-    ANDOP     [reduzir usando a regra 29 (expression)]
-    OROP      [reduzir usando a regra 29 (expression)]
-    RELOP     [reduzir usando a regra 29 (expression)]
-    INCR      [reduzir usando a regra 29 (expression)]
-    MULOP     [reduzir usando a regra 29 (expression)]
-    DIVOP     [reduzir usando a regra 29 (expression)]
-    POWOP     [reduzir usando a regra 29 (expression)]
-    RESTOP    [reduzir usando a regra 29 (expression)]
     $padrão  reduzir usando a regra 29 (expression)
 
 
@@ -1495,27 +1381,6 @@ Estado 90
    32           | expression . EQOP expression
    33           | expression . RELOP expression
 
-    ADDOP   deslocar, e ir ao estado 66
-    EQOP    deslocar, e ir ao estado 67
-    ANDOP   deslocar, e ir ao estado 68
-    OROP    deslocar, e ir ao estado 69
-    RELOP   deslocar, e ir ao estado 70
-    INCR    deslocar, e ir ao estado 71
-    MULOP   deslocar, e ir ao estado 72
-    DIVOP   deslocar, e ir ao estado 73
-    POWOP   deslocar, e ir ao estado 74
-    RESTOP  deslocar, e ir ao estado 75
-
-    ADDOP     [reduzir usando a regra 28 (expression)]
-    EQOP      [reduzir usando a regra 28 (expression)]
-    ANDOP     [reduzir usando a regra 28 (expression)]
-    OROP      [reduzir usando a regra 28 (expression)]
-    RELOP     [reduzir usando a regra 28 (expression)]
-    INCR      [reduzir usando a regra 28 (expression)]
-    MULOP     [reduzir usando a regra 28 (expression)]
-    DIVOP     [reduzir usando a regra 28 (expression)]
-    POWOP     [reduzir usando a regra 28 (expression)]
-    RESTOP    [reduzir usando a regra 28 (expression)]
     $padrão  reduzir usando a regra 28 (expression)
 
 
@@ -1533,27 +1398,6 @@ Estado 91
    33           | expression . RELOP expression
    33           | expression RELOP expression .
 
-    ADDOP   deslocar, e ir ao estado 66
-    EQOP    deslocar, e ir ao estado 67
-    ANDOP   deslocar, e ir ao estado 68
-    OROP    deslocar, e ir ao estado 69
-    RELOP   deslocar, e ir ao estado 70
-    INCR    deslocar, e ir ao estado 71
-    MULOP   deslocar, e ir ao estado 72
-    DIVOP   deslocar, e ir ao estado 73
-    POWOP   deslocar, e ir ao estado 74
-    RESTOP  deslocar, e ir ao estado 75
-
-    ADDOP     [reduzir usando a regra 33 (expression)]
-    EQOP      [reduzir usando a regra 33 (expression)]
-    ANDOP     [reduzir usando a regra 33 (expression)]
-    OROP      [reduzir usando a regra 33 (expression)]
-    RELOP     [reduzir usando a regra 33 (expression)]
-    INCR      [reduzir usando a regra 33 (expression)]
-    MULOP     [reduzir usando a regra 33 (expression)]
-    DIVOP     [reduzir usando a regra 33 (expression)]
-    POWOP     [reduzir usando a regra 33 (expression)]
-    RESTOP    [reduzir usando a regra 33 (expression)]
     $padrão  reduzir usando a regra 33 (expression)
 
 
@@ -1571,27 +1415,6 @@ Estado 92
    32           | expression . EQOP expression
    33           | expression . RELOP expression
 
-    ADDOP   deslocar, e ir ao estado 66
-    EQOP    deslocar, e ir ao estado 67
-    ANDOP   deslocar, e ir ao estado 68
-    OROP    deslocar, e ir ao estado 69
-    RELOP   deslocar, e ir ao estado 70
-    INCR    deslocar, e ir ao estado 71
-    MULOP   deslocar, e ir ao estado 72
-    DIVOP   deslocar, e ir ao estado 73
-    POWOP   deslocar, e ir ao estado 74
-    RESTOP  deslocar, e ir ao estado 75
-
-    ADDOP     [reduzir usando a regra 23 (expression)]
-    EQOP      [reduzir usando a regra 23 (expression)]
-    ANDOP     [reduzir usando a regra 23 (expression)]
-    OROP      [reduzir usando a regra 23 (expression)]
-    RELOP     [reduzir usando a regra 23 (expression)]
-    INCR      [reduzir usando a regra 23 (expression)]
-    MULOP     [reduzir usando a regra 23 (expression)]
-    DIVOP     [reduzir usando a regra 23 (expression)]
-    POWOP     [reduzir usando a regra 23 (expression)]
-    RESTOP    [reduzir usando a regra 23 (expression)]
     $padrão  reduzir usando a regra 23 (expression)
 
 
@@ -1609,27 +1432,6 @@ Estado 93
    32           | expression . EQOP expression
    33           | expression . RELOP expression
 
-    ADDOP   deslocar, e ir ao estado 66
-    EQOP    deslocar, e ir ao estado 67
-    ANDOP   deslocar, e ir ao estado 68
-    OROP    deslocar, e ir ao estado 69
-    RELOP   deslocar, e ir ao estado 70
-    INCR    deslocar, e ir ao estado 71
-    MULOP   deslocar, e ir ao estado 72
-    DIVOP   deslocar, e ir ao estado 73
-    POWOP   deslocar, e ir ao estado 74
-    RESTOP  deslocar, e ir ao estado 75
-
-    ADDOP     [reduzir usando a regra 24 (expression)]
-    EQOP      [reduzir usando a regra 24 (expression)]
-    ANDOP     [reduzir usando a regra 24 (expression)]
-    OROP      [reduzir usando a regra 24 (expression)]
-    RELOP     [reduzir usando a regra 24 (expression)]
-    INCR      [reduzir usando a regra 24 (expression)]
-    MULOP     [reduzir usando a regra 24 (expression)]
-    DIVOP     [reduzir usando a regra 24 (expression)]
-    POWOP     [reduzir usando a regra 24 (expression)]
-    RESTOP    [reduzir usando a regra 24 (expression)]
     $padrão  reduzir usando a regra 24 (expression)
 
 
@@ -1647,27 +1449,6 @@ Estado 94
    32           | expression . EQOP expression
    33           | expression . RELOP expression
 
-    ADDOP   deslocar, e ir ao estado 66
-    EQOP    deslocar, e ir ao estado 67
-    ANDOP   deslocar, e ir ao estado 68
-    OROP    deslocar, e ir ao estado 69
-    RELOP   deslocar, e ir ao estado 70
-    INCR    deslocar, e ir ao estado 71
-    MULOP   deslocar, e ir ao estado 72
-    DIVOP   deslocar, e ir ao estado 73
-    POWOP   deslocar, e ir ao estado 74
-    RESTOP  deslocar, e ir ao estado 75
-
-    ADDOP     [reduzir usando a regra 22 (expression)]
-    EQOP      [reduzir usando a regra 22 (expression)]
-    ANDOP     [reduzir usando a regra 22 (expression)]
-    OROP      [reduzir usando a regra 22 (expression)]
-    RELOP     [reduzir usando a regra 22 (expression)]
-    INCR      [reduzir usando a regra 22 (expression)]
-    MULOP     [reduzir usando a regra 22 (expression)]
-    DIVOP     [reduzir usando a regra 22 (expression)]
-    POWOP     [reduzir usando a regra 22 (expression)]
-    RESTOP    [reduzir usando a regra 22 (expression)]
     $padrão  reduzir usando a regra 22 (expression)
 
 
@@ -1685,27 +1466,6 @@ Estado 95
    32           | expression . EQOP expression
    33           | expression . RELOP expression
 
-    ADDOP   deslocar, e ir ao estado 66
-    EQOP    deslocar, e ir ao estado 67
-    ANDOP   deslocar, e ir ao estado 68
-    OROP    deslocar, e ir ao estado 69
-    RELOP   deslocar, e ir ao estado 70
-    INCR    deslocar, e ir ao estado 71
-    MULOP   deslocar, e ir ao estado 72
-    DIVOP   deslocar, e ir ao estado 73
-    POWOP   deslocar, e ir ao estado 74
-    RESTOP  deslocar, e ir ao estado 75
-
-    ADDOP     [reduzir usando a regra 30 (expression)]
-    EQOP      [reduzir usando a regra 30 (expression)]
-    ANDOP     [reduzir usando a regra 30 (expression)]
-    OROP      [reduzir usando a regra 30 (expression)]
-    RELOP     [reduzir usando a regra 30 (expression)]
-    INCR      [reduzir usando a regra 30 (expression)]
-    MULOP     [reduzir usando a regra 30 (expression)]
-    DIVOP     [reduzir usando a regra 30 (expression)]
-    POWOP     [reduzir usando a regra 30 (expression)]
-    RESTOP    [reduzir usando a regra 30 (expression)]
     $padrão  reduzir usando a regra 30 (expression)
 
 
@@ -1798,7 +1558,7 @@ Estado 101
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -1890,7 +1650,7 @@ Estado 107
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
@@ -1976,7 +1736,7 @@ Estado 112
     INCR    deslocar, e ir ao estado 51
     MULOP   deslocar, e ir ao estado 9
 
-    $padrão  reduzir usando a regra 36 (sign)
+    $padrão  reduzir usando a regra 38 (sign)
 
     variable    ir ao estado 52
     pointer     ir ao estado 13
