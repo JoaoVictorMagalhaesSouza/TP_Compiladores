@@ -35,8 +35,6 @@ bis (c<500){
 }
 do play func1 (do v1, do v2, re v3){
 	a = 1;
-	
-
 }
 
 a = func1();

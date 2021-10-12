@@ -93,7 +93,7 @@ statements_: statement statements_ | ;
 
 statement:
     if_statement | for_statement | while_statement | assigment |  function_call LITERAL_PONTO_E_VIRGULA |
-    CONTINUE LITERAL_PONTO_E_VIRGULA | BREAK LITERAL_PONTO_E_VIRGULA | RETURN LITERAL_PONTO_E_VIRGULA | declaration
+    CONTINUE LITERAL_PONTO_E_VIRGULA | BREAK LITERAL_PONTO_E_VIRGULA | RETURN expression LITERAL_PONTO_E_VIRGULA | declaration
     //{printf("STATEMENT reconhecido\n");}
 ;
 

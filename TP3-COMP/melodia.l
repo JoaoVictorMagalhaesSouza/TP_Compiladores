@@ -63,7 +63,7 @@ STRING 			\"{allsymbols}*\"
 ";"					{ return LITERAL_PONTO_E_VIRGULA;}
 "."					{ return LITERAL_PONTO; }
 ","					{ return LITERAL_VIRGULA; }
-"="|"-="|"+="				{printf("%s\n",yytext);return LITERAL_RECEBE; }
+"="|"-="|"+="|"/="|"*="		{printf("%s\n",yytext);return LITERAL_RECEBE; }
 
 "+"|"-"				{return ADDOP; }
 "=="|"~="				{ return EQOP; }
