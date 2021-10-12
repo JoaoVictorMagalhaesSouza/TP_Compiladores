@@ -1,5 +1,7 @@
-#ifndef tabela_hash.h
-#define tabela_hash.h
+#ifndef tabela_hash
+#define tabela_hash
+#endif
+
 #define M 9999
 typedef struct {
     char *tipo; //do
@@ -37,7 +39,3 @@ void incrementaEscopo();
 void decrementaEscopo();
 // Estou mudando o nome das funções.  Verificar no .c depois.
  
-
-
-
-#endif

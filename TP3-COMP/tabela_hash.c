@@ -129,7 +129,42 @@ void imprimirTabela(){
 int main() {
     Entidade e = criarEntidade("do","15","v1");
     Entidade e2 = criarEntidade("fa","+15","v2");
-    printf("%s %d %s %s\n",e.tipo,e.escopo,e.valor,e.id);
-    printf("%s %d %s %s\n",e2.tipo,e2.escopo,e2.valor,e2.id);
+    printf("Tipo da variavel:%s Escopo:%d Valor:%s ID:%s\n",e.tipo,e.escopo,e.valor,e.id);
+    printf("Tipo da variavel:%s Escopo:%d Valor:%s ID:%s\n",e2.tipo,e2.escopo,e2.valor,e2.id);
+    
+    /*
+    int op, mat;
+    Pessoa *p;
+    Lista *lista;
+    inicializar();
+
+    do {
+        printf("\n0 - Sair\n1 - Inserir\n2 - Buscar\n3 - Imprimir tabela\n");
+        scanf("%d", &op);
+        switch(op) {
+        case 0:
+            printf("saindo...\n");
+            break;
+        case 1:
+            inserTabela();
+            break;
+        case 2:
+            printf("Qual a matricula a ser buscada? ");
+            scanf("%d", &mat);
+            lista = buscarPessoaTabela(mat);
+            if(p) {
+                //printf("Pessoa encontrada: Matricula: %d\tNome: %s", p->matricula, p->nome);
+                imprimirLista(lista);
+            } else
+                printf("Pessoa nao contrada!\n");
+            break;
+        case 3:
+            imprimirTabela();
+            break;
+        default:
+            printf("Opcao invalida!\n");
+        }
+    } while(op != 0);
+	*/
     return 0;
 }
