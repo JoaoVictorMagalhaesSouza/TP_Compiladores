@@ -26,15 +26,7 @@ Entidade criarEntidade (char *tipo,  char *valor, char *id){
 	
 }
 /*
-Pessoa criarPessoa() {
-    Pessoa p;
-    printf("Digite o nome da pessoa: ");
-    scanf("%*c");
-    fgets(p.nome, 50, stdin);
-    printf("Digite a matricula: ");
-    scanf("%d", &p.matricula);
-    return p;
-}
+
 
 // imprime uma pessoa
 void imprimirPessoa(Pessoa p) {
