@@ -1,40 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define M 9999
-// tamanho da tabela
+#include "tabela_hash.h"
+/*Ideia: Ao abrir um "{" e "}" estamos delimitando blocos (escopo). 
+Dessa forma, sempre que formos acessar uma variável posteriormente, acessaremos de acordo a variavel global "escopo".
+Por exemplo: int a = 2; if (1) {a = 3;} Aqui temos o escopo global (a=2) e o escopo local(a=3).
+Enquanto estivermos dentro de if(1), nossa variavel global vale 1. Depois de saírmos, ela vale 0.
+
+Sintetizando:
+	1) Variável "escopo" começa em 0.
+	2) Ao identificarmos "{" incrementamos ela via função ("incrementaEscopo");
+	3) Ao identificarmos "}" decrementamos ela via função ("decrementaEscopo");
+*/
 
 
-
-
-// tipo tad
-typedef struct {
-    int matricula;
-    char nome[50];
-    //tipo
-    //escopo
-    //valor?
-} Pessoa;
-
-// tipo nó usado na lista encadeada
-typedef struct no {
-    Pessoa pessoa;
-    struct no *proximo;
-} No;
-
-// tipo lista com um ponteiro para o primeiro nó
-typedef struct {
-    No *inicio;
-    int tam;
-} Lista;
-
-// nossa tabela (vetor de ponteiros para listas)
-Lista *tabela[M];
-
-//--------------------------------- fim definições variáveis --------------------
-
-//--------------------------------- funções meus tipos --------------------------
-
+// Implementações dos métodos
 // cria e retorna um tipo pessoa
+Entidade criarEntidade (char *tipo,  char *valor, char *id){
+	Entidade e;
+	e.tipo = tipo;
+	e.escopo = escopoGlobal;
+	e.valor = valor;
+	e.id = id;
+	//escopoGlobal++; O escopo está incrementando
+	return e;
+	
+}
+/*
 Pessoa criarPessoa() {
     Pessoa p;
     printf("Digite o nome da pessoa: ");
@@ -59,12 +50,12 @@ Lista* criarLista() {
     return l;
 }
 
-/*
-    inserir no início da lista
-    PARÂMETROS
-    p - nova pessoa a ser inserida
-    *lista - endereço de uma lista encadeada.
-*/
+
+    //inserir no início da lista
+    //PARÂMETROS
+    //p - nova pessoa a ser inserida
+    //*lista - endereço de uma lista encadeada.
+
 void inserirInicio(Pessoa p, Lista *lista) {
     No *no = malloc(sizeof(No));
     no->pessoa = p;
@@ -134,40 +125,11 @@ void imprimirTabela(){
     printf("---------------------FIM TABELA-----------------------\n");
 }
 
-
+*/
 int main() {
-    int op, mat;
-    Pessoa *p;
-    Lista *lista;
-    inicializar();
-
-    do {
-        printf("\n0 - Sair\n1 - Inserir\n2 - Buscar\n3 - Imprimir tabela\n");
-        scanf("%d", &op);
-        switch(op) {
-        case 0:
-            printf("saindo...\n");
-            break;
-        case 1:
-            inserTabela();
-            break;
-        case 2:
-            printf("Qual a matricula a ser buscada? ");
-            scanf("%d", &mat);
-            lista = buscarPessoaTabela(mat);
-            if(p) {
-                //printf("Pessoa encontrada: Matricula: %d\tNome: %s", p->matricula, p->nome);
-                imprimirLista(lista);
-            } else
-                printf("Pessoa nao contrada!\n");
-            break;
-        case 3:
-            imprimirTabela();
-            break;
-        default:
-            printf("Opcao invalida!\n");
-        }
-    } while(op != 0);
-
+    Entidade e = criarEntidade("do","15","v1");
+    Entidade e2 = criarEntidade("fa","+15","v2");
+    printf("%s %d %s %s\n",e.tipo,e.escopo,e.valor,e.id);
+    printf("%s %d %s %s\n",e2.tipo,e2.escopo,e2.valor,e2.id);
     return 0;
 }
