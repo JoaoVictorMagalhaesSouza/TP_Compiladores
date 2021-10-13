@@ -6,7 +6,7 @@ void yyerror(char *c);
 #include "stdio.h"
 #include "stdlib.h"
 int linha = 2;
-
+void escreve_arquivo(char *texto);
 %}
 
 
@@ -35,7 +35,7 @@ STRING 			\"{allsymbols}*\"
 {TIPOS} 				{ escreve_arquivo(yytext); return TIPO;}		
 
 "ensaio"				{ escreve_arquivo(yytext); return IF; }
-"improviso"				{ escreve_arquivo(yytext); printf("%s\n",yytext); return ELSE; }
+"improviso"				{ escreve_arquivo(yytext); return ELSE; }
 "bis"					{ escreve_arquivo(yytext); return WHILE; }
 "refrao"				{ escreve_arquivo(yytext); return FOR; }
 "continue"				{ escreve_arquivo(yytext); return CONTINUE; }
@@ -45,25 +45,25 @@ STRING 			\"{allsymbols}*\"
 "acorde"				{ escreve_arquivo(yytext); return ACORDE; }
 "play"					{ escreve_arquivo(yytext); return PLAY; }
 
-{ID}		 			{ escreve_arquivo(yytext); printf("%s\n",yytext); return ID; }	
+{ID}		 			{ escreve_arquivo(yytext); return ID; }	
 
-{ICONSTANTE}				{ escreve_arquivo(yytext); printf("%s\n",yytext); return ICONSTANTE; }
+{ICONSTANTE}				{ escreve_arquivo(yytext); return ICONSTANTE; }
 {FCONSTANTE}				{ escreve_arquivo(yytext); return FCONSTANTE; }
 
 {STRING}				{ escreve_arquivo(yytext); return STRING; }
 
 
 
-"("					{ escreve_arquivo(yytext); printf("%s\n",yytext); return LPAREN; }
-")"					{ escreve_arquivo(yytext); printf("%s\n",yytext); return RPAREN; }
+"("					{ escreve_arquivo(yytext); return LPAREN; }
+")"					{ escreve_arquivo(yytext); return RPAREN; }
 "["					{ escreve_arquivo(yytext); return LCOLCH; }
 "]"					{ escreve_arquivo(yytext); return RCOLCH; }
-"{"					{ escreve_arquivo(yytext); printf("%s\n",yytext); return LCHAV; }
-"}"					{ escreve_arquivo(yytext); printf("%s\n",yytext); return RCHAV; }
+"{"					{ escreve_arquivo(yytext); return LCHAV; }
+"}"					{ escreve_arquivo(yytext); return RCHAV; }
 ";"					{ escreve_arquivo(yytext); return LITERAL_PONTO_E_VIRGULA;}
 "."					{ escreve_arquivo(yytext); return LITERAL_PONTO; }
 ","					{ escreve_arquivo(yytext); return LITERAL_VIRGULA; }
-"="|"-="|"+="|"/="|"*="			{ escreve_arquivo(yytext); printf("%s\n",yytext);return LITERAL_RECEBE; }
+"="|"-="|"+="|"/="|"*="			{ escreve_arquivo(yytext); return LITERAL_RECEBE; }
 
 "+"|"-"					{ escreve_arquivo(yytext); return ADDOP; }
 "=="|"~="				{ escreve_arquivo(yytext); return EQOP; }
@@ -80,8 +80,6 @@ STRING 			\"{allsymbols}*\"
 
 \n 					{ escreve_arquivo(yytext); char stringNum[20]; sprintf(stringNum,"%d",linha); escreve_arquivo(stringNum); linha +=1;}
 .
-
-
 
 
 %%
