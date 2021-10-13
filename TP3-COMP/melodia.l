@@ -5,12 +5,7 @@ void yyerror(char *c);
 #include "string.h" 
 #include "stdio.h"
 #include "stdlib.h"
-#include "tabela_hash.h" // Para modificarmos escopo, etc.
-int linha = 1; 
-char tipo[100];
-char id[100];
-char value[100];
-
+int linha = 2;
 
 %}
 
@@ -35,55 +30,55 @@ STRING 			\"{allsymbols}*\"
 
 
 %%
-#.*
+#.*					{ escreve_arquivo(yytext); }
 
-{TIPOS} 				{return TIPO;}		
+{TIPOS} 				{ escreve_arquivo(yytext); return TIPO;}		
 
-"ensaio"				{ return IF; }
-"improviso"				{ printf("%s\n",yytext);return ELSE; }
-"bis"					{ return WHILE; }
-"refrao"				{ return FOR; }
-"continue"				{ return CONTINUE; }
-"finale"				{ return BREAK; }
-"void"					{ return VOID; }
-"eco"					{ return RETURN; }
-"acorde"				{ return ACORDE; }
-"play"					{ return PLAY; }
+"ensaio"				{ escreve_arquivo(yytext); return IF; }
+"improviso"				{ escreve_arquivo(yytext); printf("%s\n",yytext); return ELSE; }
+"bis"					{ escreve_arquivo(yytext); return WHILE; }
+"refrao"				{ escreve_arquivo(yytext); return FOR; }
+"continue"				{ escreve_arquivo(yytext); return CONTINUE; }
+"finale"				{ escreve_arquivo(yytext); return BREAK; }
+"void"					{ escreve_arquivo(yytext); return VOID; }
+"eco"					{ escreve_arquivo(yytext); return RETURN; }
+"acorde"				{ escreve_arquivo(yytext); return ACORDE; }
+"play"					{ escreve_arquivo(yytext); return PLAY; }
 
-{ID}		 			{strcpy(id,yytext);return ID; }	
+{ID}		 			{ escreve_arquivo(yytext); printf("%s\n",yytext); return ID; }	
 
-{ICONSTANTE}				{return ICONSTANTE; }
-{FCONSTANTE}				{return FCONSTANTE; }
+{ICONSTANTE}				{ escreve_arquivo(yytext); printf("%s\n",yytext); return ICONSTANTE; }
+{FCONSTANTE}				{ escreve_arquivo(yytext); return FCONSTANTE; }
 
-{STRING}				{return STRING; }
-
-
-
-"("					{ printf("%s\n",yytext);return LPAREN; }
-")"					{ printf("%s\n",yytext);return RPAREN; }
-"["					{ return LCOLCH; }
-"]"					{ return RCOLCH; }
-"{"					{ printf("%s\n",yytext);return LCHAV; }
-"}"					{ printf("%s\n",yytext);return RCHAV; }
-";"					{ return LITERAL_PONTO_E_VIRGULA;} /// Aqui que vamos mandar a sentença p/ tabela 
-"."					{ return LITERAL_PONTO; }
-","					{ return LITERAL_VIRGULA; }
-"="|"-="|"+="|"/="|"*="		{printf("%s\n",yytext);return LITERAL_RECEBE; }
-
-"+"|"-"				{return ADDOP; }
-"=="|"~="				{ return EQOP; }
-"&"					{ return ANDOP; }
-"|"					{ return OROP; }
-"~"					{ return NOTOP; }
-">"|"<"|">="|"<="			{ return RELOP; }
-"++"|"--"				{ return INCR; }
-"*"					{ return MULOP; }
-"**"					{ return POWOP; }
-"%"					{ return RESTOP; }
-"/"|"//"				{ return DIVOP; } 
+{STRING}				{ escreve_arquivo(yytext); return STRING; }
 
 
-\n 					{ linha +=1;}
+
+"("					{ escreve_arquivo(yytext); printf("%s\n",yytext); return LPAREN; }
+")"					{ escreve_arquivo(yytext); printf("%s\n",yytext); return RPAREN; }
+"["					{ escreve_arquivo(yytext); return LCOLCH; }
+"]"					{ escreve_arquivo(yytext); return RCOLCH; }
+"{"					{ escreve_arquivo(yytext); printf("%s\n",yytext); return LCHAV; }
+"}"					{ escreve_arquivo(yytext); printf("%s\n",yytext); return RCHAV; }
+";"					{ escreve_arquivo(yytext); return LITERAL_PONTO_E_VIRGULA;}
+"."					{ escreve_arquivo(yytext); return LITERAL_PONTO; }
+","					{ escreve_arquivo(yytext); return LITERAL_VIRGULA; }
+"="|"-="|"+="|"/="|"*="			{ escreve_arquivo(yytext); printf("%s\n",yytext);return LITERAL_RECEBE; }
+
+"+"|"-"					{ escreve_arquivo(yytext); return ADDOP; }
+"=="|"~="				{ escreve_arquivo(yytext); return EQOP; }
+"&"					{ escreve_arquivo(yytext); return ANDOP; }
+"|"					{ escreve_arquivo(yytext); return OROP; }
+"~"					{ escreve_arquivo(yytext); return NOTOP; }
+">"|"<"|">="|"<="			{ escreve_arquivo(yytext); return RELOP; }
+"++"|"--"				{ escreve_arquivo(yytext); return INCR; }
+"*"					{ escreve_arquivo(yytext); return MULOP; }
+"**"					{ escreve_arquivo(yytext); return POWOP; }
+"%"					{ escreve_arquivo(yytext); return RESTOP; }
+"/"|"//"				{ escreve_arquivo(yytext); return DIVOP; } 
+
+
+\n 					{ escreve_arquivo(yytext); char stringNum[20]; sprintf(stringNum,"%d",linha); escreve_arquivo(stringNum); linha +=1;}
 .
 
 
@@ -92,4 +87,11 @@ STRING 			\"{allsymbols}*\"
 %%
 int yywrap() {
 	return 1;	
+}
+
+void escreve_arquivo(char *texto){
+	FILE *pont_arq;
+	pont_arq = fopen("impresso.txt", "a");
+	fprintf(pont_arq, "%s ", texto);
+	fclose(pont_arq);
 }
