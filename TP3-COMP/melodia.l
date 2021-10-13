@@ -5,7 +5,12 @@ void yyerror(char *c);
 #include "string.h" 
 #include "stdio.h"
 #include "stdlib.h"
+#include "tabela_hash.h" // Para modificarmos escopo, etc.
 int linha = 1; 
+char tipo[100];
+char id[100];
+char value[100];
+
 
 %}
 
@@ -45,9 +50,9 @@ STRING 			\"{allsymbols}*\"
 "acorde"				{ return ACORDE; }
 "play"					{ return PLAY; }
 
-{ID}		 			{printf("%s\n",yytext);return ID; }	
+{ID}		 			{strcpy(id,yytext);return ID; }	
 
-{ICONSTANTE}				{printf("%s\n",yytext);return ICONSTANTE; }
+{ICONSTANTE}				{return ICONSTANTE; }
 {FCONSTANTE}				{return FCONSTANTE; }
 
 {STRING}				{return STRING; }
@@ -60,7 +65,7 @@ STRING 			\"{allsymbols}*\"
 "]"					{ return RCOLCH; }
 "{"					{ printf("%s\n",yytext);return LCHAV; }
 "}"					{ printf("%s\n",yytext);return RCHAV; }
-";"					{ return LITERAL_PONTO_E_VIRGULA;}
+";"					{ return LITERAL_PONTO_E_VIRGULA;} /// Aqui que vamos mandar a sentença p/ tabela 
 "."					{ return LITERAL_PONTO; }
 ","					{ return LITERAL_VIRGULA; }
 "="|"-="|"+="|"/="|"*="		{printf("%s\n",yytext);return LITERAL_RECEBE; }

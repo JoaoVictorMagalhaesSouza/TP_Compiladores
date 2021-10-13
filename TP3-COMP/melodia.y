@@ -1,5 +1,6 @@
 %{
 #include <stdio.h>
+#include <stdlib.h>
 
 void yyerror(char *c);
 int yylex(void);
@@ -14,6 +15,7 @@ extern int linha;
 
 
 %left ID ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP ACORDE POWOP RESTOP 
+
 
 
 
@@ -99,12 +101,6 @@ statement:
 
 if_statement: IF LPAREN expression RPAREN tail else_part{printf("BLOCO IF\n");};
 
-//if_statement: IF LPAREN expression RPAREN tail else_if_part else_part{printf("BLOCO IF\n");};
-// Tivemos problemas nessa parte: nossa suspeita é que esteja relacionado à recursão mais a esquerda.
-else_if_part: ELSE IF LPAREN expression RPAREN tail else_if_part_ | ;
-else_if_part_: ELSE IF LPAREN expression RPAREN tail else_if_part_ | ;
-
-
 else_part: ELSE tail | /* empty */ ; 
 
 for_statement: FOR LPAREN expression LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA expression RPAREN tail {printf("BLOCO FOR\n");} ;
@@ -131,7 +127,24 @@ void yyerror(char *c){
 
 int main(){
 	yyparse();
-	return 1;
+	int i;
+	char Linha[100];
+        char *result;
+	FILE *arq;
+	char Str[50];
+
+	arq = fopen("entrada.txt", "r");
+i = 1;
+while (!feof(arq))
+  {
+	// Lê uma linha (inclusive com o '\n')
+      result = fgets(Linha, 100, arq);  // o 'fgets' lê até 99 caracteres ou até o '\n'
+      
+      if (result)  // Se foi possível ler
+	  printf("Linha %d : %s",i,Linha);
+      i++;
+  }
+  fclose(arq);	return 1;
 
 }
 

@@ -69,6 +69,7 @@
 #line 1 "melodia.y"
 
 #include <stdio.h>
+#include <stdlib.h>
 
 void yyerror(char *c);
 int yylex(void);
@@ -76,7 +77,7 @@ char *s;
 extern int linha;
 
 
-#line 80 "y.tab.c"
+#line 81 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -580,14 +581,14 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    27,    27,    27,    29,    29,    35,    35,    35,    37,
-      37,    39,    39,    43,    43,    45,    45,    49,    49,    51,
-      51,    51,    53,    55,    55,    55,    57,    57,    57,    61,
-      62,    63,    64,    65,    66,    67,    68,    69,    70,    71,
-      72,    73,    74,    75,    76,    77,    84,    84,    86,    86,
-      91,    92,    92,    95,    95,    95,    95,    95,    96,    96,
-      96,    96,   100,   108,   108,   110,   112,   115,   116,   118,
-     120,   120,   122
+       0,    28,    28,    28,    30,    30,    36,    36,    36,    38,
+      38,    40,    40,    44,    44,    46,    46,    50,    50,    52,
+      52,    52,    54,    56,    56,    56,    58,    58,    58,    62,
+      63,    64,    65,    66,    67,    68,    69,    70,    71,    72,
+      73,    74,    75,    76,    77,    78,    85,    85,    87,    87,
+      92,    93,    93,    96,    96,    96,    96,    96,    97,    97,
+      97,    97,   101,   109,   109,   111,   113,   116,   117,   119,
+     121,   121,   123
 };
 #endif
 
@@ -1501,73 +1502,73 @@ yyreduce:
   switch (yyn)
     {
   case 8:
-#line 35 "melodia.y"
+#line 36 "melodia.y"
                                       {printf("VARIAVEL identificada\n");}
-#line 1507 "y.tab.c"
+#line 1508 "y.tab.c"
     break;
 
   case 16:
-#line 46 "melodia.y"
+#line 47 "melodia.y"
 {printf("Houve uma declaracao\n");}
-#line 1513 "y.tab.c"
+#line 1514 "y.tab.c"
     break;
 
   case 45:
-#line 80 "melodia.y"
+#line 81 "melodia.y"
     {printf("EXPRESSION reconhecida.\n");}
-#line 1519 "y.tab.c"
+#line 1520 "y.tab.c"
     break;
 
   case 62:
-#line 100 "melodia.y"
+#line 101 "melodia.y"
                                                         {printf("BLOCO IF\n");}
-#line 1525 "y.tab.c"
+#line 1526 "y.tab.c"
     break;
 
   case 65:
-#line 110 "melodia.y"
+#line 111 "melodia.y"
                                                                                                                        {printf("BLOCO FOR\n");}
-#line 1531 "y.tab.c"
+#line 1532 "y.tab.c"
     break;
 
   case 66:
-#line 112 "melodia.y"
+#line 113 "melodia.y"
                                                      {printf("BLOCO WHILE\n");}
-#line 1537 "y.tab.c"
+#line 1538 "y.tab.c"
     break;
 
   case 67:
-#line 115 "melodia.y"
+#line 116 "melodia.y"
                                                             {printf("DEFINICAO FUNCAO reconhecida\n");}
-#line 1543 "y.tab.c"
+#line 1544 "y.tab.c"
     break;
 
   case 68:
-#line 116 "melodia.y"
+#line 117 "melodia.y"
                                                 {printf("CHAMADA FUNCAO reconhecida\n");}
-#line 1549 "y.tab.c"
+#line 1550 "y.tab.c"
     break;
 
   case 69:
-#line 118 "melodia.y"
+#line 119 "melodia.y"
                                             {printf("CASTING reconhecido\n");}
-#line 1555 "y.tab.c"
+#line 1556 "y.tab.c"
     break;
 
   case 71:
-#line 120 "melodia.y"
+#line 121 "melodia.y"
                                         {printf("TAIL reconhecido\n");}
-#line 1561 "y.tab.c"
+#line 1562 "y.tab.c"
     break;
 
   case 72:
-#line 122 "melodia.y"
+#line 123 "melodia.y"
                                                                      {printf("ASSIGNMENT reconhecido\n");}
-#line 1567 "y.tab.c"
+#line 1568 "y.tab.c"
     break;
 
 
-#line 1571 "y.tab.c"
+#line 1572 "y.tab.c"
 
       default: break;
     }
@@ -1799,7 +1800,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 125 "melodia.y"
+#line 126 "melodia.y"
 	
 
 
@@ -1809,7 +1810,24 @@ void yyerror(char *c){
 
 int main(){
 	yyparse();
-	return 1;
+	int i;
+	char Linha[100];
+        char *result;
+	FILE *arq;
+	char Str[50];
+
+	arq = fopen("entrada.txt", "r");
+i = 1;
+while (!feof(arq))
+  {
+	// Lê uma linha (inclusive com o '\n')
+      result = fgets(Linha, 100, arq);  // o 'fgets' lê até 99 caracteres ou até o '\n'
+      
+      if (result)  // Se foi possível ler
+	  printf("Linha %d : %s",i,Linha);
+      i++;
+  }
+  fclose(arq);	return 1;
 
 }
 
