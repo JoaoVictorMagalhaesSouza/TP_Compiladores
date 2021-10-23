@@ -1,6 +1,7 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 void yyerror(char *c);
 int yylex(void);
 char *s;
@@ -9,18 +10,25 @@ extern int linha;
 void imprimeCodigoFonte();
 
 %}
+%union {char *string;};
+//do a ; declaração
+//a
 
-%token TIPO ID IF ELSE WHILE FOR CONTINUE BREAK VOID RETURN ICONSTANTE FCONSTANTE STRING LPAREN RPAREN LCOLCH RCOLCH LCHAV RCHAV LITERAL_PONTO_E_VIRGULA LITERAL_PONTO LITERAL_VIRGULA LITERAL_RECEBE PLAY
-%token ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP EOL ACORDE POWOP RESTOP
+
+%token <string> TIPO  ID IF ELSE WHILE FOR CONTINUE BREAK VOID RETURN <string> ICONSTANTE FCONSTANTE STRING LPAREN RPAREN LCOLCH RCOLCH LCHAV RCHAV LITERAL_PONTO_E_VIRGULA LITERAL_PONTO  LITERAL_VIRGULA  LITERAL_RECEBE PLAY
+%token <string> ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP EOL  ACORDE POWOP RESTOP
 
 
 
+%left assignment
 %right IADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP EOL ACORDE POWOP RESTOP
 %right TIPO ID IF ELSE WHILE FOR CONTINUE BREAK VOID RETURN ICONSTANTE FCONSTANTE STRING LPAREN RPAREN LCOLCH RCOLCH LCHAV RCHAV LITERAL_PONTO_E_VIRGULA LITERAL_PONTO LITERAL_VIRGULA LITERAL_RECEBE PLAY
 
-
+%type <string> declaration_names declaration function_def declaration_variable pointer variable expression constant sign casting   function_call expression_list 
 
 %start program
+
+
 %%
 
 
@@ -36,9 +44,10 @@ array: array LCOLCH ICONSTANTE RCOLCH | LCOLCH ICONSTANTE RCOLCH ;
 
 /* DECLARAÇÕES */
 
-declarations:  declaration declarations| declaration ;
+declarations:  declaration|declaration declarations;
 
-declaration: TIPO declaration_names LITERAL_PONTO_E_VIRGULA |function_def ;
+declaration: TIPO declaration_names LITERAL_PONTO_E_VIRGULA {printf("Declaration: %s %s\n",$1,$2);}
+|function_def ;
 
 
 declaration_names: declaration_variable|declaration_names LITERAL_VIRGULA declaration_variable;
@@ -49,32 +58,33 @@ declaration_args: TIPO ID ;
 
 argument_list: declaration_args LITERAL_VIRGULA argument_list | declaration_args |;
 
-expression_list: expression LITERAL_VIRGULA expression_list | expression | ;
+expression_list: expression LITERAL_VIRGULA expression_list {$$ = strcat(strcat($1,$2),$3);} | expression | {$$ = "";};
 
 /* EXPRESSIONS */
 expression:
-	variable|
-    sign constant|
-    expression POWOP expression|    
-    expression MULOP expression|
-    expression DIVOP expression|
-    expression ADDOP expression|
-    expression INCR| 
-    INCR expression|
-    expression OROP expression|
-    expression ANDOP expression|    
-    expression RESTOP expression|
-    NOTOP expression|
-    expression EQOP expression|
-    expression RELOP expression| 
-    LPAREN expression RPAREN |
+	
+    sign constant{$$ =$2;}|
+    expression POWOP expression{$$ = strcat(strcat($1,$2),$3);}|    
+    expression MULOP expression{$$ = strcat(strcat($1,$2),$3);}|
+    expression DIVOP expression{$$ = strcat(strcat($1,$2),$3);}|
+    expression ADDOP expression{$$ = strcat(strcat($1,$2),$3);}|
+    expression INCR{$$ = strcat($1,$2);}| 
+    INCR expression{$$ = strcat($1,$2);}|
+    expression OROP expression{$$ = strcat(strcat($1,$2),$3);}|
+    expression ANDOP expression{$$ = strcat(strcat($1,$2),$3);}|    
+    expression RESTOP expression{$$ = strcat(strcat($1,$2),$3);}|
+    NOTOP expression{$$ = strcat($1,$2);}|
+    expression EQOP expression{$$ = strcat(strcat($1,$2),$3);}|
+    expression RELOP expression{$$ = strcat(strcat($1,$2),$3);}| 
+    LPAREN expression RPAREN {$$ = strcat(strcat($1,$2),$3);}|
+    variable{printf("Cai em Variable\n");}|
     function_call|
     casting    
 ;
 
-constant: ICONSTANTE|FCONSTANTE ;
+constant: ICONSTANTE|FCONSTANTE {printf("     Cai em Constant: %s\n",$1);} ;
 
-sign: ADDOP|;
+sign: ADDOP|{$$ = "";};
 
 
 /* STATEMENTS */
@@ -98,13 +108,13 @@ while_statement: WHILE LPAREN expression RPAREN tail ;
 // Definicao de funcao:
 
 function_def: TIPO PLAY ID LPAREN argument_list RPAREN tail ;
-function_call: ID LPAREN expression_list RPAREN ;
+function_call: ID LPAREN expression_list RPAREN {$$ = strcat(strcat(strcat($1,$2),$3),$4);};
 
 casting: TIPO LPAREN expression_list RPAREN ;
 
 tail: statement | LCHAV statements RCHAV ;
 
-assigment: variable LITERAL_RECEBE expression LITERAL_PONTO_E_VIRGULA ; 
+assigment: variable LITERAL_RECEBE expression LITERAL_PONTO_E_VIRGULA {printf("Assigment: %s %s %s %s\n",$1,$2,$3,$4);}; 
 
 
 %%	
@@ -143,4 +153,4 @@ int main(){
 	return 1;
 }
 
-
+ 

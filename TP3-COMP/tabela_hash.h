@@ -4,11 +4,11 @@
 
 #define M 150
 typedef struct {
-    char *tipo; //do
-    int escopo; // 1,2,3
-    int has_value;
+    char *tipo; 
+    int escopo; 
+    int has_value; 
     char *id;
-    char *valor; // = 4 // podemos usar atoi() e atof() depois para converter esse valor.
+    char *valor; 
 } Entidade; // 
 
 typedef struct no {

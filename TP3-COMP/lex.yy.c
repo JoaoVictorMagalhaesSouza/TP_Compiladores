@@ -519,10 +519,11 @@ void yyerror(char *c);
 #include "string.h" 
 #include "stdio.h"
 #include "stdlib.h"
+#include "tabela_hash.h"
 int linha = 2;
 void escreve_arquivo(char *texto);
-#line 525 "lex.yy.c"
 #line 526 "lex.yy.c"
+#line 527 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -739,9 +740,9 @@ YY_DECL
 		}
 
 	{
-#line 32 "melodia.l"
+#line 33 "melodia.l"
 
-#line 745 "lex.yy.c"
+#line 746 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -800,206 +801,206 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 33 "melodia.l"
+#line 34 "melodia.l"
 { escreve_arquivo(yytext); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 35 "melodia.l"
-{ escreve_arquivo(yytext); return TIPO;}		
+#line 36 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext); return TIPO;}		
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 37 "melodia.l"
-{ escreve_arquivo(yytext); return IF; }
+#line 38 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return IF; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 38 "melodia.l"
-{ escreve_arquivo(yytext); return ELSE; }
+#line 39 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return ELSE; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 39 "melodia.l"
-{ escreve_arquivo(yytext); return WHILE; }
+#line 40 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return WHILE; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 40 "melodia.l"
-{ escreve_arquivo(yytext); return FOR; }
+#line 41 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return FOR; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 41 "melodia.l"
-{ escreve_arquivo(yytext); return CONTINUE; }
+#line 42 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return CONTINUE; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 42 "melodia.l"
-{ escreve_arquivo(yytext); return BREAK; }
+#line 43 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return BREAK; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 43 "melodia.l"
-{ escreve_arquivo(yytext); return VOID; }
+#line 44 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return VOID; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 44 "melodia.l"
-{ escreve_arquivo(yytext); return RETURN; }
+#line 45 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return RETURN; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 45 "melodia.l"
-{ escreve_arquivo(yytext); return ACORDE; }
+#line 46 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return ACORDE; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 46 "melodia.l"
-{ escreve_arquivo(yytext); return PLAY; }
+#line 47 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return PLAY; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 48 "melodia.l"
-{ escreve_arquivo(yytext); return ID; }	
+#line 49 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext); return ID; }	
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 50 "melodia.l"
-{ escreve_arquivo(yytext); return ICONSTANTE; }
+#line 51 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext); return ICONSTANTE; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 51 "melodia.l"
-{ escreve_arquivo(yytext); return FCONSTANTE; }
+#line 52 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext); return FCONSTANTE; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 53 "melodia.l"
-{ escreve_arquivo(yytext); return STRING; }
+#line 54 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return STRING; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 57 "melodia.l"
-{ escreve_arquivo(yytext); return LPAREN; }
+#line 58 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LPAREN; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 58 "melodia.l"
-{ escreve_arquivo(yytext); return RPAREN; }
+#line 59 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return RPAREN; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 59 "melodia.l"
-{ escreve_arquivo(yytext); return LCOLCH; }
+#line 60 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LCOLCH; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 60 "melodia.l"
-{ escreve_arquivo(yytext); return RCOLCH; }
+#line 61 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return RCOLCH; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 61 "melodia.l"
-{ escreve_arquivo(yytext); return LCHAV; }
+#line 62 "melodia.l"
+{ escreve_arquivo(yytext); escopoGlobal++; printf("Escopo %d\n",escopoGlobal); return LCHAV; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 62 "melodia.l"
-{ escreve_arquivo(yytext); return RCHAV; }
+#line 63 "melodia.l"
+{ escreve_arquivo(yytext); escopoGlobal--; printf("Escopo %d\n",escopoGlobal); return RCHAV; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 63 "melodia.l"
-{ escreve_arquivo(yytext); return LITERAL_PONTO_E_VIRGULA;}
+#line 64 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LITERAL_PONTO_E_VIRGULA;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 64 "melodia.l"
-{ escreve_arquivo(yytext); return LITERAL_PONTO; }
+#line 65 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LITERAL_PONTO; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 65 "melodia.l"
-{ escreve_arquivo(yytext); return LITERAL_VIRGULA; }
+#line 66 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LITERAL_VIRGULA; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 66 "melodia.l"
-{ escreve_arquivo(yytext); return LITERAL_RECEBE; }
+#line 67 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LITERAL_RECEBE; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 68 "melodia.l"
-{ escreve_arquivo(yytext); return ADDOP; }
+#line 69 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return ADDOP; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 69 "melodia.l"
-{ escreve_arquivo(yytext); return EQOP; }
+#line 70 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return EQOP; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 70 "melodia.l"
-{ escreve_arquivo(yytext); return ANDOP; }
+#line 71 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return ANDOP; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 71 "melodia.l"
-{ escreve_arquivo(yytext); return OROP; }
+#line 72 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return OROP; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 72 "melodia.l"
-{ escreve_arquivo(yytext); return NOTOP; }
+#line 73 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return NOTOP; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 73 "melodia.l"
-{ escreve_arquivo(yytext); return RELOP; }
+#line 74 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return RELOP; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 74 "melodia.l"
-{ escreve_arquivo(yytext); return INCR; }
+#line 75 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return INCR; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 75 "melodia.l"
-{ escreve_arquivo(yytext); return MULOP; }
+#line 76 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return MULOP; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 76 "melodia.l"
-{ escreve_arquivo(yytext); return POWOP; }
+#line 77 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return POWOP; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 77 "melodia.l"
-{ escreve_arquivo(yytext); return RESTOP; }
+#line 78 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return RESTOP; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 78 "melodia.l"
-{ escreve_arquivo(yytext); return DIVOP; } 
+#line 79 "melodia.l"
+{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return DIVOP; } 
 	YY_BREAK
 case 38:
 /* rule 38 can match eol */
 YY_RULE_SETUP
-#line 81 "melodia.l"
-{ escreve_arquivo(yytext); char stringNum[20]; sprintf(stringNum,"%d",linha); escreve_arquivo(stringNum); linha +=1;}
+#line 82 "melodia.l"
+{ escreve_arquivo(yytext); fflush(stdin);char stringNum[20]; sprintf(stringNum,"%d",linha); escreve_arquivo(stringNum); linha +=1;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 82 "melodia.l"
+#line 83 "melodia.l"
 
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 85 "melodia.l"
+#line 86 "melodia.l"
 ECHO;
 	YY_BREAK
-#line 1003 "lex.yy.c"
+#line 1004 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2004,7 +2005,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 85 "melodia.l"
+#line 86 "melodia.l"
 
 int yywrap() {
 	return 1;	
