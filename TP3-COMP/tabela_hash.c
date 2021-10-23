@@ -137,7 +137,6 @@ void editaEntidade (char *id, int escopo, char *value){
 
 }
 /*
-*/
 int main() {
     //Entidade e = criarEntidade("do","15","v1");
     //Entidade e2 = criarEntidade("fa","+15","v2");
@@ -203,7 +202,9 @@ int main() {
             printf("Opcao invalida!\n");
         }
     } while(op != 0);
-	/*
-	*/
+	
+	
     return 0;
 }
+*/
+

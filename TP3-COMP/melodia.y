@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "tabela_hash.h"
 void yyerror(char *c);
 int yylex(void);
 char *s;
@@ -24,7 +25,7 @@ void imprimeCodigoFonte();
 %right IADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP EOL ACORDE POWOP RESTOP
 %right TIPO ID IF ELSE WHILE FOR CONTINUE BREAK VOID RETURN ICONSTANTE FCONSTANTE STRING LPAREN RPAREN LCOLCH RCOLCH LCHAV RCHAV LITERAL_PONTO_E_VIRGULA LITERAL_PONTO LITERAL_VIRGULA LITERAL_RECEBE PLAY
 
-%type <string> declaration_names declaration function_def declaration_variable pointer variable expression constant sign casting   function_call expression_list 
+%type <string> declaration_names declaration function_def declaration_variable pointer variable expression constant sign casting   function_call expression_list argument_list tail declaration_args array statement if_statement for_statement while_statement assigment
 
 %start program
 
@@ -46,17 +47,17 @@ array: array LCOLCH ICONSTANTE RCOLCH | LCOLCH ICONSTANTE RCOLCH ;
 
 declarations:  declaration|declaration declarations;
 
-declaration: TIPO declaration_names LITERAL_PONTO_E_VIRGULA {printf("Declaration: %s %s\n",$1,$2);}
-|function_def ;
+declaration: TIPO declaration_names LITERAL_PONTO_E_VIRGULA {printf("Declaracao de variaveis: %s %s %s\n",$1,$2,$3);}
+|function_def {printf("Declaracao de funcao: %s\n",$1);} ;
 
 
-declaration_names: declaration_variable|declaration_names LITERAL_VIRGULA declaration_variable;
+declaration_names: declaration_variable|declaration_names LITERAL_VIRGULA declaration_variable{$$ = strcat(strcat($1,$2),$3);};
 
-declaration_variable: ID|ACORDE ID array|pointer ID ;
+declaration_variable: ID|ACORDE ID array{$$ = strcat(strcat($1,$2),$3);}|pointer ID {$$ = strcat($1,$2);};
 
-declaration_args: TIPO ID ;
+declaration_args: TIPO ID {$$ = strcat($1,$2);};
 
-argument_list: declaration_args LITERAL_VIRGULA argument_list | declaration_args |;
+argument_list: declaration_args LITERAL_VIRGULA argument_list {$$ = strcat(strcat($1,$2),$3);}| declaration_args | {$$ = "";};
 
 expression_list: expression LITERAL_VIRGULA expression_list {$$ = strcat(strcat($1,$2),$3);} | expression | {$$ = "";};
 
@@ -82,7 +83,7 @@ expression:
     casting    
 ;
 
-constant: ICONSTANTE|FCONSTANTE {printf("     Cai em Constant: %s\n",$1);} ;
+constant: ICONSTANTE|FCONSTANTE ;
 
 sign: ADDOP|{$$ = "";};
 
@@ -141,6 +142,7 @@ void imprimeCodigoFonte(){
 }
 
 int main(){
+	inicializarTabela();
 	FILE *pont_arq;
 	pont_arq = fopen("impresso.txt", "w");
 	fprintf(pont_arq, "%s ", " 1 ");

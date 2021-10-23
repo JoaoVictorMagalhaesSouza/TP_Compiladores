@@ -71,6 +71,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "tabela_hash.h"
 void yyerror(char *c);
 int yylex(void);
 char *s;
@@ -79,7 +80,7 @@ extern int linha;
 void imprimeCodigoFonte();
 
 
-#line 83 "y.tab.c"
+#line 84 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -213,10 +214,10 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 13 "melodia.y"
+#line 14 "melodia.y"
 char *string;
 
-#line 220 "y.tab.c"
+#line 221 "y.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -595,14 +596,14 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    35,    35,    35,    37,    37,    39,    39,    39,    41,
-      41,    43,    43,    47,    47,    49,    50,    53,    53,    55,
-      55,    55,    57,    59,    59,    59,    61,    61,    61,    66,
-      67,    68,    69,    70,    71,    72,    73,    74,    75,    76,
-      77,    78,    79,    80,    81,    82,    85,    85,    87,    87,
-      92,    93,    93,    96,    96,    96,    96,    96,    97,    97,
-      97,    97,   100,   102,   102,   104,   106,   110,   111,   113,
-     115,   115,   117
+       0,    36,    36,    36,    38,    38,    40,    40,    40,    42,
+      42,    44,    44,    48,    48,    50,    51,    54,    54,    56,
+      56,    56,    58,    60,    60,    60,    62,    62,    62,    67,
+      68,    69,    70,    71,    72,    73,    74,    75,    76,    77,
+      78,    79,    80,    81,    82,    83,    86,    86,    88,    88,
+      93,    94,    94,    97,    97,    97,    97,    97,    98,    98,
+      98,    98,   101,   103,   103,   105,   107,   111,   112,   114,
+     116,   116,   118
 };
 #endif
 
@@ -1519,139 +1520,175 @@ yyreduce:
   switch (yyn)
     {
   case 15:
-#line 49 "melodia.y"
-                                                            {printf("Declaration: %s %s\n",(yyvsp[-2].string),(yyvsp[-1].string));}
-#line 1525 "y.tab.c"
+#line 50 "melodia.y"
+                                                            {printf("Declaracao de variaveis: %s %s %s\n",(yyvsp[-2].string),(yyvsp[-1].string),(yyvsp[0].string));}
+#line 1526 "y.tab.c"
+    break;
+
+  case 16:
+#line 51 "melodia.y"
+              {printf("Declaracao de funcao: %s\n",(yyvsp[0].string));}
+#line 1532 "y.tab.c"
+    break;
+
+  case 18:
+#line 54 "melodia.y"
+                                                                                              {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
+#line 1538 "y.tab.c"
+    break;
+
+  case 20:
+#line 56 "melodia.y"
+                                        {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
+#line 1544 "y.tab.c"
+    break;
+
+  case 21:
+#line 56 "melodia.y"
+                                                                                    {(yyval.string) = strcat((yyvsp[-1].string),(yyvsp[0].string));}
+#line 1550 "y.tab.c"
+    break;
+
+  case 22:
+#line 58 "melodia.y"
+                          {(yyval.string) = strcat((yyvsp[-1].string),(yyvsp[0].string));}
+#line 1556 "y.tab.c"
+    break;
+
+  case 23:
+#line 60 "melodia.y"
+                                                              {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
+#line 1562 "y.tab.c"
+    break;
+
+  case 25:
+#line 60 "melodia.y"
+                                                                                                                   {(yyval.string) = "";}
+#line 1568 "y.tab.c"
     break;
 
   case 26:
-#line 61 "melodia.y"
+#line 62 "melodia.y"
                                                             {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1531 "y.tab.c"
+#line 1574 "y.tab.c"
     break;
 
   case 28:
-#line 61 "melodia.y"
+#line 62 "melodia.y"
                                                                                                             {(yyval.string) = "";}
-#line 1537 "y.tab.c"
+#line 1580 "y.tab.c"
     break;
 
   case 29:
-#line 66 "melodia.y"
+#line 67 "melodia.y"
                  {(yyval.string) =(yyvsp[0].string);}
-#line 1543 "y.tab.c"
+#line 1586 "y.tab.c"
     break;
 
   case 30:
-#line 67 "melodia.y"
+#line 68 "melodia.y"
                                {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1549 "y.tab.c"
+#line 1592 "y.tab.c"
     break;
 
   case 31:
-#line 68 "melodia.y"
+#line 69 "melodia.y"
                                {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1555 "y.tab.c"
+#line 1598 "y.tab.c"
     break;
 
   case 32:
-#line 69 "melodia.y"
+#line 70 "melodia.y"
                                {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1561 "y.tab.c"
+#line 1604 "y.tab.c"
     break;
 
   case 33:
-#line 70 "melodia.y"
+#line 71 "melodia.y"
                                {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1567 "y.tab.c"
+#line 1610 "y.tab.c"
     break;
 
   case 34:
-#line 71 "melodia.y"
+#line 72 "melodia.y"
                    {(yyval.string) = strcat((yyvsp[-1].string),(yyvsp[0].string));}
-#line 1573 "y.tab.c"
+#line 1616 "y.tab.c"
     break;
 
   case 35:
-#line 72 "melodia.y"
+#line 73 "melodia.y"
                    {(yyval.string) = strcat((yyvsp[-1].string),(yyvsp[0].string));}
-#line 1579 "y.tab.c"
+#line 1622 "y.tab.c"
     break;
 
   case 36:
-#line 73 "melodia.y"
+#line 74 "melodia.y"
                               {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1585 "y.tab.c"
+#line 1628 "y.tab.c"
     break;
 
   case 37:
-#line 74 "melodia.y"
+#line 75 "melodia.y"
                                {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1591 "y.tab.c"
+#line 1634 "y.tab.c"
     break;
 
   case 38:
-#line 75 "melodia.y"
+#line 76 "melodia.y"
                                 {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1597 "y.tab.c"
+#line 1640 "y.tab.c"
     break;
 
   case 39:
-#line 76 "melodia.y"
+#line 77 "melodia.y"
                     {(yyval.string) = strcat((yyvsp[-1].string),(yyvsp[0].string));}
-#line 1603 "y.tab.c"
+#line 1646 "y.tab.c"
     break;
 
   case 40:
-#line 77 "melodia.y"
+#line 78 "melodia.y"
                               {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1609 "y.tab.c"
+#line 1652 "y.tab.c"
     break;
 
   case 41:
-#line 78 "melodia.y"
+#line 79 "melodia.y"
                                {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1615 "y.tab.c"
+#line 1658 "y.tab.c"
     break;
 
   case 42:
-#line 79 "melodia.y"
+#line 80 "melodia.y"
                              {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1621 "y.tab.c"
+#line 1664 "y.tab.c"
     break;
 
   case 43:
-#line 80 "melodia.y"
+#line 81 "melodia.y"
             {printf("Cai em Variable\n");}
-#line 1627 "y.tab.c"
-    break;
-
-  case 47:
-#line 85 "melodia.y"
-                                {printf("     Cai em Constant: %s\n",(yyvsp[0].string));}
-#line 1633 "y.tab.c"
+#line 1670 "y.tab.c"
     break;
 
   case 49:
-#line 87 "melodia.y"
+#line 88 "melodia.y"
             {(yyval.string) = "";}
-#line 1639 "y.tab.c"
+#line 1676 "y.tab.c"
     break;
 
   case 68:
-#line 111 "melodia.y"
+#line 112 "melodia.y"
                                                 {(yyval.string) = strcat(strcat(strcat((yyvsp[-3].string),(yyvsp[-2].string)),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1645 "y.tab.c"
+#line 1682 "y.tab.c"
     break;
 
   case 72:
-#line 117 "melodia.y"
+#line 118 "melodia.y"
                                                                       {printf("Assigment: %s %s %s %s\n",(yyvsp[-3].string),(yyvsp[-2].string),(yyvsp[-1].string),(yyvsp[0].string));}
-#line 1651 "y.tab.c"
+#line 1688 "y.tab.c"
     break;
 
 
-#line 1655 "y.tab.c"
+#line 1692 "y.tab.c"
 
       default: break;
     }
@@ -1883,7 +1920,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 120 "melodia.y"
+#line 121 "melodia.y"
 	
 
 
@@ -1908,6 +1945,7 @@ void imprimeCodigoFonte(){
 }
 
 int main(){
+	inicializarTabela();
 	FILE *pont_arq;
 	pont_arq = fopen("impresso.txt", "w");
 	fprintf(pont_arq, "%s ", " 1 ");
