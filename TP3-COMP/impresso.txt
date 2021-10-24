@@ -1,53 +1,5 @@
- 1  #Declaracao 
- 2 do a ; 
- 3 do b ; 
- 4 re c ; 
- 5 mi d ; 
- 6 fa k ; 
- 7 sol broFazSol ; 
- 8 la emCasa ; 
- 9 si variable ; 
- 10 do * a ; #Ponteiro 
- 11 do acorde vetor [ 20 ] ; #Declaracao de Vetor 
- 12 
- 13 ensaio ( 2 > 3 ) { a = 2 ; do a ; } #Semelhante ao IF em C 
- 14 improviso { do a ; } 
- 15 
- 16 
- 17 
- 18 
- 19 ensaio ( a > 3 ) { 
- 20 a = 2 ; 
- 21 a = a ++ ; 
- 22 a += 1 ; 
- 23 ensaio ( b < 4 ) { 
- 24 b += 2 ; 
- 25 c += 3 ; 
- 26 
- 27 } 
- 28 improviso a = 20 ; 
- 29 } 
- 30 improviso { a = 0 ; } 
- 31 do a ; 
- 32 refrao ( a ; a < 2 ; a ++ ) { b = b + 1 ; } #For 
- 33 bis ( c < 500 ) { 
- 34 c = c + 1 ; 
- 35 } 
- 36 do play func1 ( do v1 , do v2 , re v3 ) { 
- 37 a = 1 ; 
- 38 } 
- 39 
- 40 a = func1 ( ) ; 
- 41 a = 2 + func1 ( v1 , v2 , v3 ) + 3 ; 
- 42 ensaio ( a > 0 ) a = b ; 
- 43 
- 44 func47 ( ) ; 
- 45 
- 46 a = funcv1 ( v1 ) ; 
- 47 
- 48 a = do ( a ) ; 
- 49 
- 50 nota ( ) ; 
- 51 show ( ) ; 
- 52 
- 53 
+ 1  do a ; 
+ 2 do b ; 
+ 3 b = 3 ; 
+ 4 a = b ; 
+ 5 

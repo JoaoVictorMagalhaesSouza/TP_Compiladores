@@ -40,7 +40,7 @@ void exterminaEscopo (int escopo);
 void imprimirTabela();
 void incrementaEscopo();
 void decrementaEscopo();
-
+int analiseSemantica(char *id, char *expressio, int escopoGlobal);
 
 // Estou mudando o nome das funções.  Verificar no .c depois.
  

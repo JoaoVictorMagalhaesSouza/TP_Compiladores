@@ -160,7 +160,7 @@ expression:
 
 
 
-constant: ICONSTANTE|FCONSTANTE ;
+constant: ICONSTANTE|FCONSTANTE|STRING; 
 
 sign: ADDOP|{$$ = "";};
 
@@ -192,7 +192,17 @@ casting: TIPO LPAREN expression_list RPAREN ;
 
 tail: statement | LCHAV statements RCHAV ;
 
-assigment: variable LITERAL_RECEBE expression LITERAL_PONTO_E_VIRGULA {editaEntidade($1,escopoGlobal,$3);imprimirTabela();}; 
+assigment: variable LITERAL_RECEBE expression LITERAL_PONTO_E_VIRGULA {
+
+
+
+	if (!analiseSemantica($1,$3,escopoGlobal)){
+		printf("Seu código está incorreto semanticamente.\n");
+		exit(0);
+	
+	}
+	imprimirTabela();
+	}; 
 
 
 %%	
