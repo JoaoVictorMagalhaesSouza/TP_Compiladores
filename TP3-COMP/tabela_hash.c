@@ -63,10 +63,17 @@ void inserirInicio(Entidade e, Lista *lista, int escopoGlobal) {
 No* buscarEntidade(char* id, int escopo, No *inicio) {
 
     while(inicio != NULL) {
-        if((inicio->entidade.escopo == escopo) && (strcmp(id,inicio->entidade.id)==0))
+    	//printf("%d == %d ?          %s == %s?\n",inicio->entidade.escopo,escopo,inicio->entidade.id,id);
+        if((inicio->entidade.escopo == escopo) && (strcmp(id,inicio->entidade.id)==0)){
+        	
             return inicio;
-        else
+            }
+        else{
+        	
+        	
             inicio = inicio->proximo;
+            
+            }
     }
     return NULL;// entidade não encontrada
 }
@@ -77,7 +84,7 @@ void exterminaEscopo (int escopo){
 	for (i=0;i<150;i++){
 		noaux = tabela[i]->inicio;
 		while (noaux != NULL){
-			if (noaux->entidade.escopo == escopo) noaux->entidade.id = NULL;		
+			if (noaux->entidade.escopo == escopo) noaux->entidade.id = "";		
 		noaux = noaux->proximo;
 		}
 				
@@ -130,10 +137,13 @@ Entidade* buscarEntidadeTabela(char *id, int escopo){
     escopoAux = escopo;
     // Procurando uma variavel em todos os escopos menores que o atual.
     while (escopoAux >= 0){
+    	printf("%d %s\n",escopoAux,id);
     	No *no = buscarEntidade(id,escopoAux, tabela[indice]->inicio);
+    	printf("Escopo de busca: %d\n",escopoAux);
     	if(no)
         	return &no->entidade;
-        escopoAux--;
+        else
+        	escopoAux--;
     }
      return NULL;
 }
@@ -149,11 +159,16 @@ void imprimirTabela(){
     printf("| ----------------------------- FIM TABELA --------------------------------- |\n");
 }
 void editaEntidade (char *id, int escopo, char *value){
+	
+	
 	Entidade *aux = buscarEntidadeTabela(id,escopo);
+
 	if (aux){		
 		aux->valor = value;
-		aux->has_value = 1;	
+		aux->has_value = 1;
+	
 	}
+	
 
 }
 // do a;
