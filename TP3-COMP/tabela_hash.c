@@ -17,7 +17,7 @@ Sintetizando:
 
 // Implementações dos métodos
 // cria e retorna um tipo pessoa
-Entidade criarEntidade (char *tipo, char *id){
+Entidade criarEntidade (char *tipo, char *id, int escopoGlobal){
 	Entidade e;
 	e.tipo = tipo;
 	e.escopo = escopoGlobal; 
@@ -51,7 +51,7 @@ Lista* criarListaVazia() {
     //p - nova pessoa a ser inserida
     //*lista - endereço de uma lista encadeada.
 
-void inserirInicio(Entidade e, Lista *lista) {
+void inserirInicio(Entidade e, Lista *lista, int escopoGlobal) {
     No *no = malloc(sizeof(No));
     no->entidade = e;
     no->proximo = lista->inicio;
@@ -68,7 +68,22 @@ No* buscarEntidade(char* id, int escopo, No *inicio) {
         else
             inicio = inicio->proximo;
     }
-    return NULL;// matricula não encontrada
+    return NULL;// entidade não encontrada
+}
+void exterminaEscopo (int escopo){
+	int i;
+	//Lista *aux;
+	No *noaux;
+	for (i=0;i<150;i++){
+		noaux = tabela[i]->inicio;
+		while (noaux != NULL){
+			if (noaux->entidade.escopo == escopo) noaux->entidade.id = NULL;		
+		noaux = noaux->proximo;
+		}
+				
+	}
+
+
 }
 
 void imprimirLista(No *inicio) {
@@ -101,21 +116,26 @@ int hashing(char *id){
 }
 
 // cria uma entidade e a insere na tabela
-void insereTabela(char *tipo, char *id){ // do a
-    Entidade e1 = criarEntidade(tipo,id);
+void insereTabela(char *tipo, char *id, int escopoGlobal){ // do a
+    Entidade e1 = criarEntidade(tipo,id,escopoGlobal);
     int indice = hashing(e1.id);
-    inserirInicio(e1, tabela[indice]);
+    inserirInicio(e1, tabela[indice], escopoGlobal);
 }
 
-// busca uma pessoa. Seu retorno é um endereço ou NULL
+// busca uma entidade. Seu retorno é um endereço ou NULL
 Entidade* buscarEntidadeTabela(char *id, int escopo){
     int indice = hashing(id);
     printf("Index: %d\n",indice);
-    No *no = buscarEntidade(id,escopo, tabela[indice]->inicio);
-    if(no)
-        return &no->entidade;
-    else
-        return NULL;
+    int escopoAux;
+    escopoAux = escopo;
+    // Procurando uma variavel em todos os escopos menores que o atual.
+    while (escopoAux >= 0){
+    	No *no = buscarEntidade(id,escopoAux, tabela[indice]->inicio);
+    	if(no)
+        	return &no->entidade;
+        escopoAux--;
+    }
+     return NULL;
 }
 
 // imprimir tabela
@@ -136,6 +156,16 @@ void editaEntidade (char *id, int escopo, char *value){
 	}
 
 }
+// do a;
+// ensaio (a>b) { do b; a=1;} -> percorre a lista e id = null p/ todos os caras daquele escopo
+// do c;
+// ensaio (b>c) { b = 1; } 
+
+// 1o - Pesquisar se tá na tabela;
+// 2o - Se tiver, modifica;
+	
+
+
 /*
 int main() {
     //Entidade e = criarEntidade("do","15","v1");

@@ -5,7 +5,9 @@ void yyerror(char *c);
 #include "string.h" 
 #include "stdio.h"
 #include "stdlib.h"
+#include "tabela_hash.h"
 int linha = 2;
+extern int escopoGlobal;
 void escreve_arquivo(char *texto);
 
 %}
@@ -59,8 +61,8 @@ STRING 			\"{allsymbols}*\"
 ")"					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return RPAREN; }
 "["					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LCOLCH; }
 "]"					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return RCOLCH; }
-"{"					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LCHAV; }
-"}"					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return RCHAV; }
+"{"					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);printf("Escopo: %d\n",++escopoGlobal);return LCHAV; }
+"}"					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);exterminaEscopo(escopoGlobal);imprimirTabela();printf("Escopo: %d\n",--escopoGlobal);return RCHAV; }
 ";"					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LITERAL_PONTO_E_VIRGULA;}
 "."					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LITERAL_PONTO; }
 ","					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LITERAL_VIRGULA; }

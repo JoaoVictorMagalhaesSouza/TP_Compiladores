@@ -23,21 +23,24 @@ typedef struct {
 
 // Criando a Tabela Hash
 Lista *tabela[M];
-int escopoGlobal = 0;
 
-Entidade criarEntidade (char *tipo, char *id);
+
+Entidade criarEntidade (char *tipo, char *id, int escopoGlobal);
 void imprimirEntidade(Entidade entidade);
 Lista* criarListaVazia();
-void inserirInicio(Entidade entidade, Lista *lista);
-No* buscarEntidade(char *id, int escopo, No *inicio); // do v1 escopo = 0 if (vasdas) {do v1; v1 = 1} escopo = 1
+void inserirInicio(Entidade entidade, Lista *lista, int escopoGlobal);
+No* buscarEntidade(char *id, int escopoGlobal, No *inicio); // do v1 escopo = 0 if (vasdas) {do v1; v1 = 1} escopo = 1
 void imprimirLista(No *inicio);
 void inicializarTabela();
 int hashing(char *id); /// A gente vai converter o id para sua soma de inteiros. ASCII.
-void insereTabela(char *tipo, char *id);
-Entidade* buscarEntidadeTabela(char *id, int escopo); // v1 1 
-void editaEntidade (char *id, int escopo, char *value);
+void insereTabela(char *tipo, char *id, int escopoGlobal);
+Entidade* buscarEntidadeTabela(char *id, int escopoGlobal); // v1 1 
+void editaEntidade (char *id, int escopoGlobal, char *value);
+void exterminaEscopo (int escopo);
 void imprimirTabela();
 void incrementaEscopo();
 void decrementaEscopo();
+
+
 // Estou mudando o nome das funções.  Verificar no .c depois.
  

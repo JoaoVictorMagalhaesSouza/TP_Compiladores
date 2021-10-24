@@ -86,8 +86,7 @@ extern int yydebug;
     ACORDE = 292,
     POWOP = 293,
     RESTOP = 294,
-    assignment = 295,
-    IADDOP = 296
+    assignment = 295
   };
 #endif
 /* Tokens.  */
@@ -129,16 +128,15 @@ extern int yydebug;
 #define POWOP 293
 #define RESTOP 294
 #define assignment 295
-#define IADDOP 296
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 14 "melodia.y"
+#line 16 "melodia.y"
 char *string;
 
-#line 142 "y.tab.h"
+#line 140 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
