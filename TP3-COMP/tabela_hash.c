@@ -162,7 +162,6 @@ int analiseSemantica(char *id, char *expression, int escopoGlobal){
                 intCaractere = str[i];
                 if (intCaractere<48 || intCaractere>57){ // do a; a = 2;
                     e2 = buscarEntidadeTabela(str,escopoGlobal);
-                    printf("ID: %s  VALOR: %s\n",e2->id,e2->valor);
                     if (e2){
                     	if(strcmp("do",e2->tipo)==0){            	
                     		editaEntidade(id,escopoGlobal,e2->valor);
@@ -190,8 +189,24 @@ int analiseSemantica(char *id, char *expression, int escopoGlobal){
                 intCaractere = str[i];
                 
                 if ((intCaractere<48 || intCaractere>57) && intCaractere!=46){
+                    e2 = buscarEntidadeTabela(str,escopoGlobal);
+                    if (e2){
+                    	if(strcmp("re",e2->tipo)==0){            	
+                    		editaEntidade(id,escopoGlobal,e2->valor);
+                    		return 1;
+                    		}
+                    	else{
+                    	 printf("Type error (Semantic error) !\n");
+                    	return 0;// Nao sao do mesmo tipo
+                    	
+                    	}
+                    
+                    }
+                    else{
+                       
                     printf("Type error (Semantic error) !\n");
                     return 0;// Nao sao do mesmo tipo
+                    }
                 }
         }
         editaEntidade(id,escopoGlobal,expression);// Sginifica que sao do mesmo tipo
@@ -201,12 +216,27 @@ int analiseSemantica(char *id, char *expression, int escopoGlobal){
             aux1 = str[0];
             aux2 = str[strlen(str)-1];
             if((aux1 == 34) && (aux2 == 34)){
-            	printf("Borat Sagdiev\n");
                 editaEntidade(id,escopoGlobal,expression);//; Sginifica que sao do mesmo tipo
             }
             else{
-                printf("Type error (Semantic error) !\n");
-                return 0;
+                e2 = buscarEntidadeTabela(str,escopoGlobal);
+                    if (e2){
+                    	if(strcmp("si",e2->tipo)==0){            	
+                    		editaEntidade(id,escopoGlobal,e2->valor);
+                    		return 1;
+                    		}
+                    	else{
+                    	 printf("Type error (Semantic error) !\n");
+                    	return 0;// Nao sao do mesmo tipo
+                    	
+                    	}
+                    
+                    }
+                    else{
+                       
+                    printf("Type error (Semantic error) !\n");
+                    return 0;// Nao sao do mesmo tipo
+                    }
             }
         //editaEntidade(id,escopoGlobal,expression); Sginifica que sao do mesmo tipo
         }
