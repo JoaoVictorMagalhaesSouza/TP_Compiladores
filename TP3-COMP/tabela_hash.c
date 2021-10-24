@@ -33,7 +33,7 @@ Entidade criarEntidade (char *tipo, char *id, int escopoGlobal){
 
 // imprime uma Entidade
 void imprimirEntidade(Entidade e){
-    printf("====> Tipo da variavel:%s Escopo:%d Valor:%s ID:%s\n",e.tipo,e.escopo,e.valor,e.id);
+    printf("* ID:%s 	|	Tipo:%s	|	 Valor:%s	|	 Escopo:%d *\n",e.id,e.tipo,e.valor,e.escopo);
 }
 
 //-------------------------------- início funções lista -------------------------
@@ -141,12 +141,12 @@ Entidade* buscarEntidadeTabela(char *id, int escopo){
 // imprimir tabela
 void imprimirTabela(){
     int i;
-    printf("\n---------------------TABELA-------------------------\n");
+    printf("\n| ----------------------- TABELA DE SIMBOLOS ---------------------------- |\n");
     for(i = 0; i < M; i++){
-        printf("%d Lista tamanho: %d\n", i, tabela[i]->tam);
+        //printf("%d Lista tamanho: %d\n", i, tabela[i]->tam);
         imprimirLista(tabela[i]->inicio);
     }
-    printf("---------------------FIM TABELA-----------------------\n");
+    printf("| ----------------------------- FIM TABELA --------------------------------- |\n");
 }
 void editaEntidade (char *id, int escopo, char *value){
 	Entidade *aux = buscarEntidadeTabela(id,escopo);

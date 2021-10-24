@@ -24,10 +24,10 @@ void imprimeCodigoFonte();
 
 
 %left assignment
-%right ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP EOL ACORDE POWOP RESTOP
-%right TIPO ID IF ELSE WHILE FOR CONTINUE BREAK VOID RETURN ICONSTANTE FCONSTANTE STRING LPAREN RPAREN LCOLCH RCOLCH LCHAV RCHAV LITERAL_PONTO_E_VIRGULA LITERAL_PONTO LITERAL_VIRGULA LITERAL_RECEBE PLAY
+%left ADDOP EQOP ANDOP OROP NOTOP RELOP INCR MULOP DIVOP EOL ACORDE POWOP RESTOP
+%left TIPO ID IF ELSE WHILE FOR CONTINUE BREAK VOID RETURN ICONSTANTE FCONSTANTE STRING LPAREN RPAREN LCOLCH RCOLCH LCHAV RCHAV LITERAL_PONTO_E_VIRGULA LITERAL_PONTO LITERAL_VIRGULA LITERAL_RECEBE PLAY
 
-%type <string> declaration_names declaration function_def declaration_variable pointer variable expression constant sign casting   function_call expression_list argument_list tail declaration_args array statement if_statement for_statement while_statement assigment
+%type <string> declaration_names declaration function_def declaration_variable pointer variable expression constant sign casting   function_call expression_list argument_list tail declaration_args array statement if_statement for_statement while_statement assigment 
 
 %start program
 
@@ -68,9 +68,11 @@ expression:
 	// LPAREN expression RPAREN {$$ = $2;}| // a = 2+5*3
     sign constant{
     		if (strcmp("-",$1)==0){
-    			char aux[50];sprintf(aux, "%g", -atof($2)); $$ = aux;
+    			$$ = strcat("-",$2);
+    			//char aux[50];sprintf(aux, "%g", -atof($2)); $$ = aux;
     		}else{
-    			char aux[50];sprintf(aux, "%g", atof($2)); $$ = aux;
+    			$$ = $2;
+    			//char aux[50];sprintf(aux, "%g", atof($2)); $$ = aux;
     		
     		}
     			
@@ -81,7 +83,22 @@ expression:
     expression POWOP expression{char aux[50];double pot = pow(atof($1),atof($3));sprintf(aux, "%g", pot); $$ = aux;}|    
     expression MULOP expression{char aux[50];sprintf(aux, "%g", (atof($1)*atof($3))); $$ = aux;}|
     expression DIVOP expression{char aux[50];sprintf(aux, "%g", (atof($1)/atof($3))); $$ = aux;}|
-    expression ADDOP expression{char aux[50];sprintf(aux, "%g", (atof($1)+atof($3))); $$ = aux;}| //a++ a--
+    expression ADDOP expression{
+    		printf("%g %g\n",atof($1),atof($3));
+    		if (strcmp($2,"+")==0 || strcmp($2,"")==0){
+    			char aux[50];sprintf(aux, "%g", (atof($1)+atof($3))); $$ = aux; printf("Res: %s\n",$$);
+    		
+    		}
+    		else{
+    			char aux[50];sprintf(aux, "%g", (atof($1)-atof($3))); $$ = aux;
+    		
+    		}
+    		
+    
+    
+    
+    
+    }| //a++ a--
     expression INCR{if (strcmp($2,"++")==0){
     		    char aux[50];sprintf(aux, "%g", (atof($1)+1)); $$ = aux;
     		    }
@@ -140,6 +157,8 @@ expression:
     function_call|
     casting    
 ;
+
+
 
 constant: ICONSTANTE|FCONSTANTE ;
 

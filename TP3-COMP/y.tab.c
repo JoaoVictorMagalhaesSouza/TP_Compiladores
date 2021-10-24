@@ -536,7 +536,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  47
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   301
+#define YYLAST   288
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  41
@@ -599,11 +599,11 @@ static const yytype_uint8 yyrline[] =
        0,    38,    38,    38,    40,    40,    42,    42,    42,    44,
       44,    46,    46,    50,    50,    52,    53,    56,    56,    58,
       58,    58,    60,    62,    62,    62,    64,    64,    64,    69,
-      81,    82,    83,    84,    85,    92,    99,   100,   101,   102,
-     103,   120,   139,   140,   141,   144,   144,   146,   146,   151,
-     152,   152,   155,   155,   155,   155,   155,   156,   156,   156,
-     156,   159,   161,   161,   163,   165,   169,   170,   172,   174,
-     174,   176
+      83,    84,    85,    86,   102,   109,   116,   117,   118,   119,
+     120,   137,   156,   157,   158,   163,   163,   165,   165,   170,
+     171,   171,   174,   174,   174,   174,   174,   175,   175,   175,
+     175,   178,   180,   180,   182,   184,   188,   189,   191,   193,
+     193,   195
 };
 #endif
 
@@ -662,10 +662,10 @@ static const yytype_int16 yypact[] =
      144,   144,   -94,   194,    50,   -94,   -94,   -94,   -94,   144,
      -94,   -94,   -94,    28,   -94,   -94,   134,   -94,    56,    60,
      -94,   -94,    58,    63,   249,    62,    69,   152,   166,   208,
-     128,   262,   262,   -94,   144,   144,   144,   144,   144,   -94,
+     128,   -94,   -94,   -94,   144,   144,   144,   144,   144,   -94,
      144,   144,   144,   144,   -94,   -94,   -94,   222,   -94,    80,
       42,   -94,   -94,   128,   -94,    65,   101,   101,   144,    68,
-     262,   262,   262,   262,   262,   262,   262,   262,   262,   -94,
+     -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,
       82,    64,    72,   -94,   -94,   134,   -94,    87,   -94,   236,
      -94,   -94,    80,   101,    73,   101,   -94,   144,   -94,   -94,
      -94,   -94,   180,   101,   -94
@@ -741,9 +741,7 @@ static const yytype_int16 yytable[] =
       75,    76,    77,     0,    78,    79,    80,    81,   127,     0,
       82,    83,     0,    74,    75,    76,    77,     0,    78,    79,
       80,    81,     0,    93,    82,    83,    74,    75,    76,    77,
-       0,    78,    79,    80,    81,     0,     0,    82,    83,    74,
-      75,    76,    77,     0,    78,    79,    80,    81,     0,     0,
-      82,    83
+       0,    78,    79,    80,    81,     0,     0,    82,    83
 };
 
 static const yytype_int16 yycheck[] =
@@ -776,9 +774,7 @@ static const yytype_int16 yycheck[] =
       28,    29,    30,    -1,    32,    33,    34,    35,    22,    -1,
       38,    39,    -1,    27,    28,    29,    30,    -1,    32,    33,
       34,    35,    -1,    24,    38,    39,    27,    28,    29,    30,
-      -1,    32,    33,    34,    35,    -1,    -1,    38,    39,    27,
-      28,    29,    30,    -1,    32,    33,    34,    35,    -1,    -1,
-      38,    39
+      -1,    32,    33,    34,    35,    -1,    -1,    38,    39
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -1522,70 +1518,72 @@ yyreduce:
   case 15:
 #line 52 "melodia.y"
                                                             {insereTabela((yyvsp[-2].string),(yyvsp[-1].string),escopoGlobal); imprimirTabela();}
-#line 1526 "y.tab.c"
+#line 1522 "y.tab.c"
     break;
 
   case 16:
 #line 53 "melodia.y"
               {printf("Declaracao de funcao: %s\n",(yyvsp[0].string));}
-#line 1532 "y.tab.c"
+#line 1528 "y.tab.c"
     break;
 
   case 18:
 #line 56 "melodia.y"
                                                                                               {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1538 "y.tab.c"
+#line 1534 "y.tab.c"
     break;
 
   case 20:
 #line 58 "melodia.y"
                                         {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1544 "y.tab.c"
+#line 1540 "y.tab.c"
     break;
 
   case 21:
 #line 58 "melodia.y"
                                                                                     {(yyval.string) = strcat((yyvsp[-1].string),(yyvsp[0].string));}
-#line 1550 "y.tab.c"
+#line 1546 "y.tab.c"
     break;
 
   case 22:
 #line 60 "melodia.y"
                           {(yyval.string) = strcat((yyvsp[-1].string),(yyvsp[0].string));}
-#line 1556 "y.tab.c"
+#line 1552 "y.tab.c"
     break;
 
   case 23:
 #line 62 "melodia.y"
                                                               {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1562 "y.tab.c"
+#line 1558 "y.tab.c"
     break;
 
   case 25:
 #line 62 "melodia.y"
                                                                                                                    {(yyval.string) = "";}
-#line 1568 "y.tab.c"
+#line 1564 "y.tab.c"
     break;
 
   case 26:
 #line 64 "melodia.y"
                                                             {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1574 "y.tab.c"
+#line 1570 "y.tab.c"
     break;
 
   case 28:
 #line 64 "melodia.y"
                                                                                                             {(yyval.string) = "";}
-#line 1580 "y.tab.c"
+#line 1576 "y.tab.c"
     break;
 
   case 29:
 #line 69 "melodia.y"
                  {
     		if (strcmp("-",(yyvsp[-1].string))==0){
-    			char aux[50];sprintf(aux, "%g", -atof((yyvsp[0].string))); (yyval.string) = aux;
+    			(yyval.string) = strcat("-",(yyvsp[0].string));
+    			//char aux[50];sprintf(aux, "%g", -atof($2)); $$ = aux;
     		}else{
-    			char aux[50];sprintf(aux, "%g", atof((yyvsp[0].string))); (yyval.string) = aux;
+    			(yyval.string) = (yyvsp[0].string);
+    			//char aux[50];sprintf(aux, "%g", atof($2)); $$ = aux;
     		
     		}
     			
@@ -1593,35 +1591,50 @@ yyreduce:
     		
     
     }
-#line 1597 "y.tab.c"
+#line 1595 "y.tab.c"
     break;
 
   case 30:
-#line 81 "melodia.y"
+#line 83 "melodia.y"
                                {char aux[50];double pot = pow(atof((yyvsp[-2].string)),atof((yyvsp[0].string)));sprintf(aux, "%g", pot); (yyval.string) = aux;}
-#line 1603 "y.tab.c"
+#line 1601 "y.tab.c"
     break;
 
   case 31:
-#line 82 "melodia.y"
+#line 84 "melodia.y"
                                {char aux[50];sprintf(aux, "%g", (atof((yyvsp[-2].string))*atof((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1609 "y.tab.c"
+#line 1607 "y.tab.c"
     break;
 
   case 32:
-#line 83 "melodia.y"
+#line 85 "melodia.y"
                                {char aux[50];sprintf(aux, "%g", (atof((yyvsp[-2].string))/atof((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1615 "y.tab.c"
+#line 1613 "y.tab.c"
     break;
 
   case 33:
-#line 84 "melodia.y"
-                               {char aux[50];sprintf(aux, "%g", (atof((yyvsp[-2].string))+atof((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1621 "y.tab.c"
+#line 86 "melodia.y"
+                               {
+    		printf("%g %g\n",atof((yyvsp[-2].string)),atof((yyvsp[0].string)));
+    		if (strcmp((yyvsp[-1].string),"+")==0 || strcmp((yyvsp[-1].string),"")==0){
+    			char aux[50];sprintf(aux, "%g", (atof((yyvsp[-2].string))+atof((yyvsp[0].string)))); (yyval.string) = aux; printf("Res: %s\n",(yyval.string));
+    		
+    		}
+    		else{
+    			char aux[50];sprintf(aux, "%g", (atof((yyvsp[-2].string))-atof((yyvsp[0].string)))); (yyval.string) = aux;
+    		
+    		}
+    		
+    
+    
+    
+    
+    }
+#line 1634 "y.tab.c"
     break;
 
   case 34:
-#line 85 "melodia.y"
+#line 102 "melodia.y"
                    {if (strcmp((yyvsp[0].string),"++")==0){
     		    char aux[50];sprintf(aux, "%g", (atof((yyvsp[-1].string))+1)); (yyval.string) = aux;
     		    }
@@ -1629,11 +1642,11 @@ yyreduce:
 		    	char aux[50];sprintf(aux, "%g", (atof((yyvsp[-1].string))-1)); (yyval.string) = aux;
 		    }
 	}
-#line 1633 "y.tab.c"
+#line 1646 "y.tab.c"
     break;
 
   case 35:
-#line 92 "melodia.y"
+#line 109 "melodia.y"
                    {if (strcmp((yyvsp[-1].string),"++")==0){
     		    char aux[50];sprintf(aux, "%g", (atof((yyvsp[0].string))+1)); (yyval.string) = aux;
     		    }
@@ -1641,35 +1654,35 @@ yyreduce:
 		    	char aux[50];sprintf(aux, "%g", (atof((yyvsp[0].string))-1)); (yyval.string) = aux;
 		    }
 	}
-#line 1645 "y.tab.c"
+#line 1658 "y.tab.c"
     break;
 
   case 36:
-#line 99 "melodia.y"
+#line 116 "melodia.y"
                               {char aux[50];sprintf(aux, "%d", (atoi((yyvsp[-2].string))||atoi((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1651 "y.tab.c"
+#line 1664 "y.tab.c"
     break;
 
   case 37:
-#line 100 "melodia.y"
+#line 117 "melodia.y"
                                {char aux[50];sprintf(aux, "%d", (atoi((yyvsp[-2].string))&&atoi((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1657 "y.tab.c"
+#line 1670 "y.tab.c"
     break;
 
   case 38:
-#line 101 "melodia.y"
+#line 118 "melodia.y"
                                 {char aux[50];sprintf(aux, "%d", (atoi((yyvsp[-2].string))%atoi((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1663 "y.tab.c"
+#line 1676 "y.tab.c"
     break;
 
   case 39:
-#line 102 "melodia.y"
+#line 119 "melodia.y"
                     {char aux[50];sprintf(aux, "%d", (!atof((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1669 "y.tab.c"
+#line 1682 "y.tab.c"
     break;
 
   case 40:
-#line 103 "melodia.y"
+#line 120 "melodia.y"
                               {
     				
     				if(strcmp("==",(yyvsp[-1].string))==0){
@@ -1687,11 +1700,11 @@ yyreduce:
     
     
     }
-#line 1691 "y.tab.c"
+#line 1704 "y.tab.c"
     break;
 
   case 41:
-#line 120 "melodia.y"
+#line 137 "melodia.y"
                                {
     				
     				if(strcmp("<",(yyvsp[-1].string))==0){
@@ -1710,29 +1723,29 @@ yyreduce:
     
     
     }
-#line 1714 "y.tab.c"
+#line 1727 "y.tab.c"
     break;
 
   case 48:
-#line 146 "melodia.y"
+#line 165 "melodia.y"
             {(yyval.string) = "";}
-#line 1720 "y.tab.c"
+#line 1733 "y.tab.c"
     break;
 
   case 67:
-#line 170 "melodia.y"
+#line 189 "melodia.y"
                                                 {(yyval.string) = strcat(strcat(strcat((yyvsp[-3].string),(yyvsp[-2].string)),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1726 "y.tab.c"
+#line 1739 "y.tab.c"
     break;
 
   case 71:
-#line 176 "melodia.y"
+#line 195 "melodia.y"
                                                                       {editaEntidade((yyvsp[-3].string),escopoGlobal,(yyvsp[-1].string));imprimirTabela();}
-#line 1732 "y.tab.c"
+#line 1745 "y.tab.c"
     break;
 
 
-#line 1736 "y.tab.c"
+#line 1749 "y.tab.c"
 
       default: break;
     }
@@ -1964,7 +1977,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 179 "melodia.y"
+#line 198 "melodia.y"
 	
 
 
