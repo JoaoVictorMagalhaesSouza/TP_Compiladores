@@ -1628,7 +1628,7 @@ yyreduce:
 #line 86 "melodia.y"
                                {
     		printf("%g %g\n",atof((yyvsp[-2].string)),atof((yyvsp[0].string)));
-    		if (strcmp((yyvsp[-1].string),"+")==0 || strcmp((yyvsp[-1].string),"")==0){
+    		if (strcmp((yyvsp[-1].string),"+")==0){
     			char aux[50];sprintf(aux, "%g", (atof((yyvsp[-2].string))+atof((yyvsp[0].string)))); (yyval.string) = aux; printf("Res: %s\n",(yyval.string));
     		
     		}

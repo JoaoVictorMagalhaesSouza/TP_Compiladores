@@ -79,13 +79,13 @@ expression:
     		
     		
     
-    }| // +2; -2;; 2
+    }| // +2; -2;; 2 2 + 3 // 2 + 2;
     expression POWOP expression{char aux[50];double pot = pow(atof($1),atof($3));sprintf(aux, "%g", pot); $$ = aux;}|    
     expression MULOP expression{char aux[50];sprintf(aux, "%g", (atof($1)*atof($3))); $$ = aux;}|
     expression DIVOP expression{char aux[50];sprintf(aux, "%g", (atof($1)/atof($3))); $$ = aux;}|
     expression ADDOP expression{
     		printf("%g %g\n",atof($1),atof($3));
-    		if (strcmp($2,"+")==0 || strcmp($2,"")==0){
+    		if (strcmp($2,"+")==0){
     			char aux[50];sprintf(aux, "%g", (atof($1)+atof($3))); $$ = aux; printf("Res: %s\n",$$);
     		
     		}

@@ -7,12 +7,10 @@
  7 sol broFazSol ; 
  8 la emCasa ; 
  9 si variable ; 
- 10 do * a ; #Ponteiro 
- 11 do acorde vetor [ 20 ] ; #Declaracao de Vetor 
- 12 
- 13 ensaio ( 2 > 3 ) { a = 2 ; 
- 14 do a ; } #Semelhante ao IF em C 
- 15 improviso { do a ; } 
- 16 
- 17 
- 18 
+ 10 do acorde vetor [ 20 ] ; #Declaracao de Vetor 
+ 11 
+ 12 ensaio ( 2 > 3 ) { a = 2 ; do a ; } #Semelhante ao IF em C 
+ 13 improviso { do a ; } 
+ 14 
+ 15 ensaio ( 3 ) { 
+ 16 a = 2 ; 

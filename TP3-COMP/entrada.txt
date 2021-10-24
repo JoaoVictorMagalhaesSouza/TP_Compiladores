@@ -7,11 +7,20 @@ fa k;
 sol broFazSol;
 la emCasa;
 si variable;
-do *a;	#Ponteiro
 do acorde vetor[20]; #Declaracao de Vetor
 
-ensaio (2>3) { a=2; 
-do a;} #Semelhante ao IF em C
+ensaio (2>3) { a=2; do a;} #Semelhante ao IF em C
 improviso {do a;}
 
+ensaio (3){
+ 	a = 2; 
+ 	a=a++;
+ 	a+=1;
+ 	ensaio (4){
+ 		b+=2;
+ 		c+=3;
 
+ 	}
+ 	improviso {a = 20;}
+ }
+improviso { a = 0; }
