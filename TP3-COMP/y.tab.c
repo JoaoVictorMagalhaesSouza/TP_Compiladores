@@ -1515,64 +1515,76 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
+  case 11:
+#line 46 "melodia.y"
+                                      {(yyval.string) = strcat(strcat(strcat((yyvsp[-3].string),(yyvsp[-2].string)),(yyvsp[-1].string)),(yyvsp[0].string));}
+#line 1522 "y.tab.c"
+    break;
+
+  case 12:
+#line 46 "melodia.y"
+                                                                                                            {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
+#line 1528 "y.tab.c"
+    break;
+
   case 15:
 #line 52 "melodia.y"
                                                             {insereTabela((yyvsp[-2].string),(yyvsp[-1].string),escopoGlobal); imprimirTabela();}
-#line 1522 "y.tab.c"
+#line 1534 "y.tab.c"
     break;
 
   case 16:
 #line 53 "melodia.y"
               {printf("Declaracao de funcao: %s\n",(yyvsp[0].string));}
-#line 1528 "y.tab.c"
+#line 1540 "y.tab.c"
     break;
 
   case 18:
 #line 56 "melodia.y"
                                                                                               {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1534 "y.tab.c"
+#line 1546 "y.tab.c"
     break;
 
   case 20:
 #line 58 "melodia.y"
-                                        {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1540 "y.tab.c"
+                                        {(yyval.string) = strcat((yyvsp[-1].string),(yyvsp[0].string));}
+#line 1552 "y.tab.c"
     break;
 
   case 21:
 #line 58 "melodia.y"
-                                                                                    {(yyval.string) = strcat((yyvsp[-1].string),(yyvsp[0].string));}
-#line 1546 "y.tab.c"
+                                                                         {(yyval.string) = strcat((yyvsp[-1].string),(yyvsp[0].string));}
+#line 1558 "y.tab.c"
     break;
 
   case 22:
 #line 60 "melodia.y"
                           {(yyval.string) = strcat((yyvsp[-1].string),(yyvsp[0].string));}
-#line 1552 "y.tab.c"
+#line 1564 "y.tab.c"
     break;
 
   case 23:
 #line 62 "melodia.y"
                                                               {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1558 "y.tab.c"
+#line 1570 "y.tab.c"
     break;
 
   case 25:
 #line 62 "melodia.y"
                                                                                                                    {(yyval.string) = "";}
-#line 1564 "y.tab.c"
+#line 1576 "y.tab.c"
     break;
 
   case 26:
 #line 64 "melodia.y"
                                                             {(yyval.string) = strcat(strcat((yyvsp[-2].string),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1570 "y.tab.c"
+#line 1582 "y.tab.c"
     break;
 
   case 28:
 #line 64 "melodia.y"
                                                                                                             {(yyval.string) = "";}
-#line 1576 "y.tab.c"
+#line 1588 "y.tab.c"
     break;
 
   case 29:
@@ -1591,25 +1603,25 @@ yyreduce:
     		
     
     }
-#line 1595 "y.tab.c"
+#line 1607 "y.tab.c"
     break;
 
   case 30:
 #line 83 "melodia.y"
                                {char aux[50];double pot = pow(atof((yyvsp[-2].string)),atof((yyvsp[0].string)));sprintf(aux, "%g", pot); (yyval.string) = aux;}
-#line 1601 "y.tab.c"
+#line 1613 "y.tab.c"
     break;
 
   case 31:
 #line 84 "melodia.y"
                                {char aux[50];sprintf(aux, "%g", (atof((yyvsp[-2].string))*atof((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1607 "y.tab.c"
+#line 1619 "y.tab.c"
     break;
 
   case 32:
 #line 85 "melodia.y"
                                {char aux[50];sprintf(aux, "%g", (atof((yyvsp[-2].string))/atof((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1613 "y.tab.c"
+#line 1625 "y.tab.c"
     break;
 
   case 33:
@@ -1630,7 +1642,7 @@ yyreduce:
     
     
     }
-#line 1634 "y.tab.c"
+#line 1646 "y.tab.c"
     break;
 
   case 34:
@@ -1642,7 +1654,7 @@ yyreduce:
 		    	char aux[50];sprintf(aux, "%g", (atof((yyvsp[-1].string))-1)); (yyval.string) = aux;
 		    }
 	}
-#line 1646 "y.tab.c"
+#line 1658 "y.tab.c"
     break;
 
   case 35:
@@ -1654,31 +1666,31 @@ yyreduce:
 		    	char aux[50];sprintf(aux, "%g", (atof((yyvsp[0].string))-1)); (yyval.string) = aux;
 		    }
 	}
-#line 1658 "y.tab.c"
+#line 1670 "y.tab.c"
     break;
 
   case 36:
 #line 116 "melodia.y"
                               {char aux[50];sprintf(aux, "%d", (atoi((yyvsp[-2].string))||atoi((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1664 "y.tab.c"
+#line 1676 "y.tab.c"
     break;
 
   case 37:
 #line 117 "melodia.y"
                                {char aux[50];sprintf(aux, "%d", (atoi((yyvsp[-2].string))&&atoi((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1670 "y.tab.c"
+#line 1682 "y.tab.c"
     break;
 
   case 38:
 #line 118 "melodia.y"
                                 {char aux[50];sprintf(aux, "%d", (atoi((yyvsp[-2].string))%atoi((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1676 "y.tab.c"
+#line 1688 "y.tab.c"
     break;
 
   case 39:
 #line 119 "melodia.y"
                     {char aux[50];sprintf(aux, "%d", (!atof((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1682 "y.tab.c"
+#line 1694 "y.tab.c"
     break;
 
   case 40:
@@ -1700,7 +1712,7 @@ yyreduce:
     
     
     }
-#line 1704 "y.tab.c"
+#line 1716 "y.tab.c"
     break;
 
   case 41:
@@ -1723,29 +1735,29 @@ yyreduce:
     
     
     }
-#line 1727 "y.tab.c"
+#line 1739 "y.tab.c"
     break;
 
   case 48:
 #line 165 "melodia.y"
             {(yyval.string) = "";}
-#line 1733 "y.tab.c"
+#line 1745 "y.tab.c"
     break;
 
   case 67:
 #line 189 "melodia.y"
                                                 {(yyval.string) = strcat(strcat(strcat((yyvsp[-3].string),(yyvsp[-2].string)),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1739 "y.tab.c"
+#line 1751 "y.tab.c"
     break;
 
   case 71:
 #line 195 "melodia.y"
                                                                       {editaEntidade((yyvsp[-3].string),escopoGlobal,(yyvsp[-1].string));imprimirTabela();}
-#line 1745 "y.tab.c"
+#line 1757 "y.tab.c"
     break;
 
 
-#line 1749 "y.tab.c"
+#line 1761 "y.tab.c"
 
       default: break;
     }

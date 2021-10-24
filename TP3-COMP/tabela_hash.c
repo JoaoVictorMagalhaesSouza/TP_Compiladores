@@ -33,7 +33,7 @@ Entidade criarEntidade (char *tipo, char *id, int escopoGlobal){
 
 // imprime uma Entidade
 void imprimirEntidade(Entidade e){
-    printf("* ID:%s 	|	Tipo:%s	|	 Valor:%s	|	 Escopo:%d *\n",e.id,e.tipo,e.valor,e.escopo);
+    printf("* ID:%s \t | \t Tipo:%s \t | \t Valor:%s \t | \t Escopo:%d *\n",e.id,e.tipo,e.valor,e.escopo);
 }
 
 //-------------------------------- início funções lista -------------------------

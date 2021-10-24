@@ -1,7 +1,7 @@
 #Declaracao
 do a;
 do b;
-re c;
+do c;
 mi d;
 fa k;
 sol broFazSol;
@@ -10,43 +10,8 @@ si variable;
 do *a;	#Ponteiro
 do acorde vetor[20]; #Declaracao de Vetor
 
-ensaio (2>3) { a=2; do a; } #Semelhante ao IF em C
+ensaio (2>3) { a=2; 
+do a;} #Semelhante ao IF em C
 improviso {do a;}
 
-
-
-
-ensaio (a>3){
- 	a = 2; 
- 	a=a++;
- 	a+=1;
- 	ensaio (b<4){
- 		b+=2;
- 		c+=3;
-
- 	}
- 	improviso a = 20;
- }
-improviso { a = 0; }
-do a;
-refrao (a; a<2; a++) {b = b+1;} #For
-bis (c<500){
- c = c+1;
-}
-do play func1 (do v1, do v2, re v3){
-	a = 1;
-}
-
-a = func1();
-a = 2 + func1(v1,v2,v3) + 3;
-ensaio (a>0) a=b; 
-
-func47();
-
-a = funcv1(v1);
-
-a = do(a);
-
-nota();
-show();
 

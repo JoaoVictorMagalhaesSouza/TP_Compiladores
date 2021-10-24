@@ -43,7 +43,7 @@ variable: ID | pointer ID | ID array ;
 
 pointer: pointer MULOP | MULOP ;
 
-array: array LCOLCH ICONSTANTE RCOLCH | LCOLCH ICONSTANTE RCOLCH ;
+array: array LCOLCH ICONSTANTE RCOLCH {$$ = strcat(strcat(strcat($1,$2),$3),$4);}| LCOLCH ICONSTANTE RCOLCH {$$ = strcat(strcat($1,$2),$3);};
 
 /* DECLARAÇÕES */
 
@@ -55,7 +55,7 @@ declaration: TIPO declaration_names LITERAL_PONTO_E_VIRGULA {insereTabela($1,$2,
 
 declaration_names: declaration_variable|declaration_names LITERAL_VIRGULA declaration_variable{$$ = strcat(strcat($1,$2),$3);};
 
-declaration_variable: ID|ACORDE ID array{$$ = strcat(strcat($1,$2),$3);}|pointer ID {$$ = strcat($1,$2);};
+declaration_variable: ID|ACORDE ID array{$$ = strcat($2,$3);}|pointer ID {$$ = strcat($1,$2);};
 
 declaration_args: TIPO ID {$$ = strcat($1,$2);};
 
@@ -179,7 +179,7 @@ if_statement: IF LPAREN expression RPAREN tail else_part;
 
 else_part: ELSE tail | ; 
 
-for_statement: FOR LPAREN expression LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA expression RPAREN tail ;
+ for_statement: FOR LPAREN expression LITERAL_PONTO_E_VIRGULA expression LITERAL_PONTO_E_VIRGULA expression RPAREN tail ;
 
 while_statement: WHILE LPAREN expression RPAREN tail ;
 

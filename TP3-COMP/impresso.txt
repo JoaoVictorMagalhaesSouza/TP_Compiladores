@@ -1,4 +1,18 @@
- 1  do a ; 
- 2 a = 2 + 3 * 5 + 2 - 1 
- 3 ; 
- 4 
+ 1  #Declaracao 
+ 2 do a ; 
+ 3 do b ; 
+ 4 do c ; 
+ 5 mi d ; 
+ 6 fa k ; 
+ 7 sol broFazSol ; 
+ 8 la emCasa ; 
+ 9 si variable ; 
+ 10 do * a ; #Ponteiro 
+ 11 do acorde vetor [ 20 ] ; #Declaracao de Vetor 
+ 12 
+ 13 ensaio ( 2 > 3 ) { a = 2 ; 
+ 14 do a ; } #Semelhante ao IF em C 
+ 15 improviso { do a ; } 
+ 16 
+ 17 
+ 18 
