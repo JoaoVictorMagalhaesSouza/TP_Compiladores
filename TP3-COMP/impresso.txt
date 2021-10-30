@@ -1,5 +1,0 @@
- 1  si string ; 
- 2 string = "oi" ; 
- 3 si string2 ; 
- 4 string2 = string ; 
- 5 

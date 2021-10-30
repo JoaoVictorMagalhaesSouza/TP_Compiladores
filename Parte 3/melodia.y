@@ -49,7 +49,7 @@ array: array LCOLCH ICONSTANTE RCOLCH {$$ = strcat(strcat(strcat($1,$2),$3),$4);
 
 declarations:  declaration|declaration declarations;
 
-declaration: TIPO declaration_names LITERAL_PONTO_E_VIRGULA {insereTabela($1,$2,escopoGlobal); imprimirTabela();}
+declaration: TIPO declaration_names LITERAL_PONTO_E_VIRGULA {insereTabela($1,$2,escopoGlobal);}
 |function_def {printf("Declaracao de funcao: %s\n",$1);} ;
 
 
@@ -68,7 +68,8 @@ expression:
 	// LPAREN expression RPAREN {$$ = $2;}| // a = 2+5*3
     sign constant{
     		if (strcmp("-",$1)==0){
-    			$$ = strcat("-",$2);
+    			char sinal[50] = "-";
+    			strcpy($$,strcat(sinal,$2));
     			//char aux[50];sprintf(aux, "%g", -atof($2)); $$ = aux;
     		}else{
     			$$ = $2;
@@ -201,7 +202,7 @@ assigment: variable LITERAL_RECEBE expression LITERAL_PONTO_E_VIRGULA {
 		exit(0);
 	
 	}
-	imprimirTabela();
+	//imprimirTabela();
 	}; 
 
 
@@ -240,6 +241,7 @@ int main(){
 	imprimeCodigoFonte();
 	printf("\nPrograma sintaticamente correto!\n");
 	printf("\n");
+	imprimirTabela();
 	
 	return 1;
 }

@@ -599,11 +599,11 @@ static const yytype_uint8 yyrline[] =
        0,    38,    38,    38,    40,    40,    42,    42,    42,    44,
       44,    46,    46,    50,    50,    52,    53,    56,    56,    58,
       58,    58,    60,    62,    62,    62,    64,    64,    64,    69,
-      83,    84,    85,    86,   102,   109,   116,   117,   118,   119,
-     120,   137,   156,   157,   158,   163,   163,   163,   165,   165,
-     170,   171,   171,   174,   174,   174,   174,   174,   175,   175,
-     175,   175,   178,   180,   180,   182,   184,   188,   189,   191,
-     193,   193,   195
+      84,    85,    86,    87,   103,   110,   117,   118,   119,   120,
+     121,   138,   157,   158,   159,   164,   164,   164,   166,   166,
+     171,   172,   172,   175,   175,   175,   175,   175,   176,   176,
+     176,   176,   179,   181,   181,   183,   185,   189,   190,   192,
+     194,   194,   196
 };
 #endif
 
@@ -1529,7 +1529,7 @@ yyreduce:
 
   case 15:
 #line 52 "melodia.y"
-                                                            {insereTabela((yyvsp[-2].string),(yyvsp[-1].string),escopoGlobal); imprimirTabela();}
+                                                            {insereTabela((yyvsp[-2].string),(yyvsp[-1].string),escopoGlobal);}
 #line 1534 "y.tab.c"
     break;
 
@@ -1591,7 +1591,8 @@ yyreduce:
 #line 69 "melodia.y"
                  {
     		if (strcmp("-",(yyvsp[-1].string))==0){
-    			(yyval.string) = strcat("-",(yyvsp[0].string));
+    			char sinal[50] = "-";
+    			strcpy((yyval.string),strcat(sinal,(yyvsp[0].string)));
     			//char aux[50];sprintf(aux, "%g", -atof($2)); $$ = aux;
     		}else{
     			(yyval.string) = (yyvsp[0].string);
@@ -1603,29 +1604,29 @@ yyreduce:
     		
     
     }
-#line 1607 "y.tab.c"
+#line 1608 "y.tab.c"
     break;
 
   case 30:
-#line 83 "melodia.y"
+#line 84 "melodia.y"
                                {char aux[50];double pot = pow(atof((yyvsp[-2].string)),atof((yyvsp[0].string)));sprintf(aux, "%g", pot); (yyval.string) = aux;}
-#line 1613 "y.tab.c"
+#line 1614 "y.tab.c"
     break;
 
   case 31:
-#line 84 "melodia.y"
+#line 85 "melodia.y"
                                {char aux[50];sprintf(aux, "%g", (atof((yyvsp[-2].string))*atof((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1619 "y.tab.c"
+#line 1620 "y.tab.c"
     break;
 
   case 32:
-#line 85 "melodia.y"
+#line 86 "melodia.y"
                                {char aux[50];sprintf(aux, "%g", (atof((yyvsp[-2].string))/atof((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1625 "y.tab.c"
+#line 1626 "y.tab.c"
     break;
 
   case 33:
-#line 86 "melodia.y"
+#line 87 "melodia.y"
                                {
     		printf("%g %g\n",atof((yyvsp[-2].string)),atof((yyvsp[0].string)));
     		if (strcmp((yyvsp[-1].string),"+")==0){
@@ -1642,11 +1643,11 @@ yyreduce:
     
     
     }
-#line 1646 "y.tab.c"
+#line 1647 "y.tab.c"
     break;
 
   case 34:
-#line 102 "melodia.y"
+#line 103 "melodia.y"
                    {if (strcmp((yyvsp[0].string),"++")==0){
     		    char aux[50];sprintf(aux, "%g", (atof((yyvsp[-1].string))+1)); (yyval.string) = aux;
     		    }
@@ -1654,11 +1655,11 @@ yyreduce:
 		    	char aux[50];sprintf(aux, "%g", (atof((yyvsp[-1].string))-1)); (yyval.string) = aux;
 		    }
 	}
-#line 1658 "y.tab.c"
+#line 1659 "y.tab.c"
     break;
 
   case 35:
-#line 109 "melodia.y"
+#line 110 "melodia.y"
                    {if (strcmp((yyvsp[-1].string),"++")==0){
     		    char aux[50];sprintf(aux, "%g", (atof((yyvsp[0].string))+1)); (yyval.string) = aux;
     		    }
@@ -1666,35 +1667,35 @@ yyreduce:
 		    	char aux[50];sprintf(aux, "%g", (atof((yyvsp[0].string))-1)); (yyval.string) = aux;
 		    }
 	}
-#line 1670 "y.tab.c"
+#line 1671 "y.tab.c"
     break;
 
   case 36:
-#line 116 "melodia.y"
+#line 117 "melodia.y"
                               {char aux[50];sprintf(aux, "%d", (atoi((yyvsp[-2].string))||atoi((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1676 "y.tab.c"
+#line 1677 "y.tab.c"
     break;
 
   case 37:
-#line 117 "melodia.y"
+#line 118 "melodia.y"
                                {char aux[50];sprintf(aux, "%d", (atoi((yyvsp[-2].string))&&atoi((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1682 "y.tab.c"
+#line 1683 "y.tab.c"
     break;
 
   case 38:
-#line 118 "melodia.y"
+#line 119 "melodia.y"
                                 {char aux[50];sprintf(aux, "%d", (atoi((yyvsp[-2].string))%atoi((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1688 "y.tab.c"
+#line 1689 "y.tab.c"
     break;
 
   case 39:
-#line 119 "melodia.y"
+#line 120 "melodia.y"
                     {char aux[50];sprintf(aux, "%d", (!atof((yyvsp[0].string)))); (yyval.string) = aux;}
-#line 1694 "y.tab.c"
+#line 1695 "y.tab.c"
     break;
 
   case 40:
-#line 120 "melodia.y"
+#line 121 "melodia.y"
                               {
     				
     				if(strcmp("==",(yyvsp[-1].string))==0){
@@ -1712,11 +1713,11 @@ yyreduce:
     
     
     }
-#line 1716 "y.tab.c"
+#line 1717 "y.tab.c"
     break;
 
   case 41:
-#line 137 "melodia.y"
+#line 138 "melodia.y"
                                {
     				
     				if(strcmp("<",(yyvsp[-1].string))==0){
@@ -1735,23 +1736,23 @@ yyreduce:
     
     
     }
-#line 1739 "y.tab.c"
+#line 1740 "y.tab.c"
     break;
 
   case 49:
-#line 165 "melodia.y"
+#line 166 "melodia.y"
             {(yyval.string) = "";}
-#line 1745 "y.tab.c"
+#line 1746 "y.tab.c"
     break;
 
   case 68:
-#line 189 "melodia.y"
+#line 190 "melodia.y"
                                                 {(yyval.string) = strcat(strcat(strcat((yyvsp[-3].string),(yyvsp[-2].string)),(yyvsp[-1].string)),(yyvsp[0].string));}
-#line 1751 "y.tab.c"
+#line 1752 "y.tab.c"
     break;
 
   case 72:
-#line 195 "melodia.y"
+#line 196 "melodia.y"
                                                                       {
 
 
@@ -1761,13 +1762,13 @@ yyreduce:
 		exit(0);
 	
 	}
-	imprimirTabela();
+	//imprimirTabela();
 	}
-#line 1767 "y.tab.c"
+#line 1768 "y.tab.c"
     break;
 
 
-#line 1771 "y.tab.c"
+#line 1772 "y.tab.c"
 
       default: break;
     }
@@ -1999,7 +2000,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 208 "melodia.y"
+#line 209 "melodia.y"
 	
 
 
@@ -2035,6 +2036,7 @@ int main(){
 	imprimeCodigoFonte();
 	printf("\nPrograma sintaticamente correto!\n");
 	printf("\n");
+	imprimirTabela();
 	
 	return 1;
 }

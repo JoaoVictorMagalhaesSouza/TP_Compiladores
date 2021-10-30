@@ -1,0 +1,20 @@
+ 1  #Função para cálculo de do Fibonacci não-recursivo 
+ 2 
+ 3 do n ; 
+ 4 n = do ( nota ( ) ) ; 
+ 5 
+ 6 do t1 , t2 , t3 ; 
+ 7 
+ 8 t1 = 0 ; 
+ 9 t2 = 1 ; 
+ 10 t3 = 0 ; 
+ 11 
+ 12 bis ( t3 <= n ) { 
+ 13 #Essa linha deveria estar comentada! 
+ 14 show ( t3 ) ; #Erro aqui 
+ 15 t3 = t1 + t2 ; 
+ 16 t1 = t2 ; 
+ 17 t2 = t3 ; 
+ 18 } 
+ 19 
+ 20 

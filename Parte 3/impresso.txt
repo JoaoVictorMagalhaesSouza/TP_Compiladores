@@ -1,0 +1,6 @@
+ 1  #Declaracao 
+ 2 do a ; 
+ 3 re b ; 
+ 4 a = 2 ; 
+ 5 b = 2.3 ; 
+ 6 a = 4.4 ; 

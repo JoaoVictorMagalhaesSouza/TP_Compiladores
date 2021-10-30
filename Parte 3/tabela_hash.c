@@ -160,7 +160,7 @@ int analiseSemantica(char *id, char *expression, int escopoGlobal){
             for (int i=0;i<strlen(str);i++){
                 int intCaractere ;
                 intCaractere = str[i];
-                if (intCaractere<48 || intCaractere>57){ // do a; a = 2;
+                if ((intCaractere<48 || intCaractere>57) && (intCaractere!=45)){ // do a; a = 2;
                     e2 = buscarEntidadeTabela(str,escopoGlobal);
                     if (e2){
                     	if(strcmp("do",e2->tipo)==0){            	

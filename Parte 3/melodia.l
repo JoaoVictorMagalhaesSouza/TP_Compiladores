@@ -62,7 +62,7 @@ STRING 			\"{allsymbols}*\"
 "["					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LCOLCH; }
 "]"					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return RCOLCH; }
 "{"					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);printf("Escopo: %d\n",++escopoGlobal);return LCHAV; }
-"}"					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);exterminaEscopo(escopoGlobal);imprimirTabela();printf("Escopo: %d\n",--escopoGlobal);return RCHAV; }
+"}"					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);exterminaEscopo(escopoGlobal);printf("Escopo: %d\n",--escopoGlobal);return RCHAV; }
 ";"					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LITERAL_PONTO_E_VIRGULA;}
 "."					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LITERAL_PONTO; }
 ","					{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return LITERAL_VIRGULA; }
@@ -81,7 +81,7 @@ STRING 			\"{allsymbols}*\"
 "/"|"//"				{ escreve_arquivo(yytext); yylval.string = strdup(yytext);return DIVOP; } 
 
 
-\n 					{ escreve_arquivo(yytext); fflush(stdin);char stringNum[20]; sprintf(stringNum,"%d",linha); escreve_arquivo(stringNum); linha +=1;}
+\n 					{ escreve_arquivo(yytext); fflush(stdin);char stringNum[20]; sprintf(stringNum,"%d",linha); escreve_arquivo(stringNum); linha +=1; imprimirTabela();}
 .
 
 

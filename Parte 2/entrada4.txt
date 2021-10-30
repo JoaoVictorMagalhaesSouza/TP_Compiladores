@@ -10,7 +10,8 @@ t2 = 1;
 t3 = 0;
 
 bis (t3 <= n){
-	show(t3);
+	#Essa linha deveria estar comentada!
+	show(t3); #Erro aqui
 	t3 = t1 + t2;
 	t1 = t2;
 	t2 = t3;
