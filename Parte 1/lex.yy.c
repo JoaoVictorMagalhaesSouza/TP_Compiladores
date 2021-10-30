@@ -1726,52 +1726,52 @@ YY_RULE_SETUP
 case 3:
 YY_RULE_SETUP
 #line 85 "lex1.l"
-{printf("Foi encontrada uma variavel do tipo DO: %s \n",yytext);}
+{printf("Foi encontrado um valor do tipo DO: %s \n",yytext);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 86 "lex1.l"
-{printf("Foi encontrada uma variavel do tipo RE: %s \n",yytext);}
+{printf("Foi encontrado um valor do tipo RE: %s \n",yytext);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 87 "lex1.l"
-{printf("Foi encontrada uma variavel do tipo MI: %s \n",yytext);}
+{printf("Foi encontrado um valor do tipo MI: %s \n",yytext);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 88 "lex1.l"
-{printf("Foi encontrada uma variavel do tipo FA: %s \n",yytext);}
+{printf("Foi encontrado um valor do tipo FA: %s \n",yytext);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 89 "lex1.l"
-{printf("Foi encontrada uma variavel do tipo SOL: %s \n",yytext);}
+{printf("Foi encontrado um valor do tipo SOL: %s \n",yytext);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 90 "lex1.l"
-{printf("Foi encontrada uma variavel do tipo LA: %s \n",yytext);}
+{printf("Foi encontrado um valor do tipo LA: %s \n",yytext);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 91 "lex1.l"
-{printf("Foi encontrada uma variavel do tipo SI: %s \n",yytext);}
+{printf("Foi encontrado um valor do tipo SI: %s \n",yytext);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 92 "lex1.l"
-{printf("Foi encontado um TAD_ACORDE. %s \n",yytext);}
+{printf("Foi encontado um valor do tipo ACORDE. %s \n",yytext);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 93 "lex1.l"
-{printf("Foi encontrado um TAD_MAESTRO. %s \n", yytext);}
+{printf("Foi encontrado um valor do tipo MAESTRO. %s \n", yytext);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 94 "lex1.l"
-{printf("Foi encontrado um TAD_VAZIO. %s \n", yytext);}
+{printf("Foi encontrado um valor do tipo VAZIO. %s \n", yytext);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP

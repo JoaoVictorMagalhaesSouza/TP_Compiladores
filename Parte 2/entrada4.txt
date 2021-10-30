@@ -1,0 +1,19 @@
+#Função para cálculo de do Fibonacci não-recursivo
+
+do n;
+n = do(nota());
+
+do t1,t2,t3;
+
+t1 = 0;
+t2 = 1;
+t3 = 0;
+
+bis (t3 <= n){
+	#Essa linha deveria estar comentada!
+	show(t3); #Erro aqui
+	t3 = t1 + t2;
+	t1 = t2;
+	t2 = t3;
+}
+

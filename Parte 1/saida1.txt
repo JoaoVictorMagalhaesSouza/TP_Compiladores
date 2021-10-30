@@ -10,16 +10,16 @@ Foi econtrado a definicao de uma FUNCAO. do play funcao1(){}
 Foi econtrado a definicao de uma FUNCAO. re play funcao2(){} 
 Foi econtrado a definicao de uma FUNCAO. sol play funcao3(){} 
 Foi econtrado a definicao de uma FUNCAO. mi play funcao4(){} 
-Foi encontrada uma variavel do tipo DO: 2 
-Foi encontrada uma variavel do tipo RE: +2 
-Foi encontrada uma variavel do tipo RE: -2 
-Foi encontrada uma variavel do tipo MI: 2.3 
-Foi encontrada uma variavel do tipo MI: -2.3 
-Foi encontrada uma variavel do tipo DO: 0 
-Foi encontrada uma variavel do tipo SI: "Essa eh uma string" 
-Foi encontrada uma variavel do tipo LA: True 
-Foi encontrada uma variavel do tipo LA: False 
-Foi encontado um TAD_ACORDE. ["Joao","Victor",False,False,False,2,2.3,"Futebol",] 
+Foi encontrado um valor do tipo DO: 2 
+Foi encontrado um valor do tipo RE: +2 
+Foi encontrado um valor do tipo RE: -2 
+Foi encontrado um valor do tipo MI: 2.3 
+Foi encontrado um valor do tipo MI: -2.3 
+Foi encontrado um valor do tipo DO: 0 
+Foi encontrado um valor do tipo SI: "Essa eh uma string" 
+Foi encontrado um valor do tipo LA: True 
+Foi encontrado um valor do tipo LA: False 
+Foi encontado um valor do tipo ACORDE. ["Joao","Victor",False,False,False,2,2.3,"Futebol",] 
 Foi encontrado uma operacao de DECLARACAO DE VARIAVEL. medley nossoModeloClasse{} 
 Foi encontrado uma operacao de DECLARACAO DE VARIAVEL. medley classe1{} = nossoModeloClasse 
 Foi encontrado um LACO REFRAO. refrao(i=0 ; i<10 ; i++){} 

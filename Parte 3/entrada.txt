@@ -1,0 +1,30 @@
+#Declaracao
+do a;
+do b;
+re c;
+mi d;
+fa k;
+sol v1;
+la v2;
+si v3;
+do *a;	#Ponteiro
+
+
+ensaio (2>3) { a=2; do a; } #Semelhante ao IF em C
+improviso {do a;}
+
+
+
+
+ensaio (a>3){
+ 	a = 2; 
+ 	a=a++;
+ 	a+=1;
+ 	ensaio (b<4){
+ 		b+=2;
+ 		c+=3;
+
+ 	}
+ 	improviso a = 20;
+}
+
